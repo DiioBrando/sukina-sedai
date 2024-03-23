@@ -2,9 +2,15 @@ import React from 'react';
 
 // ------ start setting anime-data
 
+export interface IRating {
+    thePlot: number;
+    characters: number;
+    drawing: number;
+}
+
 export interface IUserRating {
     idUser: number;
-    rating: number;
+    rating: IRating;
 }
 
 export interface IData {
@@ -20,6 +26,7 @@ export interface ITagsItems {
 export interface IVideos {
     idVideo: number;
     name: string;
+    urlVideo: string;
     date: IData;
 }
 
@@ -32,7 +39,7 @@ export interface IAnimeSeason {
 export interface IAnimeArray {
     id: number;
     amineName: string;
-    introComponent: React.ReactNode;
+    introName: string;
     tags: ITagsItems[];
     animeSeason: IAnimeSeason[];
     favorites: number;
@@ -41,6 +48,7 @@ export interface IAnimeArray {
     ratingKinopoisk: number;
     userRating: IUserRating[];
     outputStatus: string;
+    studio: string;
 }
 // ------ end setting anime-data
 
@@ -50,10 +58,16 @@ export interface IAnimeArray {
 export interface IAnimeObjectArray {
     id: number;
     amineName: string;
-    introComponent: React.ReactNode;
+    introName: string;
     tags: ITagsItems[];
+    animeSeason: IAnimeSeason[];
     favorites: number;
     data: IData;
+    ratingIMDb: number;
+    ratingKinopoisk: number;
+    userRating: IUserRating[];
+    outputStatus: string;
+    studio: string;
 }
 
 
@@ -62,3 +76,8 @@ export interface ISettingAnimeCard {
 }
 
 // ------ end AnimeCard setting
+
+
+export interface IVideo {
+    video: IVideos;
+}
