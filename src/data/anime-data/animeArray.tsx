@@ -3,7 +3,7 @@ import { IAnimeArray } from '@/entities/IAnimeArray';
 export const animeArray: IAnimeArray[] = [
     {
         id: 1,
-        amineName: 'Stone Ocean',
+        amineName: 'Stone-Ocean',
         introName: 'jojo',
         tags: [
             {

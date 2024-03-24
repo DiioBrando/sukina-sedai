@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 import ReactPlayer from 'react-player';
 import { IVideo } from '@/entities/IAnimeArray';
@@ -17,7 +17,8 @@ export const VideoPlayer: React.FC<IVideo>  = ({ video }) => {
                 url={currentVideo}
                 controls={true}
                 light={false}
-                pip={true}/>
+                pip={true}
+            />
             <source src={currentVideo} type="video/mp4"/>
         </>
     );

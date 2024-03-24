@@ -42,7 +42,6 @@ export interface IComments {
     commentId: string;
     comment: string;
     dateComment: string;
-    replay: [];
 }
 
 export interface IComment {

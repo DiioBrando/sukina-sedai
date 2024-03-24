@@ -11,22 +11,17 @@ import { Comments } from '@/features/sedai-services/components/Comments';
 import { ChangeEvent, useState} from 'react';
 import { IComments } from "@/entities/IAnimeArray";
 
-export const Video = () => {
+export const Video = ({ params }: {params: number}) => {
     const [comments, setComments] = useState<IComments>({
         name: '',
         userId: 0,
         commentId: '',
         comment: '',
         dateComment: '',
-        replay: [
-
-        ],
     });
-
-    // для теста страницы видео
-    const anime = animeArray[0];
-    const video = anime.animeSeason.flatMap((item) => item.videos.filter((video) => video.idVideo === 1).map(it => it));
-
+    const anime = animeArray.filter((item) => item.id === Number(params))[0]
+    const video = anime.animeSeason[0].videos
+    console.log(video)
     const date = () => {
         const date = new Date();
         return `
@@ -36,10 +31,21 @@ export const Video = () => {
         `
     }
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setComments({ ...comments, userId: 1, commentId: `${Math.random() * 1000000000}`, name: '1233', comment: event.target.value,  dateComment: date() });
+        if(event.target.value.length !== 0) {
+            setComments({
+                ...comments,
+                userId: Math.random() * 1000,
+                commentId: `${Math.floor(Math.random() * 10000)}`,
+                name: '1233',
+                comment: event.target.value,
+                dateComment: date()
+            });
+        }
     }
     const handleSubmit = () => {
-        anime.userComments.push(Object.assign(comments));
+        if(comments.comment.length !== 0) {
+            anime.userComments.push(Object.assign(comments));
+        }
         setComments({...comments, comment: ''});
     }
 
