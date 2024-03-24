@@ -10,7 +10,6 @@ export const VideoPlayer: React.FC<IVideo>  = ({ video }) => {
             <ReactPlayer
                 style={{
                     maxHeight: 'max-content',
-                    minHeight: '544px',
                     background: 'black',
                 }}
                 height={'100%'}

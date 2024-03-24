@@ -14,7 +14,7 @@ export const Profile: React.FC<IHandleChange> = ({ handleChange }) => {
                        },
                    },
                    eventButton: handleChange,
-                   styleButton: 'p-1',
+                   styleButton: 'p-1 h-fit',
                }}/>
         </>
     );

@@ -91,6 +91,7 @@ export const animeArray: IAnimeArray[] = [
         ],
         outputStatus: 'ended for now',
         studio: 'David Production',
+        userComments: [],
     },
     {
         id: 2,
@@ -156,6 +157,7 @@ export const animeArray: IAnimeArray[] = [
         ],
         outputStatus: 'ended for now',
         studio: '',
+        userComments: [],
     },
     {
         id: 3,
@@ -221,6 +223,7 @@ export const animeArray: IAnimeArray[] = [
         ],
         outputStatus: 'ended for now',
         studio: '',
+        userComments: [],
     },
     {
         id: 4,
@@ -286,6 +289,7 @@ export const animeArray: IAnimeArray[] = [
         ],
         outputStatus: 'ended for now',
         studio: '',
+        userComments: [],
     },
     {
         id: 5,
@@ -351,6 +355,7 @@ export const animeArray: IAnimeArray[] = [
         ],
         outputStatus: 'ended for now',
         studio: '',
+        userComments: [],
     },
     {
         id: 6,
@@ -416,5 +421,6 @@ export const animeArray: IAnimeArray[] = [
         ],
         outputStatus: 'ended for now',
         studio: '',
+        userComments: [],
     },
 ];

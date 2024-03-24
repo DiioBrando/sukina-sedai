@@ -36,6 +36,19 @@ export interface IAnimeSeason {
     videos: IVideos[];
 }
 
+export interface IComments {
+    name: string;
+    userId: number;
+    commentId: string;
+    comment: string;
+    dateComment: string;
+    replay: [];
+}
+
+export interface IComment {
+    comment: IComments;
+}
+
 export interface IAnimeArray {
     id: number;
     amineName: string;
@@ -49,6 +62,7 @@ export interface IAnimeArray {
     userRating: IUserRating[];
     outputStatus: string;
     studio: string;
+    userComments: IComments[];
 }
 // ------ end setting anime-data
 
@@ -68,6 +82,7 @@ export interface IAnimeObjectArray {
     userRating: IUserRating[];
     outputStatus: string;
     studio: string;
+    userComments: IComments[];
 }
 
 

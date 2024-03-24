@@ -7,18 +7,50 @@ import { Rating } from '@/features/sedai-services/components/Rating';
 import { Intro } from '@/features/sedai-services/components/Intro';
 import { VideoPlayer } from '@/features/sedai-services/components/VideoPlayer';
 import { Message } from '@/features/sedai-services/components/Message';
+import { Comments } from '@/features/sedai-services/components/Comments';
+import { ChangeEvent, useState} from 'react';
+import { IComments } from "@/entities/IAnimeArray";
 
 export const Video = () => {
+    const [comments, setComments] = useState<IComments>({
+        name: '',
+        userId: 0,
+        commentId: '',
+        comment: '',
+        dateComment: '',
+        replay: [
+
+        ],
+    });
+
     // для теста страницы видео
     const anime = animeArray[0];
     const video = anime.animeSeason.flatMap((item) => item.videos.filter((video) => video.idVideo === 1).map(it => it));
+
+    const date = () => {
+        const date = new Date();
+        return `
+        ${date.getDate()}.${date.getMonth() < 10? '0' + date.getMonth(): date.getMonth()}.${date.getFullYear()}
+        - 
+        ${(date.getHours() < 10? '0'+ date.getHours(): date.getHours())}:${date.getMinutes() < 10? '0'+ date.getMinutes(): date.getMinutes()}
+        `
+    }
+    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setComments({ ...comments, userId: 1, commentId: `${Math.random() * 1000000000}`, name: '1233', comment: event.target.value,  dateComment: date() });
+    }
+    const handleSubmit = () => {
+        anime.userComments.push(Object.assign(comments));
+        setComments({...comments, comment: ''});
+    }
+
     return(
         <Content>
             <div className={'flex flex-col overflow-y-auto overflow-hidden pb-20 px-5 max-h-[100vh] w-full'}>
                 <div className={'flex flex-col'}>
                     <div className={'w-full h-full flex flex-col sm:flex-row gap-2 p-2 max-w-max'}>
                         <div className={'max-w-[300px] min-w-[200px] h-fit'}>
-                            <Intro className={'rounded-md'} id={anime.id} introName={anime.introName} width={300} height={300}
+                            <Intro className={'rounded-md'} id={anime.id} introName={anime.introName} width={300}
+                                   height={300}
                                    ratingKinopoisk={anime.ratingKinopoisk} ratingIMDb={anime.ratingIMDb}/>
                         </div>
                         <div className={'flex flex-col min-w-[200px] h-fit'}>
@@ -52,22 +84,23 @@ export const Video = () => {
                         </div>
                     </div>
                     <div className={'flex flex-wrap md:justify-center gap-2 p-4'}>
-                            <Rating ratingName={'the plot'}/>
-                            <Rating ratingName={'characters'}/>
-                            <Rating ratingName={'drawing'}/>
+                        <Rating ratingName={'the plot'}/>
+                        <Rating ratingName={'characters'}/>
+                        <Rating ratingName={'drawing'}/>
                     </div>
-                    <div className={'flex flex-wrap p-2'}>
-                        <h2 className={'w-full text-xl md:text-2xl  lg:text-center'}>Title: {anime.amineName}</h2>
-                        <p className={'text-md md:text-lg'}>{anime.animeSeason.map((item) => item.titleAnime)}</p>
+                    <div className={'flex flex-wrap p-4'}>
+                        <h2 className={'w-full text-xl md:text-2xl  lg:text-center break-words'}>Title: {anime.amineName}</h2>
+                        <p className={'text-md md:text-lg break-words'}>{anime.animeSeason.map((item) => item.titleAnime)}</p>
                     </div>
                 </div>
                 <div className={'w-full h-full flex flex-col justify-center items-center'}>
                     <VideoPlayer video={video[0]}/>
-                    <div className={'flex w-full'}>
-                        <div className={'py-4 flex w-full'}>
-                        <Message/>
-                        </div>
+                </div>
+                <div className={'flex flex-col w-full'}>
+                    <div className={'py-4 flex w-full'}>
+                        <Message valueComment={comments.comment} handleChange={handleChange} handleSubmit={handleSubmit}/>
                     </div>
+                    {anime.userComments.map((item) => <Comments key={item.commentId} comment={item}/>)}
                 </div>
             </div>
         </Content>
