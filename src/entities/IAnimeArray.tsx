@@ -2,16 +2,22 @@ import React from 'react';
 
 // ------ start setting anime-data
 
-export interface IRating {
-    thePlot: number;
-    characters: number;
-    drawing: number;
-}
-
 export interface IUserRating {
     idUser: number;
-    rating: IRating;
+    rating: number;
 }
+
+export interface ITypeRating {
+    averageRating: number;
+    userScore: IUserRating[];
+}
+
+export interface IRating {
+    thePlot: ITypeRating;
+    characters: ITypeRating;
+    drawing: ITypeRating;
+}
+
 
 export interface IData {
     day?: number;
@@ -58,7 +64,7 @@ export interface IAnimeArray {
     data: IData;
     ratingIMDb: number;
     ratingKinopoisk: number;
-    userRating: IUserRating[];
+    userRating: IRating;
     outputStatus: string;
     studio: string;
     userComments: IComments[];
@@ -78,7 +84,7 @@ export interface IAnimeObjectArray {
     data: IData;
     ratingIMDb: number;
     ratingKinopoisk: number;
-    userRating: IUserRating[];
+    userRating: IRating;
     outputStatus: string;
     studio: string;
     userComments: IComments[];

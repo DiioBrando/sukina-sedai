@@ -79,16 +79,51 @@ export const animeArray: IAnimeArray[] = [
         },
         ratingIMDb: 7.12,
         ratingKinopoisk: 6,
-        userRating: [
-            {
-                idUser: 1,
-                rating: {
-                    thePlot: 0,
-                    characters: 0,
-                    drawing: 0,
-                },
+        userRating: {
+            thePlot: {
+                averageRating: 0,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                    {
+                        idUser: 2,
+                        rating: 6,
+                    },
+                    {
+                        idUser: 3,
+                        rating: 9,
+                    },
+                    {
+                        idUser: 4,
+                        rating: 8,
+                    },
+                    {
+                        idUser: 5,
+                        rating: 7,
+                    },
+                ],
             },
-        ],
+            characters: {
+                averageRating: 4.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+            drawing: {
+                averageRating: 4.5,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+        },
         outputStatus: 'ended for now',
         studio: 'David Production',
         userComments: [],
@@ -145,16 +180,35 @@ export const animeArray: IAnimeArray[] = [
         data: { day: 1, month: 4, year: 2013 },
         ratingIMDb: 8.9,
         ratingKinopoisk: 8.7,
-        userRating: [
-            {
-                idUser: 1,
-                rating: {
-                    thePlot: 0,
-                    characters: 0,
-                    drawing: 0,
-                },
+        userRating: {
+            thePlot: {
+                averageRating: 3.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
             },
-        ],
+            characters: {
+                averageRating: 6.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+            drawing: {
+                averageRating: 7.5,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+        },
         outputStatus: 'ended for now',
         studio: '',
         userComments: [],
@@ -211,16 +265,35 @@ export const animeArray: IAnimeArray[] = [
         data: { day: 4, month: 10, year: 2006 },
         ratingIMDb: 9.0,
         ratingKinopoisk: 8.9,
-        userRating: [
-            {
-                idUser: 1,
-                rating: {
-                    thePlot: 0,
-                    characters: 0,
-                    drawing: 0,
-                },
+        userRating: {
+            thePlot: {
+                averageRating: 3.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
             },
-        ],
+            characters: {
+                averageRating: 7.2,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+            drawing: {
+                averageRating: 8.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+        },
         outputStatus: 'ended for now',
         studio: '',
         userComments: [],
@@ -277,16 +350,35 @@ export const animeArray: IAnimeArray[] = [
         data: { day: 5, month: 4, year: 2009 },
         ratingIMDb: 9.1,
         ratingKinopoisk: 8.8,
-        userRating: [
-            {
-                idUser: 1,
-                rating: {
-                    thePlot: 0,
-                    characters: 0,
-                    drawing: 0,
-                },
+        userRating: {
+            thePlot: {
+                averageRating: 8.9,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
             },
-        ],
+            characters: {
+                averageRating: 7.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+            drawing: {
+                averageRating: 3.5,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
+            },
+        },
         outputStatus: 'ended for now',
         studio: '',
         userComments: [],
@@ -343,82 +435,35 @@ export const animeArray: IAnimeArray[] = [
         data: { day: 3, month: 4, year: 2016 },
         ratingIMDb: 8.5,
         ratingKinopoisk: 8.7,
-        userRating: [
-            {
-                idUser: 1,
-                rating: {
-                    thePlot: 0,
-                    characters: 0,
-                    drawing: 0,
-                },
-            },
-        ],
-        outputStatus: 'ended for now',
-        studio: '',
-        userComments: [],
-    },
-    {
-        id: 6,
-        amineName: 'Tokyo Ghoul',
-        introName: 'ghoul',
-        tags: [
-            { idTag: 2, nameTag: 'Drama' },
-            { idTag: 3, nameTag: 'Horror' },
-            { idTag: 6, nameTag: 'Thriller' },
-            { idTag: 23, nameTag: 'Supernatural' },
-        ],
-        animeSeason: [
-            {
-                seasonId: 1,
-                titleAnime: 'Tokyo Ghoul follows Ken Kaneki, a college student who becomes a half-ghoul after a chance encounter with one, and must navigate the dangerous world of ghouls while struggling with his own identity.',
-                videos: [
-                    { idVideo: 1, name: 'Tragedy',
-                        urlVideo: '',
-                        date: { day: 4, year: 2014 } },
-                    { idVideo: 2, name: 'Incubation',
-                        urlVideo: '',
-                        date: { day: 11, year: 2014 } },
-                    { idVideo: 3, name: 'Dove',
-                        urlVideo: '',
-                        date: { day: 18, year: 2014 } },
-                    { idVideo: 4, name: 'Supper',
-                        urlVideo: '',
-                        date: { day: 25, year: 2014 } },
+        userRating: {
+            thePlot: {
+                averageRating: 9.8,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
                 ],
             },
-            {
-                seasonId: 2,
-                titleAnime: 'Tokyo Ghoul Season 2 delves deeper into the conflict between ghouls and humans, as Kaneki faces new challenges and discovers shocking truths about his past.',
-                videos: [
-                    { idVideo: 1, name: 'New Surge',
-                        urlVideo: '',
-                        date: { day: 9, year: 2015 } },
-                    { idVideo: 2, name: 'Dancing Flowers',
-                        urlVideo: '',
-                        date: { day: 16, year: 2015 } },
-                    { idVideo: 3, name: 'Hangman',
-                        urlVideo: '',
-                        date: { day: 23, year: 2015 } },
-                    { idVideo: 4, name: 'Deeper Layers',
-                        urlVideo: '',
-                        date: { day: 30, year: 2015 } },
+            characters: {
+                averageRating: 5.1,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
                 ],
             },
-        ],
-        favorites: 0,
-        data: { day: 4, month: 7, year: 2014 },
-        ratingIMDb: 8.0,
-        ratingKinopoisk: 8.3,
-        userRating: [
-            {
-                idUser: 1,
-                rating: {
-                    thePlot: 0,
-                    characters: 0,
-                    drawing: 0,
-                },
+            drawing: {
+                averageRating: 7.9,
+                userScore: [
+                    {
+                        idUser: 1,
+                        rating: 4,
+                    },
+                ],
             },
-        ],
+        },
         outputStatus: 'ended for now',
         studio: '',
         userComments: [],

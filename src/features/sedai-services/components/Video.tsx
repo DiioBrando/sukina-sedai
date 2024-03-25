@@ -19,9 +19,8 @@ export const Video = ({ params }: {params: number}) => {
         comment: '',
         dateComment: '',
     });
-    const anime = animeArray.filter((item) => item.id === Number(params))[0]
-    const video = anime.animeSeason[0].videos
-    console.log(video)
+    const anime = animeArray.filter((item) => item.id === Number(params))[0];
+    const video = anime.animeSeason[0].videos;
     const date = () => {
         const date = new Date();
         return `
@@ -90,9 +89,9 @@ export const Video = ({ params }: {params: number}) => {
                         </div>
                     </div>
                     <div className={'flex flex-wrap md:justify-center gap-2 p-4'}>
-                        <Rating ratingName={'the plot'}/>
-                        <Rating ratingName={'characters'}/>
-                        <Rating ratingName={'drawing'}/>
+                        <Rating ratingName={'the plot'} maxNumRating={10} ratingObject={anime.userRating.thePlot}/>
+                        <Rating ratingName={'characters'} maxNumRating={10} ratingObject={anime.userRating.characters}/>
+                        <Rating ratingName={'drawing'} maxNumRating={10} ratingObject={anime.userRating.drawing}/>
                     </div>
                     <div className={'flex flex-wrap p-4'}>
                         <h2 className={'w-full text-xl md:text-2xl  lg:text-center break-words'}>Title: {anime.amineName}</h2>
