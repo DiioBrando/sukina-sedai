@@ -11,6 +11,7 @@ import { useClickOutSide } from '@/shared/custom-hooks/useClickOutSide';
 import { useState, useRef} from 'react';
 import { BorderLine } from '@/shared/BorderLine';
 import { Notification } from '../../../../public/icons/Notification';
+import {Browse} from "../../../../public/icons/Browse";
 
 export const NavBar = () => {
     const [isOpen, setOpen] = useState({
@@ -28,9 +29,9 @@ export const NavBar = () => {
         });
 
     return(
-        <header className={'flex justify-between max-h-14 min-h-14 h-full px-2 bg-white'}>
-            <div className={'flex items-center w-full min-w-[56px] max-w-64'}>
-                <Link href={'/'} className={'scale-125 flex justify-start min-h-14 min-w-14 max-w-14 max-h-14 w-full h-full'}>
+        <header className={'flex gap-1 items-center px-1 sm:px-2'}>
+            <div className={'flex items-center justify-start gap-2'}>
+                <Link href={'/'} className={'hidden sm:flex scale-125 justify-start min-h-14 min-w-14 max-w-14 max-h-14 w-full h-full'}>
                     <Button setting={{
                         image: {
                             svgComponent: {
@@ -41,9 +42,33 @@ export const NavBar = () => {
                         styleButton: 'p-0 hover:bg-transparent',
                     }}/>
                 </Link>
+                <Link href={'/'} className={'flex items-center justify-center p-1 sm:p-0'}>
+                    <Button setting={{
+                        image: {
+                            svgComponent: {
+                                image: <Browse/>,
+                                style: 'flex sm:hidden items-center',
+                            },
+                        },
+                        styleButton: 'p-1 sm:p-0',
+                    }}/>
+                    <p className={'hidden sm:flex p-1 hover:bg-grayTransparent hover:rounded-lg'}>Browse</p>
+                </Link>
+                <Link href={'/inventory'} className={'flex items-center justify-center p-1 sm:p-0'}>
+                    <Button setting={{
+                        image: {
+                            svgComponent: {
+                                image: '',
+                                style: 'flex sm:hidden items-center',
+                            },
+                        },
+                        styleButton: 'p-1 sm:p-0',
+                    }}/>
+                    <span className={'hidden sm:flex p-1 hover:bg-grayTransparent hover:rounded-lg'}>Inventory</span>
+                </Link>
             </div>
-            <div className={'w-full max-w-80'}>
-                <div className={'flex items-center justify-center h-full'}>
+            <div className={'flex justify-center w-full'}>
+                <div className={'flex items-center justify-center'}>
                     <Input input={{
                     placeholder: 'search favorite anime here',
                     style: 'p-1 px-4 border-r-0 rounded-r-none rounded-md',
@@ -59,7 +84,7 @@ export const NavBar = () => {
                     }}/>
                 </div>
             </div>
-            <div className={'w-full min-w-5 max-w-64 flex items-center justify-end'}>
+            <div className={'flex items-center justify-end max-w-max w-full gap-1.5'}>
                 <div className={'relative flex items-center'}>
                     <Button setting={{
                         image: {

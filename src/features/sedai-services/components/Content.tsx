@@ -7,7 +7,7 @@ export const Content: React.FC<IChildren> = ({ children }) => {
     return(
         <>
             <NavBar/>
-        <main className={'flex gap-2.5 w-full'}>
+        <main className={'flex gap-2.5'}>
             <SideBar/>
             {children}
         </main>
