@@ -5,10 +5,10 @@ import { Logo } from '../../../../public/icons/Logo';
 import { Input } from '@/features/sedai-services/components/Input';
 import { Search } from '../../../../public/icons/Search';
 import { Button } from '@/features/sedai-services/components/Button';
-import { Profile } from '@/features/sedai-services/components/Profile';
+import { ProfileImage } from '@/features/sedai-services/components/ProfileImage';
 import { DropDown } from '@/features/sedai-services/components/DropDown';
 import { useClickOutSide } from '@/shared/custom-hooks/useClickOutSide';
-import { useState, useRef} from 'react';
+import React, { useState, useRef} from 'react';
 import { BorderLine } from '@/shared/BorderLine';
 import { Notification } from '../../../../public/icons/Notification';
 import {Browse} from "../../../../public/icons/Browse";
@@ -120,7 +120,16 @@ export const NavBar = () => {
                     }
                 </div>
                 <div className={'relative flex items-center'}>
-                    <Profile handleChange={() => setOpen({...isOpen, ProfileDropDown: !isOpen.ProfileDropDown})}/>
+                    <Button setting={{
+                        image: {
+                            svgComponent: {
+                                image: <ProfileImage/>,
+                                style: 'min-h-10 min-w-10',
+                            },
+                        },
+                        eventButton: () => setOpen({...isOpen, ProfileDropDown: !isOpen.ProfileDropDown}),
+                        styleButton: 'p-1 h-fit',
+                    }}/>
                     {isOpen.ProfileDropDown && <DropDown>
                         <nav ref={elementRef} className={'absolute bottom-0 top-14 right-0 z-50'}>
                             <ul className={'p-4 border w-60 max-h-72 rounded-lg overflow-hidden overflow-y-auto bg-white'}>
@@ -152,8 +161,7 @@ export const NavBar = () => {
                                     </li>))
                                 }
                             </ul>
-                        </nav>
-                    </DropDown>}
+                        </nav></DropDown>}
                 </div>
             </div>
         </header>

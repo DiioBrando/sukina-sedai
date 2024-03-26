@@ -11,7 +11,7 @@ export const SideBar = () => {
     const [stateMenu, setStateMenu] = useState({
         isOpen: true,
         rotate: 'rotate-0',
-        display: '',
+        display: 'flex',
         widthStyleIsOpenSvg: 'w-full justify-end',
         width: 'max-w-max',
     });
@@ -19,7 +19,7 @@ export const SideBar = () => {
         if(stateMenu.isOpen) {
             setStateMenu({...stateMenu, rotate: 'rotate-180', display: 'hidden', isOpen: false, widthStyleIsOpenSvg: 'w-0'});
         } else {
-            setStateMenu({...stateMenu, rotate: 'rotate-0', display: '', isOpen: true, widthStyleIsOpenSvg: 'w-full justify-end'});
+            setStateMenu({...stateMenu, rotate: 'rotate-0', display: 'flex', isOpen: true, widthStyleIsOpenSvg: 'w-full justify-end'});
         }
     }
 
@@ -28,8 +28,8 @@ export const SideBar = () => {
           <div className={'border border-white bg-white p-2'}>
               <div className={'flex flex-1 flex-col gap-2.5'}>
                   <div className={'hidden md:flex items-center'}>
-                      <span className={`text-lg px-1 ${stateMenu.display}`}>Menu</span>
-                      <p className={`flex ${stateMenu.widthStyleIsOpenSvg}`}>
+                      <span className={`hidden text-lg px-1 md:${stateMenu.display}`}>Menu</span>
+                      <p className={`hidden md:flex ${stateMenu.widthStyleIsOpenSvg}`}>
                       <Button setting={{
                           eventButton: handleChange,
                           image: {
@@ -51,7 +51,7 @@ export const SideBar = () => {
                           },
                           styleButton: 'p-1',
                       }}/>
-                      <span className={stateMenu.display + ' hidden md:flex'}>Home</span>
+                      <span className={`md:${stateMenu.display} hidden`}>Home</span>
                   </Link>
                   <Link className={'flex items-center gap-1 text-md'} href={'/following'}>
                       <Button setting={{
@@ -63,7 +63,7 @@ export const SideBar = () => {
                           },
                           styleButton: 'p-1',
                       }}/>
-                      <span className={stateMenu.display + ' hidden md:flex'}>following anime</span>
+                      <span className={`md:${stateMenu.display} hidden`}>following anime</span>
                   </Link>
                   <Link className={'flex items-center gap-1 text-md'} href={'/recommended'}>
                       <Button setting={{
@@ -75,7 +75,7 @@ export const SideBar = () => {
                           },
                           styleButton: 'p-1',
                       }}/>
-                      <span className={stateMenu.display + ' hidden md:flex'}>Recommended anime</span>
+                      <span className={`md:${stateMenu.display} hidden`}>Recommended anime</span>
                   </Link>
               </div>
           </div>

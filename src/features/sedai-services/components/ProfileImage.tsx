@@ -1,21 +1,17 @@
-import { Button } from '@/features/sedai-services/components/Button';
-import { PersonIcon } from '../../../../public/icons/PersonIcon';
 import React from 'react';
-import { IHandleChange } from '@/entities/IHandleChange';
+import Image from 'next/image';
+import { IPersonImage } from '@/entities/user/ISettingPersonImage';
 
-export const ProfileButton: React.FC<IHandleChange> = ({ handleChange }) => {
+export const ProfileImage: React.FC<IPersonImage> = ({ setting }) => {
     return(
-        <>
-               <Button setting={{
-                   image: {
-                       svgComponent: {
-                           image: <PersonIcon/>,
-                           style: 'min-h-10 min-w-10',
-                       },
-                   },
-                   eventButton: handleChange,
-                   styleButton: 'p-1 h-fit',
-               }}/>
-        </>
+        <div className={'relative'}>
+            <Image width={setting?.width ?? 40} height={setting?.height ?? 40}
+                   className={(setting?.style ?? '') + ' rounded-full p-0.5'}
+                   src={`/avatars/${setting?.avatar ?? 'ProfileIcon'}.${setting?.formatPic ?? 'png'}`}
+                   alt={setting?.altPic ?? ''}
+                   priority={true}
+            />
+            <span className={`bg-green-500 border-white rounded-full w-[${setting?.isOnline?.width ?? 5}px] h-[${setting?.isOnline?.height ?? 5}px] absolute bottom-0 right-1 border-2 p-1`}></span>
+        </div>
     );
 }

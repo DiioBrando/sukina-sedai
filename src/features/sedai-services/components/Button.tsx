@@ -16,7 +16,7 @@ export const Button: React.FC<Setting> = ({ setting }) => {
                src={`/icons/${imagePath.src}.${imagePath.formatPicture}`}
                alt={imagePath.alt ?? ''}/>)
            :
-           (<p className={svgComponent.style ?? ''}>{svgComponent.image}</p>);
+           (<div className={svgComponent.style ?? ''}>{svgComponent.image}</div>);
     };
 
     return (

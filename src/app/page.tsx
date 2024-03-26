@@ -1,10 +1,8 @@
-import { Main } from "@/pages/Main";
+import { AllVideos } from '@/pages/AllVideos';
 
 
 export default function Home() {
   return (
-      <div>
-          <Main/>
-      </div>
+          <AllVideos/>
   );
 }

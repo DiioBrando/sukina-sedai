@@ -1,7 +1,8 @@
-import { Profile } from '@/features/sedai-services/components/Profile';
+import { ProfileImage } from '@/features/sedai-services/components/ProfileImage';
 import { IComment } from '@/entities/IAnimeArray';
 import React, { useState } from 'react';
-import { Button } from "@/features/sedai-services/components/Button";
+import { Button } from '@/features/sedai-services/components/Button';
+import { PersonIcon } from '../../../../public/icons/PersonIcon';
 
 export const Comments: React.FC<IComment> = ({ comment }) => {
     const [grade, setGrade] = useState({
@@ -26,7 +27,15 @@ export const Comments: React.FC<IComment> = ({ comment }) => {
     }
     return(
             <div className={'flex gap-2 py-2'}>
-                <Profile/>
+                <Button setting={{
+                    image: {
+                        svgComponent: {
+                            image: <ProfileImage/>,
+                            style: 'min-h-10 min-w-10',
+                        },
+                    },
+                    styleButton: 'p-1 h-fit',
+                }}/>
                 <div className={'flex flex-col'}>
                     <div className={'flex items-center gap-1'}>
                         <span className={'text-md'}>{comment.name}</span>
