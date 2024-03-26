@@ -1,6 +1,6 @@
 'use client';
 import { Content } from '@/features/sedai-services/components/Content';
-import { animeArray } from '@/data/anime-data/animeArray';
+import { animeArray } from '@/entities/data/anime-data/animeArray';
 import Link from "next/link";
 import { Tags } from '@/features/sedai-services/components/Tags';
 import { Rating } from '@/features/sedai-services/components/Rating';
@@ -30,7 +30,7 @@ export const Video = ({ params }: {params: number}) => {
         `
     }
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if(event.target.value.length !== 0) {
+        if(event.target.value.length !== 0 && event.target.value.length <= 255) {
             setComments({
                 ...comments,
                 userId: Math.random() * 1000,
@@ -88,20 +88,20 @@ export const Video = ({ params }: {params: number}) => {
                             </div>
                         </div>
                     </div>
-                    <div className={'flex flex-wrap md:justify-center gap-2 p-4'}>
+                    <div className={'flex flex-wrap md:justify-center gap-2 md:p-4'}>
                         <Rating ratingName={'the plot'} maxNumRating={10} ratingObject={anime.userRating.thePlot}/>
                         <Rating ratingName={'characters'} maxNumRating={10} ratingObject={anime.userRating.characters}/>
                         <Rating ratingName={'drawing'} maxNumRating={10} ratingObject={anime.userRating.drawing}/>
                     </div>
-                    <div className={'flex flex-wrap p-4'}>
+                    <div className={'flex flex-wrap py-4 md:px-4'}>
                         <h2 className={'w-full text-xl md:text-2xl  lg:text-center break-words'}>Title: {anime.amineName}</h2>
                         <p className={'text-md md:text-lg break-words'}>{anime.animeSeason.map((item) => item.titleAnime)}</p>
                     </div>
                 </div>
-                <div className={'w-full h-full flex flex-col justify-center items-center'}>
+                <div className={'flex flex-col justify-center items-center'}>
                     <VideoPlayer video={video[0]}/>
                 </div>
-                <div className={'flex flex-col w-full'}>
+                <div className={'flex flex-col'}>
                     <div className={'py-4 flex w-full'}>
                         <Message valueComment={comments.comment} handleChange={handleChange} handleSubmit={handleSubmit}/>
                     </div>

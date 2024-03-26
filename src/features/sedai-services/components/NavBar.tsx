@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { profileDropDownButton, profileDropDownLink } from '@/data/dropdown-data/profileDropDownItems';
+import { profileDropDownButton, profileDropDownLink } from '@/entities/data/dropdown-data/profileDropDownItems';
 import { Logo } from '../../../../public/icons/Logo';
 import { Input } from '@/features/sedai-services/components/Input';
 import { Search } from '../../../../public/icons/Search';
@@ -12,6 +12,7 @@ import { useState, useRef} from 'react';
 import { BorderLine } from '@/shared/BorderLine';
 import { Notification } from '../../../../public/icons/Notification';
 import {Browse} from "../../../../public/icons/Browse";
+import {Inventory} from "../../../../public/icons/Inventory";
 
 export const NavBar = () => {
     const [isOpen, setOpen] = useState({
@@ -30,7 +31,7 @@ export const NavBar = () => {
 
     return(
         <header className={'flex gap-1 items-center px-1 sm:px-2'}>
-            <div className={'flex items-center justify-start gap-2'}>
+            <div className={'flex items-center justify-start gap-0.5 sm:gap-2'}>
                 <Link href={'/'} className={'hidden sm:flex scale-125 justify-start min-h-14 min-w-14 max-w-14 max-h-14 w-full h-full'}>
                     <Button setting={{
                         image: {
@@ -58,8 +59,8 @@ export const NavBar = () => {
                     <Button setting={{
                         image: {
                             svgComponent: {
-                                image: '',
-                                style: 'flex sm:hidden items-center',
+                                image: <Inventory/>,
+                                style: 'flex sm:hidden items-center w-[20px] h-[20px]',
                             },
                         },
                         styleButton: 'p-1 sm:p-0',
@@ -67,20 +68,20 @@ export const NavBar = () => {
                     <span className={'hidden sm:flex p-1 hover:bg-grayTransparent hover:rounded-lg'}>Inventory</span>
                 </Link>
             </div>
-            <div className={'flex justify-center w-full'}>
-                <div className={'flex items-center justify-center'}>
+            <div className={'flex justify-end sm:justify-center w-full'}>
+                <div className={'flex items-center'}>
                     <Input input={{
                     placeholder: 'search favorite anime here',
-                    style: 'p-1 px-4 border-r-0 rounded-r-none rounded-md',
+                    style: 'p-1 px-4 border-r-0 rounded-r-none rounded-md hidden sm:flex',
                 }}/>
                     <Button setting={{
                         image: {
                             svgComponent: {
                                 image: <Search/>,
-                                style: 'w-[50px] h-[34px] border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
+                                style: 'w-[30px] h-[30px] sm:w-[50px] sm:h-[34px] border-customBorderWhite border flex p-1 rounded-md sm:rounded-l-none',
                             },
                         },
-                        styleButton: 'p-0 hover:rounded-l-none'
+                        styleButton: 'p-0 sm:hover:rounded-l-none'
                     }}/>
                 </div>
             </div>

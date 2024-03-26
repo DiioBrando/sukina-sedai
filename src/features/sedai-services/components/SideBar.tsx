@@ -27,7 +27,7 @@ export const SideBar = () => {
       <section className={`${stateMenu.width} min-w-max max-h-max w-full`}>
           <div className={'border border-white bg-white p-2'}>
               <div className={'flex flex-1 flex-col gap-2.5'}>
-                  <div className={'flex items-center'}>
+                  <div className={'hidden md:flex items-center'}>
                       <span className={`text-lg px-1 ${stateMenu.display}`}>Menu</span>
                       <p className={`flex ${stateMenu.widthStyleIsOpenSvg}`}>
                       <Button setting={{
@@ -51,7 +51,7 @@ export const SideBar = () => {
                           },
                           styleButton: 'p-1',
                       }}/>
-                      <span className={stateMenu.display}>Home</span>
+                      <span className={stateMenu.display + ' hidden md:flex'}>Home</span>
                   </Link>
                   <Link className={'flex items-center gap-1 text-md'} href={'/following'}>
                       <Button setting={{
@@ -63,7 +63,7 @@ export const SideBar = () => {
                           },
                           styleButton: 'p-1',
                       }}/>
-                      <span className={stateMenu.display}>following anime</span>
+                      <span className={stateMenu.display + ' hidden md:flex'}>following anime</span>
                   </Link>
                   <Link className={'flex items-center gap-1 text-md'} href={'/recommended'}>
                       <Button setting={{
@@ -75,7 +75,7 @@ export const SideBar = () => {
                           },
                           styleButton: 'p-1',
                       }}/>
-                      <span className={stateMenu.display}>Recommended anime</span>
+                      <span className={stateMenu.display + ' hidden md:flex'}>Recommended anime</span>
                   </Link>
               </div>
           </div>

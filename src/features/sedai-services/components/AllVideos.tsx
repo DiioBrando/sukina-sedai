@@ -1,6 +1,6 @@
 import { Content } from '@/features/sedai-services/components/Content';
 import { VideoCard } from '@/features/sedai-services/components/VideoCard';
-import { animeArray } from '@/data/anime-data/animeArray';
+import { animeArray } from '@/entities/data/anime-data/animeArray';
 
 export const AllVideos = () => {
     return(

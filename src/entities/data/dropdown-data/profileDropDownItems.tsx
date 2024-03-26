@@ -1,10 +1,10 @@
-import { PersonProfile } from '../../../public/icons/PersonProfile';
-import { Setting } from '../../../public/icons/Setting';
-import { Privacy } from '../../../public/icons/Privacy';
-import { Language } from '../../../public/icons/Language';
+import { PersonProfile } from '../../../../public/icons/PersonProfile';
+import { Setting } from '../../../../public/icons/Setting';
+import { Privacy } from '../../../../public/icons/Privacy';
+import { Language } from '../../../../public/icons/Language';
 import { IProfileDropDownButton, IProfileDropDownLink,} from '@/entities/IProfileDropDownItems';
-import { Theme } from '../../../public/icons/Theme';
-import { LogOut } from '../../../public/icons/LogOut';
+import { Theme } from '../../../../public/icons/Theme';
+import { LogOut } from '../../../../public/icons/LogOut';
 
 export const profileDropDownLink: IProfileDropDownLink[] = [
     {
