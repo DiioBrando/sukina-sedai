@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import {IPagination} from "@/entities/IPagination";
+import { Button } from "@/features/sedai-services/components/Button";
 
 export const Pagination: React.FC<IPagination> = ({ current, total, onChange }) => {
     const ref = useRef<HTMLUListElement>(null);
@@ -27,7 +28,12 @@ export const Pagination: React.FC<IPagination> = ({ current, total, onChange }) 
     }, [onChange]);
     return(
         <ul className={'flex gap-4'} ref={ref}>
-            {Array.from({ length: total + 1 }, (_v, k) => k > 0 && <li key={k} className={(current === k? 'bg-grayTransparent rounded-md': '') + ' p-2 px-4 cursor-pointer'} >{k}</li>)}
+            {Array.from({ length: total + 1 }, (_v, k) => k > 0 && <li key={k} >
+                <Button setting={{
+                    text: String(k),
+                    styleButton: (current === k? 'bg-grayTransparent rounded-md': '') + ' p-2 px-4',
+                }}/>
+            </li>)}
         </ul>
     );
 }
