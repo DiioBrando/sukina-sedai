@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { IPersonImage } from '@/entities/user/ISettingPersonImage';
+import { IPersonImage } from '@/entities/user/lib/ISettingPersonImage';
 
 export const ProfileImage: React.FC<IPersonImage> = ({ setting }) => {
     return(

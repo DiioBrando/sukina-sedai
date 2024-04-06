@@ -2,20 +2,35 @@
 import { Content } from '@/features/sedai-services/components/Content';
 import { ProfileImage } from '@/features/sedai-services/components/ProfileImage';
 import { VideoCard } from '@/features/sedai-services/components/VideoCard';
-import {animeArray} from "@/entities/data/anime-data/animeArray";
-import {Input} from "@/features/sedai-services/components/Input";
-import {Button} from "@/features/sedai-services/components/Button";
-import {Search} from "../../public/icons/Search";
-import React from "react";
-import {Watch} from "../../public/icons/Watch";
-import {Viewed} from "../../public/icons/Viewed";
-import {Track} from "../../public/icons/Track";
-import {Favorite} from "../../public/icons/Favorite";
+import {animeArray } from '@/entities/data/anime-data/animeArray';
+import { Input } from '@/features/sedai-services/components/Input';
+import { Button } from '@/features/sedai-services/components/Button';
+import { Search } from '../../public/icons/Search';
+import React, { useEffect, useState } from 'react';
+import { Watch } from '../../public/icons/Watch';
+import { Viewed } from '../../public/icons/Viewed';
+import { Track } from '../../public/icons/Track';
+import { Favorite } from '../../public/icons/Favorite';
+import { getUsers } from '@/entities/user/api/getUsers';
 
-export const Profile = () => {
+
+
+
+export const Profile = ({ params }: { params: number  }) => {
+    const [user, setUser] = useState<{name: string; id: number; status: string;}>();
+
+    useEffect(() => {
+
+        getUsers().then(data => {
+        const userFind = data.find((item: any) => item.id === params);
+
+        setUser(userFind)
+        })
+    }, [params]);
+
     return(
         <Content>
-            <div className={'max-h-[100vh] w-full'}>
+            {user  && (<div key={user.id} className={'max-h-[100vh] w-full'}>
                 <div className={'flex flex-wrap gap-3 items-center max-w-max pb-5 px-4'} >
                     <div>
                         <ProfileImage setting={{
@@ -29,9 +44,9 @@ export const Profile = () => {
                         }}/>
                     </div>
                     <div className={'flex flex-col'}>
-                        <span> name: Marginal Pedro Ivan Obkyrish </span>
+                        <span> name: {user.name}</span>
                         <span> status user: online </span>
-                        <span> unique: user </span>
+                        <span> unique:  {user.status}</span>
                     </div>
                 </div>
                 <div className={'px-4 flex flex-col gap-4'}>
@@ -104,7 +119,7 @@ export const Profile = () => {
                     <VideoCard animeObjectArray={ animeArray.slice(0, 5) }/>
                     </div>
                 </div>
-            </div>
+            </div>)}
         </Content>
     );
 }

@@ -1,5 +1,3 @@
-import React from 'react';
-
 // ------ start setting anime-data
 
 export interface IUserRating {
