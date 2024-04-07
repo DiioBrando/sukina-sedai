@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {IPagination} from "@/entities/IPagination";
+import { IPagination } from "@/entities/IPagination";
 import { Button } from "@/features/sedai-services/components/Button";
 
 export const Pagination: React.FC<IPagination> = ({ current, total, onChange }) => {
