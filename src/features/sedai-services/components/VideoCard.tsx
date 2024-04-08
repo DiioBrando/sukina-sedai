@@ -2,7 +2,7 @@ import { Tags } from '@/features/sedai-services/components/Tags';
 import { Intro } from '@/features/sedai-services/components/Intro';
 import Link from 'next/link';
 import React from 'react';
-import { IAnime } from "@/entities/data/anime-data/IAnimeType";
+import { IAnime } from "@/entities/data/anime-data/IAnimeListType";
 
 export const VideoCard: React.FC<IAnime> = ({ list }) => {
     return (
@@ -16,7 +16,7 @@ export const VideoCard: React.FC<IAnime> = ({ list }) => {
                         <span className={'text-xs'}>{item.season.year}</span>
                     </div>
                     <div className={'flex flex-wrap gap-1'}>
-                        {item.genres.slice(0, 4).map((tag) => <Tags key={tag} tag={tag}/>)}
+                        {item.genres.slice(0, 4).map((tag: string) => <Tags key={tag} tag={tag}/>)}
                     </div>
                 </div>
             </Link>

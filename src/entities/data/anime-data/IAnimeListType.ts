@@ -173,3 +173,10 @@ export interface IPagination {
     items_per_page: number
     total_items: number
 }
+
+export interface ICustomPagination {
+    current: number;
+    total: number;
+    pagePerItems: number;
+    onChange: (e: number) => void;
+}

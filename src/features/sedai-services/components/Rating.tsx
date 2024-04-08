@@ -1,5 +1,5 @@
-import {IAnimeRating} from '@/entities/IRating';
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import { IAnimeRating } from '@/entities/IRating';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export const Rating: React.FC<IAnimeRating> = ({ ratingName, maxNumRating, ratingObject}) => {
     const [rating, setRating] = useState(0);
