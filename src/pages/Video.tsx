@@ -7,12 +7,13 @@ import { Intro } from '@/features/sedai-services/components/Intro';
 import { VideoPlayer } from '@/features/sedai-services/components/VideoPlayer';
 import { Message } from '@/features/sedai-services/components/Message';
 import { Comments } from '@/features/sedai-services/components/Comments';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { IUserRating } from "@/entities/IAnimeArray";
 import { $api } from "@/entities/data/anime-data/api";
 import { Titles } from "@/entities/data/anime-data/IAnimeListType";
 import {release} from "node:os";
-import {animeArray} from "@/entities/data/anime-data/animeArray";
+import { animeArray } from "@/entities/data/anime-data/animeArray";
+import { useScrollPage } from "@/shared/custom-hooks/useScrollPage";
 
 export const Video = ({ params }: { params: number }) => {
     // const [comments, setComments] = useState<IComments>({
@@ -22,6 +23,7 @@ export const Video = ({ params }: { params: number }) => {
     //     comment: '',
     //     dateComment: '',
     // });
+    const refElem = useRef<HTMLDivElement>(null);
     const [anime, setAnime] = useState<Titles>();
     /* const date = () => {
         const date = new Date();
@@ -62,10 +64,11 @@ export const Video = ({ params }: { params: number }) => {
         }).catch(e => console.log(e));
 
     }, [params]);
+    useScrollPage(refElem);
 
     return(
         <Content>
-            <div className={'flex flex-col overflow-y-auto max-h-[100vh] pb-5 px-5 w-full'}>
+            <div ref={refElem} className={'flex flex-col overflow-y-auto max-h-[94vh] pb-10 p-5 w-full'}>
                 <div className={'flex flex-col'}>
                     <div className={'w-full h-full flex flex-col sm:flex-row gap-2 p-2 max-w-max'}>
                         <div className={'max-w-[300px] min-w-[200px] h-fit'}>

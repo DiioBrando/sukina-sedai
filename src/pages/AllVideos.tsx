@@ -1,10 +1,11 @@
 'use client';
 import { Content } from '@/features/sedai-services/components/Content';
 import { VideoCard } from '@/features/sedai-services/components/VideoCard';
-import { Pagination } from "@/features/sedai-services/components/Pagination";
-import { useEffect, useState } from 'react';
-import { $api } from "@/entities/data/anime-data/api";
-import { AnimeList, IPagination, Titles } from "@/entities/data/anime-data/IAnimeListType";
+import { Pagination } from '@/features/sedai-services/components/Pagination';
+import { useEffect, useRef, useState } from 'react';
+import { AnimeList, IPagination, Titles } from '@/entities/data/anime-data/IAnimeListType';
+import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
+import { $api } from '@/entities/data/anime-data/api';
 
 
 
@@ -32,13 +33,16 @@ export const AllVideos = () => {
         getAnime().then(response => {
             setTitles(response.data.list);
             setPagination(response.data.pagination);
-        }).catch(e => console.log(e));
 
+        }).catch(e => console.log(e));
     }, [pagination.current_page, pagination.items_per_page]);
+
+    const refElem = useRef<HTMLDivElement>(null);
+    useScrollPage(refElem);
 
     return(
         <Content>
-            <div className={'flex flex-wrap overflow-y-auto min-h-[100vh] w-full p-5 justify-center sm:justify-start gap-2'}>
+            <div ref={refElem} className={'flex flex-wrap max-h-[94vh] overflow-y-auto p-5 pb-10 justify-center sm:justify-start gap-2'}>
                 {titles && <VideoCard list={titles}/>}
                 <div className={'flex items-center justify-center h-fit w-full p-2'}>
                     <Pagination current={pagination.current_page} pagePerItems={pagination.items_per_page} total={pagination.pages} onChange={onChange}/>
