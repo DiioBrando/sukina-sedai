@@ -44,7 +44,9 @@ export const Pagination: React.FC<ICustomPagination> = ({
             <li key={k}>
               <Button
                 setting={{
-                  text: String(k),
+                  text: {
+                    value: String(k),
+                  },
                   styleButton:
                     (current === k ? 'bg-grayTransparent rounded-md' : '') +
                     ' p-2 px-4',

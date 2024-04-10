@@ -14,41 +14,8 @@ import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
 
 export const Video = ({ params }: { params: number }) => {
-  // const [comments, setComments] = useState<IComments>({
-  //     name: '',
-  //     userId: 0,
-  //     commentId: '',
-  //     comment: '',
-  //     dateComment: '',
-  // });
   const refElem = useRef<HTMLDivElement>(null);
   const [anime, setAnime] = useState<Titles>();
-  /* const date = () => {
-        const date = new Date();
-        return `
-        ${date.getDate()}.${date.getMonth() < 10? '0' + date.getMonth(): date.getMonth()}.${date.getFullYear()}
-        - 
-        ${(date.getHours() < 10? '0'+ date.getHours(): date.getHours())}:${date.getMinutes() < 10? '0'+ date.getMinutes(): date.getMinutes()}
-        `
-    }
-    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if(event.target.value.length !== 0 && event.target.value.length <= 255) {
-            setComments({
-                ...comments,
-                userId: Math.random() * 1000,
-                commentId: `${Math.floor(Math.random() * 10000)}`,
-                name: '1233',
-                comment: event.target.value,
-                dateComment: date()
-            });
-        }
-    }
-    const handleSubmit = () => {
-        if(comments.comment.length !== 0) {
-            anime.userComments.push(Object.assign(comments));
-        }
-        setComments({...comments, comment: ''});
-    } */
 
   useEffect(() => {
     const getAnime = async () =>
