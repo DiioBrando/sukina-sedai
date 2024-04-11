@@ -12,6 +12,7 @@ import { $api } from '@/entities/data/anime-data/api/api';
 import { Titles } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
+import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
 
 export const Video = ({ params }: { params: number }) => {
   const refElem = useRef<HTMLDivElement>(null);
@@ -31,6 +32,7 @@ export const Video = ({ params }: { params: number }) => {
       })
       .catch((e) => console.log(e));
   }, [params]);
+
   useScrollPage(refElem);
 
   return (
@@ -57,6 +59,7 @@ export const Video = ({ params }: { params: number }) => {
                 ratingKinopoisk={0}
                 ratingIMDb={0}
               />
+              {anime && <ControlAnime idAnime={anime.id} />}
             </div>
             <div className={'flex flex-col min-w-[200px] h-fit'}>
               <div className={'max-w-max h-fit'}>

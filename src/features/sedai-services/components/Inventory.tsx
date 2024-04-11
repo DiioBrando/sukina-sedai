@@ -7,7 +7,12 @@ import { Track } from '../../../../public/icons/Track';
 import { Favorite } from '../../../../public/icons/Favorite';
 import { VideoCard } from '@/features/sedai-services/components/VideoCard';
 import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  AnimeList,
+  Titles,
+} from '@/entities/data/anime-data/lib/IAnimeListType';
+import { $api } from '@/entities/data/anime-data/api/api';
 
 export const Inventory = () => {
   const [inventory, setInventory] = useState<{
@@ -21,6 +26,24 @@ export const Inventory = () => {
     track: false,
     favorite: false,
   });
+
+  const [titles, setTitles] = useState<Titles[]>();
+
+  useEffect(() => {
+    const getAnime = async () =>
+      $api.get<AnimeList>('/title/updates', {
+        params: {
+          page: 1,
+          items_per_page: 20,
+        },
+      });
+
+    getAnime()
+      .then((response) => {
+        setTitles(response.data.list);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   return (
     <div
@@ -147,7 +170,7 @@ export const Inventory = () => {
           'flex flex-wrap gap-2.5 max-h-[500px] w-full overflow-y-auto justify-center sm:justify-start'
         }
       >
-        <VideoCard list={userInventory.list} />
+        {userInventory && <VideoCard list={userInventory} />}
       </div>
     </div>
   );

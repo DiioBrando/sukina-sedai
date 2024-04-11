@@ -59,7 +59,6 @@ export const Profile = ({ params }: { params: number }) => {
             <div className={'flex flex-col'}>
               <span> name: {user.name}</span>
               <span>
-                {' '}
                 status user: {user.isOnlineStatus ? 'online' : 'offline'}{' '}
               </span>
               <span> unique: {user.status}</span>
