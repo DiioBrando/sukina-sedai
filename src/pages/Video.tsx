@@ -9,7 +9,7 @@ import { Message } from '@/features/sedai-services/components/Message';
 import { Comments } from '@/features/sedai-services/components/Comments';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
-import { Titles } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { List, Titles } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
 import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
@@ -18,17 +18,22 @@ export const Video = ({ params }: { params: number }) => {
   const refElem = useRef<HTMLDivElement>(null);
   const [anime, setAnime] = useState<Titles>();
 
+  const [currentPart, setCurrentPart] = useState<number>(0);
+  const [parts, setParts] = useState<List[]>();
+
   useEffect(() => {
     const getAnime = async () =>
       await $api.get('/title', {
         params: {
           id: params,
+          playlist_type: 'array',
         },
       });
 
     getAnime()
       .then((res) => {
         setAnime(res.data);
+        setParts(res.data.player.list);
       })
       .catch((e) => console.log(e));
   }, [params]);
@@ -140,6 +145,9 @@ export const Video = ({ params }: { params: number }) => {
           </div>
         </div>
         {/* видеоплеер и комменты */}
+        <div className={'flex flex-col justify-center items-center'}>
+          {parts && <VideoPlayer video={parts} currentPart={currentPart} />}
+        </div>
       </div>
     </Content>
   );

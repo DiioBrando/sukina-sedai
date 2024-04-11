@@ -93,7 +93,7 @@ export interface Player {
   host: string;
   is_rutube: boolean;
   episodes: Episodes;
-  list: List2[];
+  list: List[];
   rutube: any[];
 }
 
@@ -103,7 +103,7 @@ export interface Episodes {
   string: string;
 }
 
-export interface List2 {
+export interface List {
   episode: number;
   name?: string;
   uuid: string;
@@ -111,6 +111,11 @@ export interface List2 {
   preview: string;
   skips: Skips;
   hls: Hls;
+}
+
+export interface AnimeEpisodes {
+  video: List[];
+  currentPart: number;
 }
 
 export interface Skips {

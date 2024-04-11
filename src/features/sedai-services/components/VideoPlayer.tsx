@@ -1,25 +1,31 @@
 'use client';
 import React from 'react';
 import ReactPlayer from 'react-player';
-import { IVideo } from '@/entities/IAnimeArray';
+import { AnimeEpisodes } from '@/entities/data/anime-data/lib/IAnimeListType';
 
-export const VideoPlayer: React.FC<IVideo>  = ({ video }) => {
-    const currentVideo = `/videos/${video.urlVideo}.mp4`
-    return(
-        <>
-            <ReactPlayer
-                style={{
-                    maxHeight: 'max-content',
-                    background: 'black',
-                }}
-                height={'100%'}
-                width={'100%'}
-                url={currentVideo}
-                controls={true}
-                light={false}
-                pip={true}
-            />
-            <source src={currentVideo} type="video/mp4"/>
-        </>
-    );
-}
+export const VideoPlayer: React.FC<AnimeEpisodes> = ({
+  video,
+  currentPart,
+}) => {
+  console.log(video);
+  const currentEpisode = Object.assign(video[currentPart]);
+  const currentVideo = `https://cache.libria.fun/${currentEpisode.hls.fhd}`;
+  console.log(currentEpisode.episode);
+  return (
+    <>
+      <ReactPlayer
+        style={{
+          maxHeight: 'max-content',
+          background: 'black',
+        }}
+        height={'100%'}
+        width={'100%'}
+        url={currentVideo}
+        controls={true}
+        light={false}
+        pip={true}
+      />
+      <source src={currentVideo} type="video/mp4" />
+    </>
+  );
+};
