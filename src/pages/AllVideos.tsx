@@ -8,7 +8,7 @@ import {
   IPagination,
   Titles,
 } from '@/entities/data/anime-data/lib/IAnimeListType';
-import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
+
 import { $api } from '@/entities/data/anime-data/api/api';
 
 export const AllVideos = () => {

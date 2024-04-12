@@ -11,7 +11,6 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
 import { List, Titles } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
-import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
 import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
 import { Button } from '@/features/sedai-services/components/Button';
 
