@@ -13,6 +13,7 @@ import { List, Titles } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { useScrollPage } from '@/shared/custom-hooks/useScrollPage';
 import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
+import { Button } from '@/features/sedai-services/components/Button';
 
 export const Video = ({ params }: { params: number }) => {
   const refElem = useRef<HTMLDivElement>(null);
@@ -38,14 +39,14 @@ export const Video = ({ params }: { params: number }) => {
       .catch((e) => console.log(e));
   }, [params]);
 
-  useScrollPage(refElem);
+  // useScrollPage(refElem);
 
   return (
     <Content>
       <div
         ref={refElem}
         className={
-          'flex flex-col overflow-y-auto max-h-[94vh] pb-10 p-5 w-full'
+          'flex flex-col overflow-y-auto max-h-[93.3vh] pb-10 p-5 w-full'
         }
       >
         <div className={'flex flex-col'}>
@@ -145,8 +146,40 @@ export const Video = ({ params }: { params: number }) => {
           </div>
         </div>
         {/* видеоплеер и комменты */}
-        <div className={'flex flex-col justify-center items-center'}>
-          {parts && <VideoPlayer video={parts} currentPart={currentPart} />}
+        <div>
+          <div>
+            <div className={'flex flex-col justify-center items-center'}>
+              {parts && <VideoPlayer video={parts} currentPart={currentPart} />}
+            </div>
+            <div className={'flex justify-between p-2'}>
+              <Button
+                setting={{
+                  text: {
+                    style: 'px-3',
+                    value: `prev part`,
+                  },
+                }}
+              />
+              <div>
+                <select className={'rounded-md p-1 px-2'}>
+                  {parts &&
+                    parts.map((item) => (
+                      <option key={item.uuid} value={item.episode}>
+                        {item.episode} part
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <Button
+                setting={{
+                  text: {
+                    style: 'px-3',
+                    value: 'next part',
+                  },
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </Content>

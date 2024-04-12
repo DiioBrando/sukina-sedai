@@ -17,7 +17,7 @@ export const Intro: React.FC<IIntro> = ({
         className={className}
         width={width}
         height={height}
-        src={`https://anilibria.tv${introName}`}
+        src={`https://anilibria.tv${introName ?? ''}`}
         priority={true}
         alt={''}
       />
