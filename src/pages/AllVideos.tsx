@@ -40,15 +40,11 @@ export const AllVideos = () => {
       .catch((e) => console.log(e));
   }, [pagination.current_page, pagination.items_per_page]);
 
-  const refElem = useRef<HTMLDivElement>(null);
-  useScrollPage(refElem);
-
   return (
     <Content>
       <div
-        ref={refElem}
         className={
-          'flex flex-wrap max-h-[94vh] overflow-y-auto p-5 pb-10 justify-center sm:justify-start gap-2'
+          'flex flex-wrap max-h-[93.3vh] overflow-y-auto p-5 pb-10 justify-center sm:justify-start gap-2'
         }
       >
         {titles && <VideoCard list={titles} />}

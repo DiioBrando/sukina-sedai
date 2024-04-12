@@ -16,7 +16,6 @@ import { ControlAnime } from '@/features/sedai-services/components/ControlAnime'
 import { Button } from '@/features/sedai-services/components/Button';
 
 export const Video = ({ params }: { params: number }) => {
-  const refElem = useRef<HTMLDivElement>(null);
   const [anime, setAnime] = useState<Titles>();
 
   const [currentPart, setCurrentPart] = useState<number>(0);
@@ -39,12 +38,9 @@ export const Video = ({ params }: { params: number }) => {
       .catch((e) => console.log(e));
   }, [params]);
 
-  // useScrollPage(refElem);
-
   return (
     <Content>
       <div
-        ref={refElem}
         className={
           'flex flex-col overflow-y-auto max-h-[93.3vh] pb-10 p-5 w-full'
         }
@@ -158,6 +154,12 @@ export const Video = ({ params }: { params: number }) => {
                     style: 'px-3',
                     value: `prev part`,
                   },
+                  eventButton: () => {
+                    if (currentPart === 0) return;
+
+                    const prevPart = currentPart - 1;
+                    setCurrentPart(prevPart);
+                  },
                 }}
               />
               <div>
@@ -175,6 +177,12 @@ export const Video = ({ params }: { params: number }) => {
                   text: {
                     style: 'px-3',
                     value: 'next part',
+                  },
+                  eventButton: () => {
+                    if (currentPart >= (parts?.length ?? 0) - 1) return;
+
+                    const nextPart = currentPart + 1;
+                    setCurrentPart(nextPart);
                   },
                 }}
               />

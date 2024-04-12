@@ -7,10 +7,8 @@ export const VideoPlayer: React.FC<AnimeEpisodes> = ({
   video,
   currentPart,
 }) => {
-  console.log(video);
   const currentEpisode = Object.assign(video[currentPart]);
   const currentVideo = `https://cache.libria.fun/${currentEpisode.hls.fhd}`;
-  console.log(currentEpisode.episode);
   return (
     <>
       <ReactPlayer
