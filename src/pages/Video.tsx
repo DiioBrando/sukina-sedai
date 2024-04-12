@@ -19,7 +19,6 @@ export const Video = ({ params }: { params: number }) => {
 
   const [currentPart, setCurrentPart] = useState<number>(0);
   const [parts, setParts] = useState<List[]>();
-
   useEffect(() => {
     const getAnime = async () =>
       await $api.get('/title', {
@@ -146,23 +145,32 @@ export const Video = ({ params }: { params: number }) => {
             <div className={'flex flex-col justify-center items-center'}>
               {parts && <VideoPlayer video={parts} currentPart={currentPart} />}
             </div>
-            <div className={'flex justify-between p-2'}>
-              <Button
-                setting={{
-                  text: {
-                    style: 'px-3',
-                    value: `prev part`,
-                  },
-                  eventButton: () => {
-                    if (currentPart === 0) return;
+            <div className={'flex w-full p-2'}>
+              <div className={'flex w-full justify-start'}>
+                <Button
+                  setting={{
+                    text: {
+                      style: 'px-3',
+                      value: `prev part`,
+                    },
+                    styleButton: `${currentPart <= 0 ? 'hidden' : ''}`,
+                    eventButton: () => {
+                      if (currentPart === 0) return;
 
-                    const prevPart = currentPart - 1;
-                    setCurrentPart(prevPart);
-                  },
-                }}
-              />
-              <div>
-                <select className={'rounded-md p-1 px-2'}>
+                      const prevPart = currentPart - 1;
+                      setCurrentPart(prevPart);
+                    },
+                  }}
+                />
+              </div>
+              <div className={'flex w-full justify-center max-w-max'}>
+                <select
+                  className={'flex rounded-md p-1 px-2 w-full items-center'}
+                  value={currentPart}
+                  onChange={(e) =>
+                    setCurrentPart(Number(e.currentTarget.value) - 1)
+                  }
+                >
                   {parts &&
                     parts.map((item) => (
                       <option key={item.uuid} value={item.episode}>
@@ -171,20 +179,45 @@ export const Video = ({ params }: { params: number }) => {
                     ))}
                 </select>
               </div>
-              <Button
-                setting={{
-                  text: {
-                    style: 'px-3',
-                    value: 'next part',
-                  },
-                  eventButton: () => {
-                    if (currentPart >= (parts?.length ?? 0) - 1) return;
+              <div className={'flex w-full justify-end'}>
+                <Button
+                  setting={{
+                    text: {
+                      style: 'px-3',
+                      value: 'next part',
+                    },
+                    styleButton:
+                      '' +
+                      `${currentPart >= (parts?.length ?? 0) - 1 ? 'hidden' : ''}`,
+                    eventButton: () => {
+                      if (currentPart >= (parts?.length ?? 0) - 1) return;
 
-                    const nextPart = currentPart + 1;
-                    setCurrentPart(nextPart);
-                  },
-                }}
-              />
+                      const nextPart = currentPart + 1;
+                      setCurrentPart(nextPart);
+                    },
+                  }}
+                />
+              </div>
+            </div>
+            <div className={'flex flex-col'}>
+              <div className={'py-4 flex w-full'}>
+                <Message
+                  valueComment={''}
+                  handleChange={() => {}}
+                  handleSubmit={() => {}}
+                />
+              </div>
+              {
+                <Comments
+                  key={1}
+                  comment={{
+                    id: 0,
+                    name: 'hoho',
+                    comment: 'hoho welcome to the club sukina-sedai user!!',
+                    dateComment: '12.11.2024',
+                  }}
+                />
+              }
             </div>
           </div>
         </div>
