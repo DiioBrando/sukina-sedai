@@ -7,24 +7,25 @@ import { Intro } from '@/features/sedai-services/components/Intro';
 import { VideoPlayer } from '@/features/sedai-services/components/VideoPlayer';
 import { Message } from '@/features/sedai-services/components/Message';
 import { Comments } from '@/features/sedai-services/components/Comments';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
 import {
-  Hls,
+  Franchise,
   List,
-  Skips,
   Titles,
 } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
 import { Button } from '@/features/sedai-services/components/Button';
+import { Franchises } from '@/features/sedai-services/components/Franchises';
+import { it } from 'node:test';
 
 export const Video = ({ params }: { params: number }) => {
   const [anime, setAnime] = useState<Titles>();
 
   const [currentPart, setCurrentPart] = useState<number>(1);
   const [parts, setParts] = useState<List[]>();
-
+  const [franchises, setFranchises] = useState<Franchise[]>();
   useEffect(() => {
     const getAnime = async () =>
       await $api.get('/title', {
@@ -37,6 +38,7 @@ export const Video = ({ params }: { params: number }) => {
     getAnime()
       .then((res) => {
         setAnime(res.data);
+        setFranchises(res.data.franchises);
         setParts(res.data.player.list);
       })
       .catch((e) => console.log(e));
@@ -46,13 +48,13 @@ export const Video = ({ params }: { params: number }) => {
     <Content>
       <div
         className={
-          'flex flex-col overflow-y-auto max-h-[93.3vh] pb-10 p-5 w-full'
+          'flex flex-col overflow-y-auto overflow-x-hidden max-h-[93.3vh] pb-10 p-5 w-full'
         }
       >
         <div className={'flex flex-col'}>
           <div
             className={
-              'w-full h-full flex flex-col sm:flex-row gap-2 p-2 max-w-max'
+              'w-full h-full flex flex-col md:flex-row gap-2 p-2 max-w-max'
             }
           >
             <div className={'max-w-[300px] min-w-[200px] h-fit'}>
@@ -67,7 +69,7 @@ export const Video = ({ params }: { params: number }) => {
               />
               {anime && <ControlAnime idAnime={anime.id} />}
             </div>
-            <div className={'flex flex-col min-w-[200px] h-fit'}>
+            <div className={'flex flex-col min-w-[200px] h-fit gap-2.5'}>
               <div className={'max-w-max h-fit'}>
                 <h1 className={'text-xl'}>{anime && anime.names.ru}</h1>
                 <p className={'text-sm'}>{anime && anime.names.en}</p>
@@ -104,6 +106,24 @@ export const Video = ({ params }: { params: number }) => {
                       {anime && anime.status.string}
                     </span>
                   </Link>
+                </div>
+              </div>
+              <div
+                className={'flex border p-2.5 rounded-md flex-wrap max-w-max'}
+              >
+                <div className={'flex flex-col-reverse gap-2.5'}>
+                  {franchises &&
+                    franchises.map((item) =>
+                      item.releases.map((rel) => (
+                        <Franchises
+                          key={rel.id}
+                          id={rel.id}
+                          code={rel.code}
+                          names={rel.names}
+                          ordinal={rel.ordinal}
+                        />
+                      )),
+                    )}
                 </div>
               </div>
             </div>

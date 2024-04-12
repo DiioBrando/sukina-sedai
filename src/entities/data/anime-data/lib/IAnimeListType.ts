@@ -7,7 +7,7 @@ export interface Titles {
   id: number;
   code: string;
   names: Names;
-  franchises: any[];
+  franchises: Franchise[];
   announce: any;
   status: Status;
   posters: Posters;
@@ -23,14 +23,32 @@ export interface Titles {
   player: Player;
   torrents: Torrents;
 }
-export interface IAnime {
-  list: Titles[];
+
+export interface Franchise {
+  franchise: IFranchise;
+  releases: Release[];
+}
+
+export interface IFranchise {
+  id: string;
+  name: string;
+}
+
+export interface Release {
+  id: number;
+  code: string;
+  ordinal: number;
+  names: Names;
 }
 
 export interface Names {
   ru: string;
   en: string;
   alternative: any;
+}
+
+export interface IAnime {
+  list: Titles[];
 }
 
 export interface Status {

@@ -2,7 +2,7 @@
 import { Content } from '@/features/sedai-services/components/Content';
 import { VideoCard } from '@/features/sedai-services/components/VideoCard';
 import { Pagination } from '@/features/sedai-services/components/Pagination';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AnimeList,
   IPagination,
@@ -44,7 +44,7 @@ export const AllVideos = () => {
     <Content>
       <div
         className={
-          'flex flex-wrap max-h-[93.3vh] overflow-y-auto p-5 pb-10 justify-center sm:justify-start gap-2'
+          'flex flex-wrap max-h-[93.3vh] overflow-y-auto overflow-x-hidden p-5 pb-10 justify-center sm:justify-start gap-2'
         }
       >
         {titles && <VideoCard list={titles} />}
