@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const $api = axios.create({
-    baseURL: 'https://api.anilibria.tv/v3/',
+  baseURL: 'https://api.anilibria.tv/v3/',
 });

@@ -104,18 +104,13 @@ export interface Episodes {
 }
 
 export interface List {
-  episode: number;
+  episode?: number;
   name?: string;
-  uuid: string;
-  created_timestamp: number;
-  preview: string;
-  skips: Skips;
+  uuid?: string;
+  created_timestamp?: number;
+  preview?: string;
+  skips?: Skips;
   hls: Hls;
-}
-
-export interface AnimeEpisodes {
-  video: List[];
-  currentPart: number;
 }
 
 export interface Skips {

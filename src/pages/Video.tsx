@@ -9,7 +9,12 @@ import { Message } from '@/features/sedai-services/components/Message';
 import { Comments } from '@/features/sedai-services/components/Comments';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
-import { List, Titles } from '@/entities/data/anime-data/lib/IAnimeListType';
+import {
+  Hls,
+  List,
+  Skips,
+  Titles,
+} from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
 import { Button } from '@/features/sedai-services/components/Button';
@@ -17,8 +22,9 @@ import { Button } from '@/features/sedai-services/components/Button';
 export const Video = ({ params }: { params: number }) => {
   const [anime, setAnime] = useState<Titles>();
 
-  const [currentPart, setCurrentPart] = useState<number>(0);
+  const [currentPart, setCurrentPart] = useState<number>(1);
   const [parts, setParts] = useState<List[]>();
+
   useEffect(() => {
     const getAnime = async () =>
       await $api.get('/title', {
@@ -139,11 +145,17 @@ export const Video = ({ params }: { params: number }) => {
             </p>
           </div>
         </div>
-        {/* видеоплеер и комменты */}
         <div>
           <div>
             <div className={'flex flex-col justify-center items-center'}>
-              {parts && <VideoPlayer video={parts} currentPart={currentPart} />}
+              {parts &&
+                parts.map((item, index) =>
+                  item.episode === currentPart ? (
+                    <VideoPlayer key={item.uuid ?? index} hls={item.hls} />
+                  ) : (
+                    ''
+                  ),
+                )}
             </div>
             <div className={'flex w-full p-2'}>
               <div className={'flex w-full justify-start'}>
@@ -151,9 +163,9 @@ export const Video = ({ params }: { params: number }) => {
                   setting={{
                     text: {
                       style: 'px-3',
-                      value: `prev part`,
+                      value: 'prev part',
                     },
-                    styleButton: `${currentPart <= 0 ? 'hidden' : ''}`,
+                    styleButton: `${currentPart <= 1 ? 'hidden' : ''}`,
                     eventButton: () => {
                       if (currentPart === 0) return;
 
@@ -168,7 +180,7 @@ export const Video = ({ params }: { params: number }) => {
                   className={'flex rounded-md p-1 px-2 w-full items-center'}
                   value={currentPart}
                   onChange={(e) =>
-                    setCurrentPart(Number(e.currentTarget.value) - 1)
+                    setCurrentPart(Number(e.currentTarget.value))
                   }
                 >
                   {parts &&
@@ -188,9 +200,9 @@ export const Video = ({ params }: { params: number }) => {
                     },
                     styleButton:
                       '' +
-                      `${currentPart >= (parts?.length ?? 0) - 1 ? 'hidden' : ''}`,
+                      `${currentPart >= (parts?.length ?? 0) ? 'hidden' : ''}`,
                     eventButton: () => {
-                      if (currentPart >= (parts?.length ?? 0) - 1) return;
+                      if (currentPart >= (parts?.length ?? 0)) return;
 
                       const nextPart = currentPart + 1;
                       setCurrentPart(nextPart);

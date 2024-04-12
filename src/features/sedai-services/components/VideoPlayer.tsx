@@ -1,14 +1,9 @@
 'use client';
 import React from 'react';
 import ReactPlayer from 'react-player';
-import { AnimeEpisodes } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { List } from '@/entities/data/anime-data/lib/IAnimeListType';
 
-export const VideoPlayer: React.FC<AnimeEpisodes> = ({
-  video,
-  currentPart,
-}) => {
-  const currentEpisode = Object.assign(video[currentPart]);
-  const currentVideo = `https://cache.libria.fun/${currentEpisode.hls.fhd}`;
+export const VideoPlayer: React.FC<List> = ({ hls }) => {
   return (
     <>
       <ReactPlayer
@@ -18,12 +13,12 @@ export const VideoPlayer: React.FC<AnimeEpisodes> = ({
         }}
         height={'100%'}
         width={'100%'}
-        url={currentVideo}
+        url={'https://cache.libria.fun/' + hls.fhd}
         controls={true}
         light={false}
         pip={true}
       />
-      <source src={currentVideo} type="video/mp4" />
+      <source src={'https://cache.libria.fun/' + hls.fhd} type="video/mp4" />
     </>
   );
 };
