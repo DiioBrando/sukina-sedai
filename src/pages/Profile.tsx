@@ -14,7 +14,7 @@ import { getUsers } from '@/entities/data/user-data/api/getUsers';
 import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
 import { Inventory } from '@/features/sedai-services/components/Inventory';
 
-export const Profile = ({ params }: { params: number }) => {
+export default function Profile({ params }: { params: number }) {
   const [user, setUser] = useState<{
     name: string;
     id: number;
@@ -69,4 +69,4 @@ export const Profile = ({ params }: { params: number }) => {
       )}
     </Content>
   );
-};
+}

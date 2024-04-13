@@ -1,4 +1,4 @@
-import { Profile } from '@/pages/Profile';
+import Profile from '@/pages/Profile';
 
 export default function Page() {
   return <Profile params={1} />;

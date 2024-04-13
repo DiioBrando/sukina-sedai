@@ -18,9 +18,8 @@ import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
 import { Button } from '@/features/sedai-services/components/Button';
 import { Franchises } from '@/features/sedai-services/components/Franchises';
-import { it } from 'node:test';
 
-export const Video = ({ params }: { params: number }) => {
+export default function Video({ params }: { params: number }) {
   const [anime, setAnime] = useState<Titles>();
 
   const [currentPart, setCurrentPart] = useState<number>(1);
@@ -255,4 +254,4 @@ export const Video = ({ params }: { params: number }) => {
       </div>
     </Content>
   );
-};
+}

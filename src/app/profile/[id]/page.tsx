@@ -1,7 +1,5 @@
-import { Profile } from '@/pages/Profile';
+import Profile from '@/pages/Profile';
 
 export default function Page({ params }: { params: { id: number } }) {
-    return(
-        <Profile params={params.id}/>
-    );
+  return <Profile params={params.id} />;
 }

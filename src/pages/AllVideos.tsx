@@ -10,7 +10,7 @@ import {
 } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { $api } from '@/entities/data/anime-data/api/api';
 
-export const AllVideos = () => {
+export default function AllVideos() {
   const [pagination, setPagination] = useState<IPagination>({
     pages: 0,
     current_page: 1,
@@ -58,4 +58,4 @@ export const AllVideos = () => {
       </div>
     </Content>
   );
-};
+}
