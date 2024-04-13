@@ -86,25 +86,69 @@ export default function Video({ params }: { params: number }) {
                       </Link>
                     ))}
                 </div>
-                <div className={'flex flex-col gap-1'}>
-                  <Link
-                    href={''}
-                    className={
-                      'hover:bg-purple-500 hover:rounded-full flex items-center max-w-max max-h-max'
-                    }
-                  >
-                    <span className={'px-1'}>{anime && anime.season.year}</span>
-                  </Link>
-                  <Link
-                    href={''}
-                    className={
-                      'hover:bg-purple-500 hover:rounded-full flex items-center max-w-max max-h-max'
-                    }
-                  >
-                    <span className={'px-1'}>
-                      {anime && anime.status.string}
+                <div className={'flex flex-col gap-1 px-1'}>
+                  <div className={'flex gap-1.5'}>
+                    <span>year:</span>
+                    <Link
+                      href={''}
+                      className={
+                        'hover:bg-purple-500 hover:rounded-full flex items-center max-w-max max-h-max'
+                      }
+                    >
+                      <span>{anime && anime.season.year}</span>
+                    </Link>
+                    <span>{anime && anime.season.string}.</span>
+                  </div>
+                  <div>
+                    <span>type: {anime && anime.type.full_string}</span>
+                  </div>
+                  <div>
+                    <span>status: {anime && anime.status.string}.</span>
+                  </div>
+                  <div>
+                    <span>
+                      count parts: {parts && parts.length}/
+                      {anime && (anime.type.episodes ?? '??')}
                     </span>
-                  </Link>
+                  </div>
+                  <div>
+                    <div className={'flex flex-wrap gap-1.5'}>
+                      <span>sub:</span>
+                      {anime &&
+                        anime.team.voice.map((item, index) => (
+                          <span key={index}>
+                            {item}
+                            {anime && anime.team.voice.length <= index + 1
+                              ? '.'
+                              : ','}
+                          </span>
+                        ))}
+                    </div>
+                    <div className={'flex flex-wrap gap-1.5'}>
+                      <span>timing:</span>
+                      {anime &&
+                        anime.team.timing.map((item, index) => (
+                          <span key={index}>
+                            {item}
+                            {anime && anime.team.timing.length <= index + 1
+                              ? '.'
+                              : ','}
+                          </span>
+                        ))}
+                    </div>
+                    <div className={'flex flex-wrap gap-1.5'}>
+                      <span>translator:</span>
+                      {anime &&
+                        anime.team.translator.map((item, index) => (
+                          <span key={index}>
+                            {item}
+                            {anime && anime.team.translator.length <= index + 1
+                              ? '.'
+                              : ','}
+                          </span>
+                        ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -129,19 +173,19 @@ export default function Video({ params }: { params: number }) {
           <div className={'flex flex-wrap py-4 md:px-4'}>
             <h2
               className={
-                'w-full text-xl md:text-2xl  lg:text-center break-words'
+                'w-full text-sm md:text-2xl md:text-center break-words'
               }
             >
               {anime && anime.names.ru}
             </h2>
             <p
               className={
-                'w-full text-lg md:text-xl  lg:text-center break-words'
+                'w-full text-sm md:text-xl  md:text-center break-words'
               }
             >
               {anime && anime.names.en}
             </p>
-            <p className={'text-md md:text-lg break-words'}>
+            <p className={'text-sm md:text-lg break-words'}>
               {anime && anime.description}
             </p>
           </div>

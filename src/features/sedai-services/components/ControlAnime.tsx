@@ -56,7 +56,7 @@ export const ControlAnime: React.FC<animeIdType> = ({ idAnime }) => {
       : array.push(anime);
   };
   return (
-    <div className={'flex gap-2 justify-center md:justify-start py-4'}>
+    <div className={'flex gap-2 justify-center md:justify-start py-2 md:py-4'}>
       <div>
         <Button
           setting={{
