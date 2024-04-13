@@ -108,24 +108,6 @@ export const Video = ({ params }: { params: number }) => {
                   </Link>
                 </div>
               </div>
-              <div
-                className={'flex border p-2.5 rounded-md flex-wrap max-w-max'}
-              >
-                <div className={'flex flex-col-reverse gap-2.5'}>
-                  {franchises &&
-                    franchises.map((item) =>
-                      item.releases.map((rel) => (
-                        <Franchises
-                          key={rel.id}
-                          id={rel.id}
-                          code={rel.code}
-                          names={rel.names}
-                          ordinal={rel.ordinal}
-                        />
-                      )),
-                    )}
-                </div>
-              </div>
             </div>
           </div>
           <div className={'flex flex-wrap md:justify-center gap-2 md:p-4'}>
@@ -229,6 +211,23 @@ export const Video = ({ params }: { params: number }) => {
                     },
                   }}
                 />
+              </div>
+            </div>
+            <div className={'flex p-2.5 flex-wrap justify-center'}>
+              <div className={'flex flex-col-reverse gap-2.5'}>
+                {franchises &&
+                  franchises.map((item) =>
+                    item.releases.map((rel) => (
+                      <Franchises
+                        key={rel.id}
+                        id={rel.id}
+                        code={rel.code}
+                        names={rel.names}
+                        ordinal={rel.ordinal}
+                        currentId={anime && anime.id}
+                      />
+                    )),
+                  )}
               </div>
             </div>
             <div className={'flex flex-col'}>

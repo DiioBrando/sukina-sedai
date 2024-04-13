@@ -39,6 +39,7 @@ export interface Release {
   code: string;
   ordinal: number;
   names: Names;
+  currentId?: number;
 }
 
 export interface Names {

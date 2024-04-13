@@ -8,14 +8,13 @@ import {
   IPagination,
   Titles,
 } from '@/entities/data/anime-data/lib/IAnimeListType';
-
 import { $api } from '@/entities/data/anime-data/api/api';
 
 export const AllVideos = () => {
   const [pagination, setPagination] = useState<IPagination>({
     pages: 0,
     current_page: 1,
-    items_per_page: 10,
+    items_per_page: 20,
     total_items: 0,
   });
   const [titles, setTitles] = useState<Titles[]>();

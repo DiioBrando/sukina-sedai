@@ -2,12 +2,16 @@ import { Release } from '@/entities/data/anime-data/lib/IAnimeListType';
 import React from 'react';
 import Link from 'next/link';
 
-export const Franchises: React.FC<Release> = ({ id, ordinal, names, code }) => {
+export const Franchises: React.FC<Release> = ({
+  id,
+  ordinal,
+  names,
+  code,
+  currentId,
+}) => {
   return (
     <Link
-      className={
-        'flex p-2 border border-customBorderWhite hover:bg-grayTransparent rounded-lg max-w-[578px]'
-      }
+      className={`flex p-2 border border-customBorderWhite rounded-lg max-w-[578px] ${id === currentId ? 'pointer-events-none bg-grayTransparent' : 'hover:bg-grayTransparent'}`}
       href={`/video/${id}`}
     >
       <div className={'flex'}>
