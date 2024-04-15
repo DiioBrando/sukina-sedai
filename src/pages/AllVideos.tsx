@@ -9,17 +9,19 @@ import {
   Titles,
 } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { $api } from '@/entities/data/anime-data/api/api';
+import { useAnimeStore } from '@/shared/store';
 
 export default function AllVideos() {
-  const [pagination, setPagination] = useState<IPagination>({
-    pages: 0,
-    current_page: 1,
-    items_per_page: 20,
-    total_items: 0,
-  });
-  const [titles, setTitles] = useState<Titles[]>();
+  const pagination = useAnimeStore((state) => state.pagination);
+  const titles = useAnimeStore((state) => state.list);
+
   const onChange = (e: number) => {
-    setPagination({ ...pagination, current_page: e });
+    useAnimeStore.setState((state) => ({
+      pagination: {
+        ...state.pagination,
+        current_page: e,
+      },
+    }));
   };
 
   useEffect(() => {
@@ -33,8 +35,18 @@ export default function AllVideos() {
 
     getAnime()
       .then((response) => {
-        setTitles(response.data.list);
-        setPagination(response.data.pagination);
+        useAnimeStore.setState((state) => ({
+          list: response.data.list,
+        }));
+        useAnimeStore.setState((state) => ({
+          pagination: {
+            ...state.pagination,
+            current_page: response.data.pagination.current_page,
+            pages: response.data.pagination.pages,
+            items_per_page: response.data.pagination.items_per_page,
+            total_items: response.data.pagination.total_items,
+          },
+        }));
       })
       .catch((e) => console.log(e));
   }, [pagination.current_page, pagination.items_per_page]);

@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { Following } from '../../../../public/icons/Following';
 import { Recommended } from '../../../../public/icons/Recommended';
 import { ArrowBar } from '../../../../public/icons/ArrowBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/features/sedai-services/components/Button';
+import { $api } from '@/entities/data/anime-data/api/api';
 
 export const SideBar = () => {
   const [stateMenu, setStateMenu] = useState({
@@ -15,6 +16,14 @@ export const SideBar = () => {
     widthStyleIsOpenSvg: 'w-full justify-end',
     width: 'max-w-max',
   });
+
+  const [randomAnime, setRandomAnime] = useState();
+  useEffect(() => {
+    const getAnime = async () => await $api.get('/title/random');
+
+    getAnime().then((e) => setRandomAnime(e.data.id));
+  }, []);
+
   const handleChange = () => {
     if (stateMenu.isOpen) {
       setStateMenu({
@@ -74,26 +83,7 @@ export const SideBar = () => {
           </Link>
           <Link
             className={'flex items-center gap-1 text-md'}
-            href={'/following'}
-          >
-            <Button
-              setting={{
-                image: {
-                  svgComponent: {
-                    image: <Following />,
-                    style: 'w-5 h-5',
-                  },
-                },
-                styleButton: 'p-1',
-              }}
-            />
-            <span className={`lg:${stateMenu.display} hidden`}>
-              following anime
-            </span>
-          </Link>
-          <Link
-            className={'flex items-center gap-1 text-md'}
-            href={'/recommended'}
+            href={`/video/${randomAnime}`}
           >
             <Button
               setting={{

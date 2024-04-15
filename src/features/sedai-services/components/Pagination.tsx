@@ -8,6 +8,10 @@ export const Pagination: React.FC<ICustomPagination> = ({
   pagePerItems,
   onChange,
 }) => {
+  if (pagePerItems <= 5) {
+    return null; // Return null to hide the pagination
+  }
+
   const ref = useRef<HTMLUListElement>(null);
 
   const lengthPage = Math.ceil(total / pagePerItems) + 1;

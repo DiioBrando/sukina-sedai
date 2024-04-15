@@ -21,7 +21,6 @@ import { Franchises } from '@/features/sedai-services/components/Franchises';
 
 export default function Video({ params }: { params: number }) {
   const [anime, setAnime] = useState<Titles>();
-
   const [currentPart, setCurrentPart] = useState<number>(1);
   const [parts, setParts] = useState<List[]>();
   const [franchises, setFranchises] = useState<Franchise[]>();
