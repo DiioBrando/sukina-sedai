@@ -8,10 +8,6 @@ export const Pagination: React.FC<ICustomPagination> = ({
   pagePerItems,
   onChange,
 }) => {
-  if (pagePerItems <= 5) {
-    return null; // Return null to hide the pagination
-  }
-
   const ref = useRef<HTMLUListElement>(null);
 
   const lengthPage = Math.ceil(total / pagePerItems) + 1;
@@ -40,7 +36,7 @@ export const Pagination: React.FC<ICustomPagination> = ({
   }, [onChange]);
 
   return (
-    <ul className={'flex gap-4'} ref={ref}>
+    <ul className={pagePerItems <= 5 ? 'hidden ' : 'flex ' + 'gap-4'} ref={ref}>
       {Array.from(
         { length: lengthPage },
         (_v, k) =>
