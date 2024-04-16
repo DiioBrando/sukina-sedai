@@ -1,12 +1,12 @@
 'use client';
-import { Content } from '@/features/sedai-services/components/Content';
+import { Content } from '@/shared/component/Content';
 import Link from 'next/link';
-import { Tags } from '@/features/sedai-services/components/Tags';
-import { Rating } from '@/features/sedai-services/components/Rating';
-import { Intro } from '@/features/sedai-services/components/Intro';
-import { VideoPlayer } from '@/features/sedai-services/components/VideoPlayer';
-import { Message } from '@/features/sedai-services/components/Message';
-import { Comments } from '@/features/sedai-services/components/Comments';
+import { Tags } from '@/shared/component/Tags';
+import { Rating } from '@/shared/component/Rating';
+import { Intro } from '@/shared/component/Intro';
+import { VideoPlayer } from '@/shared/component/VideoPlayer';
+import { Message } from '@/shared/component/Message';
+import { Comments } from '@/shared/component/Comments';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
 import {
@@ -15,9 +15,9 @@ import {
   Titles,
 } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { animeArray } from '@/entities/data/anime-data/animeArray';
-import { ControlAnime } from '@/features/sedai-services/components/ControlAnime';
-import { Button } from '@/features/sedai-services/components/Button';
-import { Franchises } from '@/features/sedai-services/components/Franchises';
+import { ControlAnime } from '@/shared/component/ControlAnime';
+import { Button } from '@/shared/component/Button';
+import { Franchises } from '@/shared/component/Franchises';
 
 export default function Video({ params }: { params: number }) {
   const [anime, setAnime] = useState<Titles>();

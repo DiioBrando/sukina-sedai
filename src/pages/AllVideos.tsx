@@ -1,13 +1,9 @@
 'use client';
-import { Content } from '@/features/sedai-services/components/Content';
-import { VideoCard } from '@/features/sedai-services/components/VideoCard';
-import { Pagination } from '@/features/sedai-services/components/Pagination';
-import { useEffect, useState } from 'react';
-import {
-  AnimeList,
-  IPagination,
-  Titles,
-} from '@/entities/data/anime-data/lib/IAnimeListType';
+import { Content } from '@/shared/component/Content';
+import { VideoCard } from '@/shared/component/VideoCard';
+import { Pagination } from '@/shared/component/Pagination';
+import { useEffect } from 'react';
+import { AnimeList } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { $api } from '@/entities/data/anime-data/api/api';
 import { useAnimeStore } from '@/shared/store';
 

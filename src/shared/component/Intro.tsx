@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { IIntro } from '@/entities/IIntro';
+import { IIntro } from '@/entities/models/IIntro';
 
 export const Intro: React.FC<IIntro> = ({
   id,

@@ -1,11 +1,11 @@
 'use client';
-import { Home } from '../../../../public/icons/Home';
+import { Home } from '../../../public/icons/Home';
 import Link from 'next/link';
-import { Following } from '../../../../public/icons/Following';
-import { Recommended } from '../../../../public/icons/Recommended';
-import { ArrowBar } from '../../../../public/icons/ArrowBar';
+import { Following } from '../../../public/icons/Following';
+import { Recommended } from '../../../public/icons/Recommended';
+import { ArrowBar } from '../../../public/icons/ArrowBar';
 import { useEffect, useState } from 'react';
-import { Button } from '@/features/sedai-services/components/Button';
+import { Button } from '@/shared/component/Button';
 import { $api } from '@/entities/data/anime-data/api/api';
 
 export const SideBar = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { IChildren } from '@/entities/IChildren';
-import { SideBar } from '@/features/sedai-services/components/SideBar';
-import { NavBar } from '@/features/sedai-services/components/NavBar';
+import { IChildren } from '@/entities/models/IChildren';
+import { SideBar } from '@/shared/component/SideBar';
+import { NavBar } from '@/shared/component/NavBar';
 
 export const Content: React.FC<IChildren> = ({ children }) => {
   return (

@@ -1,8 +1,8 @@
-import { Button } from '@/features/sedai-services/components/Button';
-import { Watch } from '../../../../public/icons/Watch';
-import { Viewed } from '../../../../public/icons/Viewed';
-import { Track } from '../../../../public/icons/Track';
-import { Favorite } from '../../../../public/icons/Favorite';
+import { Button } from '@/shared/component/Button';
+import { Watch } from '../../../public/icons/Watch';
+import { Viewed } from '../../../public/icons/Viewed';
+import { Track } from '../../../public/icons/Track';
+import { Favorite } from '../../../public/icons/Favorite';
 import React, { useEffect, useState } from 'react';
 import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
 import { $api } from '@/entities/data/anime-data/api/api';

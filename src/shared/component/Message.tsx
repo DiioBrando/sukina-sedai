@@ -1,7 +1,7 @@
-import { Button } from '@/features/sedai-services/components/Button';
-import { SendArrow } from '../../../../public/icons/SendArrow';
+import { Button } from '@/shared/component/Button';
+import { SendArrow } from '../../../public/icons/SendArrow';
 import React from 'react';
-import { IMessage } from '@/entities/IMessage';
+import { IMessage } from '@/entities/models/IMessage';
 
 export const Message: React.FC<IMessage> = ({
   valueComment,

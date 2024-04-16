@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Button } from '@/features/sedai-services/components/Button';
+import { Button } from '@/shared/component/Button';
 import { ICustomPagination } from '@/entities/data/anime-data/lib/IAnimeListType';
 
 export const Pagination: React.FC<ICustomPagination> = ({
@@ -36,7 +36,7 @@ export const Pagination: React.FC<ICustomPagination> = ({
   }, [onChange]);
 
   return (
-    <ul className={pagePerItems <= 5 ? 'hidden ' : 'flex ' + 'gap-4'} ref={ref}>
+    <ul className={'flex gap-4'} ref={ref}>
       {Array.from(
         { length: lengthPage },
         (_v, k) =>

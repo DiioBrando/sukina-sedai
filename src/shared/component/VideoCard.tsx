@@ -1,5 +1,5 @@
-import { Tags } from '@/features/sedai-services/components/Tags';
-import { Intro } from '@/features/sedai-services/components/Intro';
+import { Tags } from '@/shared/component/Tags';
+import { Intro } from '@/shared/component/Intro';
 import { IAnime } from '@/entities/data/anime-data/lib/IAnimeListType';
 import Link from 'next/link';
 import React from 'react';

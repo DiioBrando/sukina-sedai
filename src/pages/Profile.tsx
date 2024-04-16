@@ -1,9 +1,9 @@
 'use client';
-import { Content } from '@/features/sedai-services/components/Content';
-import { ProfileImage } from '@/features/sedai-services/components/ProfileImage';
-import { VideoCard } from '@/features/sedai-services/components/VideoCard';
-import { Input } from '@/features/sedai-services/components/Input';
-import { Button } from '@/features/sedai-services/components/Button';
+import { Content } from '@/shared/component/Content';
+import { ProfileImage } from '@/shared/component/ProfileImage';
+import { VideoCard } from '@/shared/component/VideoCard';
+import { Input } from '@/shared/component/Input';
+import { Button } from '@/shared/component/Button';
 import { Search } from '../../public/icons/Search';
 import React, { useEffect, useState } from 'react';
 import { Watch } from '../../public/icons/Watch';
@@ -12,7 +12,7 @@ import { Track } from '../../public/icons/Track';
 import { Favorite } from '../../public/icons/Favorite';
 import { getUsers } from '@/entities/data/user-data/api/getUsers';
 import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
-import { Inventory } from '@/features/sedai-services/components/Inventory';
+import { Inventory } from '@/shared/component/Inventory';
 
 export default function Profile({ params }: { params: number }) {
   const [user, setUser] = useState<{

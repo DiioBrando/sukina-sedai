@@ -1,7 +1,7 @@
-import { ProfileImage } from '@/features/sedai-services/components/ProfileImage';
+import { ProfileImage } from '@/shared/component/ProfileImage';
 import React, { useState } from 'react';
-import { Button } from '@/features/sedai-services/components/Button';
-import { IComment } from '@/entities/IComment';
+import { Button } from '@/shared/component/Button';
+import { IComment } from '@/entities/models/IComment';
 
 export const Comments: React.FC<IComment> = ({ comment }) => {
   const [grade, setGrade] = useState({

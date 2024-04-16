@@ -4,19 +4,19 @@ import {
   profileDropDownButton,
   profileDropDownLink,
 } from '@/entities/data/dropdown-data/profileDropDownItems';
-import { Logo } from '../../../../public/icons/Logo';
-import { Input } from '@/features/sedai-services/components/Input';
-import { Search } from '../../../../public/icons/Search';
-import { Button } from '@/features/sedai-services/components/Button';
-import { ProfileImage } from '@/features/sedai-services/components/ProfileImage';
-import { DropDown } from '@/features/sedai-services/components/DropDown';
-import { useClickOutSide } from '@/shared/custom-hooks/useClickOutSide';
+import { Logo } from '../../../public/icons/Logo';
+import { Input } from '@/shared/component/Input';
+import { Search } from '../../../public/icons/Search';
+import { Button } from '@/shared/component/Button';
+import { ProfileImage } from '@/shared/component/ProfileImage';
+import { DropDown } from '@/shared/component/DropDown';
+import { useClickOutSide } from '@/shared/lib/hooks/useClickOutSide';
 import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
 import { BorderLine } from '@/shared/BorderLine';
-import { Notification } from '../../../../public/icons/Notification';
-import { Browse } from '../../../../public/icons/Browse';
-import { InventorySvg } from '../../../../public/icons/InventorySvg';
-import { Inventory } from '@/features/sedai-services/components/Inventory';
+import { Notification } from '../../../public/icons/Notification';
+import { Browse } from '../../../public/icons/Browse';
+import { InventorySvg } from '../../../public/icons/InventorySvg';
+import { Inventory } from '@/shared/component/Inventory';
 import { $api } from '@/entities/data/anime-data/api/api';
 import { useAnimeStore } from '@/shared/store';
 
@@ -55,9 +55,7 @@ export const NavBar = () => {
             pagination: {
               ...state.pagination,
               current_page: 1,
-              items_per_page: 5,
-              total_items: 0,
-              pages: 0,
+              items_per_page: 20,
             },
           }));
         });
@@ -164,7 +162,7 @@ export const NavBar = () => {
                 svgComponent: {
                   image: <Search />,
                   style:
-                    'w-[34px] h-[34px] border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
+                    'w-[34px] h-[33.7px] border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
                 },
               },
               eventButton: handleSearch,

@@ -5,7 +5,7 @@ import { Language } from '../../../../public/icons/Language';
 import {
   IProfileDropDownButton,
   IProfileDropDownLink,
-} from '@/entities/IProfileDropDownItems';
+} from '@/entities/data/dropdown-data/model/IProfileDropDownItems';
 import { Theme } from '../../../../public/icons/Theme';
 import { LogOut } from '../../../../public/icons/LogOut';
 

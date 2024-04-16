@@ -1,11 +1,11 @@
-import { Input } from '@/features/sedai-services/components/Input';
-import { Button } from '@/features/sedai-services/components/Button';
-import { Search } from '../../../../public/icons/Search';
-import { Watch } from '../../../../public/icons/Watch';
-import { Viewed } from '../../../../public/icons/Viewed';
-import { Track } from '../../../../public/icons/Track';
-import { Favorite } from '../../../../public/icons/Favorite';
-import { VideoCard } from '@/features/sedai-services/components/VideoCard';
+import { Input } from '@/shared/component/Input';
+import { Button } from '@/shared/component/Button';
+import { Search } from '../../../public/icons/Search';
+import { Watch } from '../../../public/icons/Watch';
+import { Viewed } from '../../../public/icons/Viewed';
+import { Track } from '../../../public/icons/Track';
+import { Favorite } from '../../../public/icons/Favorite';
+import { VideoCard } from '@/shared/component/VideoCard';
 import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
 import React, { useEffect, useState } from 'react';
 import {

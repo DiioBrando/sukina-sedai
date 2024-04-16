@@ -1,4 +1,4 @@
-import { Setting } from '@/entities/IButtonSetting';
+import { Setting } from '@/entities/models/IButtonSetting';
 import React from 'react';
 import Image from 'next/image';
 
