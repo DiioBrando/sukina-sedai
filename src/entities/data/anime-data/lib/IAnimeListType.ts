@@ -3,6 +3,10 @@ export interface AnimeList {
   pagination: IPagination;
 }
 
+export interface ILoad extends AnimeList {
+  isLoad: boolean;
+}
+
 export interface Titles {
   id: number;
   code: string;

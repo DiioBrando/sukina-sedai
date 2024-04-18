@@ -24,6 +24,7 @@ export default function Video({ params }: { params: number }) {
   const [currentPart, setCurrentPart] = useState<number>(1);
   const [parts, setParts] = useState<List[]>();
   const [franchises, setFranchises] = useState<Franchise[]>();
+
   useEffect(() => {
     const getAnime = async () =>
       await $api.get('/title', {
