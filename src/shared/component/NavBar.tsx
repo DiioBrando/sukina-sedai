@@ -5,20 +5,17 @@ import {
   profileDropDownLink,
 } from '@/entities/data/dropdown-data/profileDropDownItems';
 import { Logo } from '../../../public/icons/Logo';
-import { Input } from '@/shared/component/Input';
-import { Search } from '../../../public/icons/Search';
 import { Button } from '@/shared/component/Button';
 import { ProfileImage } from '@/shared/component/ProfileImage';
 import { DropDown } from '@/shared/component/DropDown';
 import { useClickOutSide } from '@/shared/lib/hooks/useClickOutSide';
-import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
+import React, { useState, useRef } from 'react';
 import { BorderLine } from '@/shared/BorderLine';
 import { Notification } from '../../../public/icons/Notification';
 import { Browse } from '../../../public/icons/Browse';
 import { InventorySvg } from '../../../public/icons/InventorySvg';
 import { Inventory } from '@/shared/component/Inventory';
-import { $api } from '@/entities/data/anime-data/api/api';
-import { useAnimeStore } from '@/shared/store';
+import { Search } from '@/shared/component/Search';
 
 export const NavBar = () => {
   const [isOpen, setOpen] = useState({
@@ -28,7 +25,6 @@ export const NavBar = () => {
     inventoryDropDown: false,
   });
   const elementRef = useRef(null);
-  const [valueSearch, setSearch] = useState<string>('');
   useClickOutSide(elementRef, () => {
     isOpen.ProfileDropDown &&
       setTimeout(() => setOpen({ ...isOpen, ProfileDropDown: false }), 100);
@@ -40,31 +36,6 @@ export const NavBar = () => {
     isOpen.inventoryDropDown &&
       setTimeout(() => setOpen({ ...isOpen, inventoryDropDown: false }), 100);
   });
-
-  const handleSearch = async () => {
-    if (!!valueSearch) {
-      await $api
-        .get('/title/search', {
-          params: {
-            search: valueSearch,
-          },
-        })
-        .then((res) => {
-          useAnimeStore.setState((state) => ({
-            list: res.data.list,
-            pagination: {
-              ...state.pagination,
-              current_page: 1,
-              items_per_page: 20,
-            },
-          }));
-        });
-    }
-  };
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value);
-  };
 
   return (
     <header className={'flex gap-1 items-center px-1 sm:px-2'}>
@@ -147,29 +118,7 @@ export const NavBar = () => {
         </div>
       </div>
       <div className={'flex justify-end sm:justify-center w-full'}>
-        <div className={'flex items-center'}>
-          <Input
-            input={{
-              placeholder: 'search favorite anime here',
-              style: 'p-1 px-4 border-r-0 rounded-r-none rounded-md',
-              onChange: onChange,
-              value: valueSearch,
-            }}
-          />
-          <Button
-            setting={{
-              image: {
-                svgComponent: {
-                  image: <Search />,
-                  style:
-                    'w-[34px] h-[33.7px] border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
-                },
-              },
-              eventButton: handleSearch,
-              styleButton: 'p-0 sm:hover:rounded-l-none',
-            }}
-          />
-        </div>
+        <Search />
       </div>
       <div className={'flex items-center justify-end max-w-max w-full gap-1.5'}>
         <div className={'relative flex items-center'}>

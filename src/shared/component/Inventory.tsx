@@ -1,6 +1,6 @@
 import { Input } from '@/shared/component/Input';
 import { Button } from '@/shared/component/Button';
-import { Search } from '../../../public/icons/Search';
+import { SearchSvg } from '../../../public/icons/SearchSvg';
 import { Watch } from '../../../public/icons/Watch';
 import { Viewed } from '../../../public/icons/Viewed';
 import { Track } from '../../../public/icons/Track';
@@ -62,7 +62,7 @@ export const Inventory = () => {
           setting={{
             image: {
               svgComponent: {
-                image: <Search />,
+                image: <SearchSvg />,
                 style:
                   'w-[50px] h-[34px] border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
               },

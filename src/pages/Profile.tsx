@@ -4,7 +4,7 @@ import { ProfileImage } from '@/shared/component/ProfileImage';
 import { VideoCard } from '@/shared/component/VideoCard';
 import { Input } from '@/shared/component/Input';
 import { Button } from '@/shared/component/Button';
-import { Search } from '../../public/icons/Search';
+import { SearchSvg } from '../../public/icons/SearchSvg';
 import React, { useEffect, useState } from 'react';
 import { Watch } from '../../public/icons/Watch';
 import { Viewed } from '../../public/icons/Viewed';

@@ -30,7 +30,6 @@ export default function AllVideos() {
           items_per_page: pagination.items_per_page,
         },
       });
-
     getAnime()
       .then((response) => {
         useAnimeStore.setState((state) => ({
