@@ -1,10 +1,10 @@
+import { $postUser } from '@/entities/data/user-data/api/api';
+import { useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
 import React from 'react';
-import { useAuthStore } from '@/shared/store';
-import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 export default function LoginForm() {
-  const setAuth = useAuthStore((state) => state.setAuth);
   const {
     register,
     handleSubmit,
@@ -14,8 +14,8 @@ export default function LoginForm() {
     mode: 'onBlur',
   });
 
-  const onSubmit = (data: object) => {
-    console.log(JSON.stringify(data));
+  const onSubmit = async (data: object) => {
+    await $postUser.post('/login', data).then((res) => {});
     reset();
   };
 
@@ -23,6 +23,7 @@ export default function LoginForm() {
     <div className={'flex justify-center items-center w-full h-full'}>
       <div className={'border border-black p-5 rounded-lg'}>
         <form
+          method={'post'}
           className={'flex flex-col gap-5'}
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -94,15 +95,16 @@ export default function LoginForm() {
           />
         </form>
         <div className={'h-full w-full justify-center flex mt-4'}>
-          <Button
-            setting={{
-              styleButton: 'p-1 max-w-max h-fit',
-              text: {
-                value: 'register page',
-              },
-              eventButton: () => setAuth(true),
-            }}
-          />
+          <Link href={'/registration'}>
+            <Button
+              setting={{
+                styleButton: 'p-1 max-w-max h-fit',
+                text: {
+                  value: 'register page',
+                },
+              }}
+            />
+          </Link>
         </div>
       </div>
     </div>

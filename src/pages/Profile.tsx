@@ -10,7 +10,7 @@ import { Watch } from '../../public/icons/Watch';
 import { Viewed } from '../../public/icons/Viewed';
 import { Track } from '../../public/icons/Track';
 import { Favorite } from '../../public/icons/Favorite';
-import { getUsers } from '@/entities/data/user-data/api/getUsers';
+import { api } from '@/entities/data/user-data/api/api';
 import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
 import { Inventory } from '@/shared/component/Inventory';
 
@@ -23,7 +23,7 @@ export default function Profile({ params }: { params: number }) {
   }>();
 
   useEffect(() => {
-    getUsers
+    api
       .get('/users', {
         params: {
           id: params,
