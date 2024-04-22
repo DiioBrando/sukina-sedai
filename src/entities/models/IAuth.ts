@@ -1,19 +1,27 @@
-export interface IPassword {
-  passwordFirst?: string;
-  passwordSecond?: string;
-}
-export interface IName {
-  name?: string;
+export interface IReg extends ILogin {
+  login: string;
 }
 
-export interface IEmail {
-  email?: string;
+export interface ILogin {
+  email: string;
+  password: string;
 }
 
-export interface IRegister extends IPassword, IEmail, IName {}
-export interface ILogin extends IName, IPassword {}
+export interface IUser {
+  login: string;
+  email: string;
+  password: string;
+  roles: Array<string>;
+  isActivated: boolean;
+}
 
 export interface IAuthBoolean {
   auth: boolean;
   setAuth: (e: boolean) => {};
+}
+
+export interface IAuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: IUser;
 }

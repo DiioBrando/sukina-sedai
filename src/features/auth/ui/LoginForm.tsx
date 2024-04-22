@@ -1,8 +1,9 @@
-import { $postUser } from '@/entities/data/user-data/api/api';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
 import React from 'react';
 import Link from 'next/link';
+import { ILogin } from '@/entities/models/IAuth';
+import { useAppContext } from '@/shared/context/page';
 
 export default function LoginForm() {
   const {
@@ -10,12 +11,12 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors, isValid },
     reset,
-  } = useForm({
+  } = useForm<ILogin>({
     mode: 'onBlur',
   });
-
-  const onSubmit = async (data: object) => {
-    await $postUser.post('/login', data).then((res) => {});
+  const { store } = useAppContext();
+  const onSubmit: SubmitHandler<ILogin> = async (data): Promise<void> => {
+    await store.login(data.email, data.password);
     reset();
   };
 

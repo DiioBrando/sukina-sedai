@@ -41,14 +41,14 @@ export const Search = () => {
           value: valueSearch,
         }}
       />
-      <Link href={'/'}>
+      <Link className={'w-[39px] h-[39px] flex'} href={'/'}>
         <Button
           setting={{
             image: {
               svgComponent: {
                 image: <SearchSvg />,
                 style:
-                  'w-[34px] h-[33.7px] border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
+                  'border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
               },
             },
             eventButton: handleSearch,

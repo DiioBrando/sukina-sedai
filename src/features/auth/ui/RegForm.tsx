@@ -1,24 +1,23 @@
-import { $postUser } from '@/entities/data/user-data/api/api';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
 import React from 'react';
 import Link from 'next/link';
+import { IReg } from '@/entities/models/IAuth';
+import { useAppContext } from '@/shared/context/page';
 export default function RegForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
-  } = useForm({
+  } = useForm<IReg>({
     mode: 'onBlur',
   });
 
-  const onSubmit = async (data: object) => {
-    console.log(data);
-    await $postUser
-      .post('/registration', data)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+  const { store } = useAppContext();
+
+  const onSubmit: SubmitHandler<IReg> = async (data): Promise<void> => {
+    await store.registration(data.login, data.email, data.password);
     reset();
   };
 
