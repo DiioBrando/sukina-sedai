@@ -18,8 +18,10 @@ import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { ControlAnime } from '@/shared/component/ControlAnime';
 import { Button } from '@/shared/component/Button';
 import { Franchises } from '@/shared/component/Franchises';
+import { useAppContext } from '@/shared/context/page';
 
 export default function Video({ params }: { params: number }) {
+  const { store } = useAppContext();
   const [anime, setAnime] = useState<Titles>();
   const [currentPart, setCurrentPart] = useState<number>(1);
   const [parts, setParts] = useState<List[]>();
@@ -66,7 +68,9 @@ export default function Video({ params }: { params: number }) {
                 ratingKinopoisk={0}
                 ratingIMDb={0}
               />
-              {anime && <ControlAnime idAnime={anime.id} />}
+              {!store.isAuth
+                ? null
+                : anime && <ControlAnime idAnime={anime.id} />}
             </div>
             <div className={'flex flex-col min-w-[200px] h-fit gap-2.5'}>
               <div className={'max-w-max h-fit'}>
@@ -152,23 +156,6 @@ export default function Video({ params }: { params: number }) {
                 </div>
               </div>
             </div>
-          </div>
-          <div className={'flex flex-wrap md:justify-center gap-2 md:p-4'}>
-            <Rating
-              ratingName={'the plot'}
-              maxNumRating={10}
-              ratingObject={animeArray.userRating.thePlot}
-            />
-            <Rating
-              ratingName={'characters'}
-              maxNumRating={10}
-              ratingObject={animeArray.userRating.characters}
-            />
-            <Rating
-              ratingName={'drawing'}
-              maxNumRating={10}
-              ratingObject={animeArray.userRating.drawing}
-            />
           </div>
           <div className={'flex flex-wrap py-4 md:px-4'}>
             <h2

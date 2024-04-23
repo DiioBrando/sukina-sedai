@@ -8,9 +8,9 @@ export interface ILogin {
 }
 
 export interface IUser {
+  id: string;
   login: string;
   email: string;
-  password: string;
   roles: Array<string>;
   isActivated: boolean;
 }

@@ -7,8 +7,3 @@ export const useAnimeStore = create<ILoad>((set) => ({
   pagination: { pages: 0, current_page: 1, items_per_page: 20, total_items: 0 },
   isLoad: true,
 }));
-
-export const useAuthStore = create<IAuthBoolean>((set) => ({
-  auth: true,
-  setAuth: async (e) => set({ auth: e }),
-}));

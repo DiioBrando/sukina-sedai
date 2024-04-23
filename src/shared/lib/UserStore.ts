@@ -1,5 +1,6 @@
-import { IUser } from '@/entities/models/IAuth';
+import { IAuthResponse, IUser } from '@/entities/models/IAuth';
 import AuthService from '@/features/auth/lib/AuthService';
+import axios from 'axios';
 
 export default class UserStore {
   user = {} as IUser;
@@ -41,6 +42,20 @@ export default class UserStore {
       localStorage.removeItem('token');
       this.setAuth(false);
       this.setUser({} as IUser);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async checkAuth() {
+    try {
+      const response = await axios.get<IAuthResponse>(
+        `${process.env.DATABASE_URL}/api/refresh`,
+        { withCredentials: true },
+      );
+      localStorage.removeItem('token');
+      this.setAuth(true);
+      this.setUser(response.data.user);
     } catch (e) {
       console.log(e);
     }

@@ -8,6 +8,8 @@ import {
 } from '@/entities/data/dropdown-data/model/IProfileDropDownItems';
 import { Theme } from '../../../../public/icons/Theme';
 import { LogOut } from '../../../../public/icons/LogOut';
+import { SignUp } from '../../../../public/icons/SignUp';
+import { SignIn } from '../../../../public/icons/SignIn';
 
 export const profileDropDownLink: IProfileDropDownLink[] = [
   {
@@ -27,6 +29,18 @@ export const profileDropDownLink: IProfileDropDownLink[] = [
     name: 'Privacy Center',
     linkTo: 'privacy',
     svgComponent: <Privacy />,
+  },
+  {
+    id: 4,
+    name: 'Sign In',
+    linkTo: 'login',
+    svgComponent: <SignIn />,
+  },
+  {
+    id: 5,
+    name: 'Sign Up',
+    linkTo: 'registration',
+    svgComponent: <SignUp />,
   },
 ];
 
