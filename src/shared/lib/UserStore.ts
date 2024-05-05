@@ -1,6 +1,7 @@
 import { IAuthResponse, IUser } from '@/entities/models/IAuth';
 import AuthService from '@/features/auth/lib/AuthService';
 import axios from 'axios';
+import { create } from 'zustand';
 
 export default class UserStore {
   user = {} as IUser;
@@ -53,7 +54,7 @@ export default class UserStore {
         `${process.env.DATABASE_URL}/api/refresh`,
         { withCredentials: true },
       );
-      localStorage.removeItem('token');
+      localStorage.setItem('token', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {

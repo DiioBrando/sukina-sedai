@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { IAuthResponse } from '@/entities/models/IAuth';
-import { throws } from 'node:assert';
 
 const $api = axios.create({
   withCredentials: true,

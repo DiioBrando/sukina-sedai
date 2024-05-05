@@ -9,7 +9,7 @@ import { Button } from '@/shared/component/Button';
 import { ProfileImage } from '@/shared/component/ProfileImage';
 import { DropDown } from '@/shared/component/DropDown';
 import { useClickOutSide } from '@/shared/lib/hooks/useClickOutSide';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BorderLine } from '@/shared/BorderLine';
 import { Notification } from '../../../public/icons/Notification';
 import { Browse } from '../../../public/icons/Browse';
@@ -28,6 +28,7 @@ export const NavBar = () => {
     fillNotification: '#000000',
     inventoryDropDown: false,
   });
+
   const elementRef = useRef(null);
   useClickOutSide(elementRef, () => {
     isOpen.ProfileDropDown &&
@@ -85,7 +86,7 @@ export const NavBar = () => {
             Browse
           </p>
         </Link>
-        {!store.isAuth ? null : (
+        {store.isAuth ? (
           <div className={'flex items-center justify-center p-1 sm:p-0'}>
             <div className={'relative flex items-center'}>
               <Button
@@ -121,50 +122,12 @@ export const NavBar = () => {
               </DropDown>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
       <div className={'flex justify-end sm:justify-center w-full'}>
         <Search />
       </div>
-      {!store.isAuth ? (
-        <div className={'flex gap-2 px-2'}>
-          <Link href={'/registration'}>
-            <Button
-              setting={{
-                image: {
-                  svgComponent: {
-                    image: <SignUp />,
-                    style: 'w-5 h-5 flex md:hidden',
-                  },
-                },
-                styleButton: 'p-1 hover:bg-grayTransparent hover:rounded-lg',
-                text: {
-                  value: 'registration',
-                  style: 'hidden md:flex',
-                },
-              }}
-            />
-          </Link>
-          <Link href={'/login'}>
-            <Button
-              setting={{
-                image: {
-                  svgComponent: {
-                    image: <SignIn />,
-                    style: 'w-5 h-5 flex md:hidden',
-                  },
-                },
-                styleButton:
-                  'flex p-1 hover:bg-grayTransparent hover:rounded-lg',
-                text: {
-                  value: 'login',
-                  style: 'hidden md:flex',
-                },
-              }}
-            />
-          </Link>
-        </div>
-      ) : (
+      {store.isAuth ? (
         <div
           className={'flex items-center justify-end max-w-max w-full gap-1.5'}
         >
@@ -305,6 +268,44 @@ export const NavBar = () => {
               </DropDown>
             )}
           </div>
+        </div>
+      ) : (
+        <div className={'flex gap-2 px-2'}>
+          <Link href={'/registration'}>
+            <Button
+              setting={{
+                image: {
+                  svgComponent: {
+                    image: <SignUp />,
+                    style: 'w-5 h-5 flex md:hidden',
+                  },
+                },
+                styleButton: 'p-1 hover:bg-grayTransparent hover:rounded-lg',
+                text: {
+                  value: 'registration',
+                  style: 'hidden md:flex',
+                },
+              }}
+            />
+          </Link>
+          <Link href={'/login'}>
+            <Button
+              setting={{
+                image: {
+                  svgComponent: {
+                    image: <SignIn />,
+                    style: 'w-5 h-5 flex md:hidden',
+                  },
+                },
+                styleButton:
+                  'flex p-1 hover:bg-grayTransparent hover:rounded-lg',
+                text: {
+                  value: 'login',
+                  style: 'hidden md:flex',
+                },
+              }}
+            />
+          </Link>
         </div>
       )}
     </header>

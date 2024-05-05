@@ -19,6 +19,9 @@ const config: Config = {
       borderColor: {
         customBorderWhite: '#CCC',
       },
+      boxShadow: {
+        customInner: 'inset 0 0 6px 0 rgb(0 0 0 / 0.05)',
+      },
     },
   },
   plugins: [],

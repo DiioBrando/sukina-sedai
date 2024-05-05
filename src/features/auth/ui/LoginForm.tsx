@@ -1,11 +1,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { ILogin } from '@/entities/models/IAuth';
 import { useAppContext } from '@/shared/context/page';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
+  const { store } = useAppContext();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -14,7 +17,13 @@ export default function LoginForm() {
   } = useForm<ILogin>({
     mode: 'onBlur',
   });
-  const { store } = useAppContext();
+
+  useEffect(() => {
+    if (store.isAuth) {
+      router.push('/');
+    }
+  }, []);
+
   const onSubmit: SubmitHandler<ILogin> = async (data): Promise<void> => {
     await store.login(data.email, data.password);
     reset();
@@ -22,17 +31,17 @@ export default function LoginForm() {
 
   return (
     <div className={'flex justify-center items-center w-full h-full'}>
-      <div className={'border border-black p-5 rounded-lg'}>
+      <div>
         <form
           method={'post'}
           className={'flex flex-col gap-5'}
           onSubmit={handleSubmit(onSubmit)}
         >
           <div>
-            <p>Login page</p>
+            <h1 className={'text-2xl text-center mr-3'}>Login</h1>
           </div>
           <label className={'flex flex-col gap-1.5'}>
-            <h1>Email</h1>
+            <h2>Email</h2>
             <input
               type="email"
               placeholder="email"
@@ -48,7 +57,9 @@ export default function LoginForm() {
                   message: 'max length email 2 symbols',
                 },
               })}
-              className={'border border-black rounded-md p-2 outline-none'}
+              className={
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+              }
             />
             <div>
               {errors?.email && (
@@ -60,7 +71,7 @@ export default function LoginForm() {
             </div>
           </label>
           <label className={'flex flex-col gap-1.5'}>
-            <h1>Password</h1>
+            <h2>Password</h2>
             <input
               type="password"
               placeholder="password"
@@ -75,11 +86,13 @@ export default function LoginForm() {
                   message: 'min length symbols 8',
                 },
               })}
-              className={'border border-black rounded-md p-2 outline-none'}
+              className={
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+              }
             />
             <div>
               {errors?.password && (
-                <p className="text-red-500">
+                <p className={'text-red-500'}>
                   {errors?.password?.message?.toString() ||
                     'This field is required!'}
                 </p>
@@ -88,10 +101,10 @@ export default function LoginForm() {
           </label>
           <input
             className={
-              'border border-black rounded-md p-2 outline-none' +
-              ` ${!isValid ? 'bg-gray-500' : 'hover:bg-grayTransparent cursor-pointer'}`
+              'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none' +
+              ` ${!isValid ? 'bg-gray-400' : 'hover:bg-grayTransparent cursor-pointer'}`
             }
-            type="submit"
+            type={'submit'}
             disabled={!isValid}
           />
         </form>
@@ -101,7 +114,7 @@ export default function LoginForm() {
               setting={{
                 styleButton: 'p-1 max-w-max h-fit',
                 text: {
-                  value: 'register page',
+                  value: 'Sign Up',
                 },
               }}
             />

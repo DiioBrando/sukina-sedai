@@ -1,7 +1,7 @@
 'use client';
 import { Content } from '@/shared/component/Content';
 import { ProfileImage } from '@/shared/component/ProfileImage';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Inventory } from '@/shared/component/Inventory';
 import { useAppContext } from '@/shared/context/page';
 

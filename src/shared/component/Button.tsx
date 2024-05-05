@@ -4,21 +4,19 @@ import Image from 'next/image';
 
 export const Button: React.FC<Setting> = ({ setting }) => {
   const renderImage = () => {
-    if (!setting.image) return null;
+    const { image } = setting;
 
-    const { imagePath, svgComponent } = setting.image;
-
-    return imagePath ? (
+    return image?.imagePath ? (
       <Image
-        width={imagePath.width}
-        height={imagePath.height}
-        className={imagePath.style}
-        src={`/icons/${imagePath.src}.${imagePath.formatPicture}`}
-        alt={imagePath.alt ?? ''}
+        width={image?.imagePath.width}
+        height={image?.imagePath.height}
+        className={image?.imagePath.style}
+        src={`/icons/${image?.imagePath.src}.${image?.imagePath.formatPicture}`}
+        alt={image?.imagePath.alt ?? ''}
       />
     ) : (
-      <div className={svgComponent?.style ?? ''}>
-        {svgComponent?.image ?? ''}
+      <div className={image?.svgComponent?.style ?? ''}>
+        {image?.svgComponent?.image ?? ''}
       </div>
     );
   };

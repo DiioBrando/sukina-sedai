@@ -1,7 +1,6 @@
 'use client';
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import UserStore from '@/shared/lib/UserStore';
-import App from 'next/app';
 
 type Context = {
   store: UserStore;
@@ -13,11 +12,14 @@ const AppContext = createContext<Context>({ store });
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const { store } = useAppContext();
+
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    const token = localStorage.getItem('token');
+    if (token) {
       store.checkAuth();
     }
-  }, []);
+  }, [store]);
+
   return (
     <AppContext.Provider value={{ store }}>{children}</AppContext.Provider>
   );

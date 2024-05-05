@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { ILoad } from '@/entities/data/anime-data/lib/IAnimeListType';
-import { IAuthBoolean } from '@/entities/models/IAuth';
 
 export const useAnimeStore = create<ILoad>((set) => ({
   list: [],

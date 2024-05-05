@@ -30,18 +30,6 @@ export const profileDropDownLink: IProfileDropDownLink[] = [
     linkTo: 'privacy',
     svgComponent: <Privacy />,
   },
-  {
-    id: 4,
-    name: 'Sign In',
-    linkTo: 'login',
-    svgComponent: <SignIn />,
-  },
-  {
-    id: 5,
-    name: 'Sign Up',
-    linkTo: 'registration',
-    svgComponent: <SignUp />,
-  },
 ];
 
 export const profileDropDownButton: IProfileDropDownButton[] = [

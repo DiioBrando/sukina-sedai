@@ -36,26 +36,24 @@ export const Search = () => {
       <Input
         input={{
           placeholder: 'search favorite anime here',
-          style: 'p-1 px-4 border-r-0 rounded-r-none rounded-md',
+          style: 'min-w-[150px] p-1 px-4 border-r-0 rounded-r-none rounded-md',
           onChange: onChange,
           value: valueSearch,
         }}
       />
-      <Link className={'w-[39px] h-[39px] flex'} href={'/'}>
-        <Button
-          setting={{
-            image: {
-              svgComponent: {
-                image: <SearchSvg />,
-                style:
-                  'border-customBorderWhite border flex p-1 rounded-md rounded-l-none',
-              },
+      <Button
+        setting={{
+          image: {
+            svgComponent: {
+              image: <SearchSvg />,
+              style:
+                'border-customBorderWhite border flex p-1 rounded-md rounded-l-none w-[34px] h-[34px]',
             },
-            eventButton: handleSearch,
-            styleButton: 'p-0 sm:hover:rounded-l-none',
-          }}
-        />
-      </Link>
+          },
+          eventButton: handleSearch,
+          styleButton: 'p-0 sm:hover:rounded-l-none',
+        }}
+      />
     </div>
   );
 };

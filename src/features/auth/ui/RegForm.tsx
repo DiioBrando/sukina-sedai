@@ -1,10 +1,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { IReg } from '@/entities/models/IAuth';
 import { useAppContext } from '@/shared/context/page';
+import { useRouter } from 'next/navigation';
+
 export default function RegForm() {
+  const { store } = useAppContext();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -14,7 +18,11 @@ export default function RegForm() {
     mode: 'onBlur',
   });
 
-  const { store } = useAppContext();
+  useEffect(() => {
+    if (store.isAuth) {
+      router.push('/');
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<IReg> = async (data): Promise<void> => {
     await store.registration(data.login, data.email, data.password);
@@ -23,20 +31,20 @@ export default function RegForm() {
 
   return (
     <div className={'flex justify-center items-center w-full h-full'}>
-      <div className={'border border-black p-5 rounded-lg'}>
+      <div>
         <form
           method={'post'}
           className={'flex flex-col gap-5'}
           onSubmit={handleSubmit(onSubmit)}
         >
           <div>
-            <p>Register page</p>
+            <h1 className={'text-2xl text-center'}>Registration</h1>
           </div>
           <label className={'flex flex-col gap-1.5'}>
-            <h1>Login</h1>
+            <h2>Login</h2>
             <input
-              type="text"
-              placeholder="login"
+              type={'text'}
+              placeholder={'login'}
               {...register('login', {
                 required: true,
                 maxLength: {
@@ -48,7 +56,9 @@ export default function RegForm() {
                   message: 'min length login 4 symbols',
                 },
               })}
-              className={'border border-black rounded-md p-2 outline-none'}
+              className={
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+              }
             />
             <div>
               {errors?.login && (
@@ -60,7 +70,7 @@ export default function RegForm() {
             </div>
           </label>
           <label className={'flex flex-col gap-1.5'}>
-            <h1>Email</h1>
+            <h2>Email</h2>
             <input
               type="email"
               placeholder="email"
@@ -76,7 +86,9 @@ export default function RegForm() {
                   message: 'max length email 2 symbols',
                 },
               })}
-              className={'border border-black rounded-md p-2 outline-none'}
+              className={
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+              }
             />
             <div>
               {errors?.email && (
@@ -88,7 +100,7 @@ export default function RegForm() {
             </div>
           </label>
           <label className={'flex flex-col gap-1.5'}>
-            <h1>Password</h1>
+            <h2>Password</h2>
             <input
               type="password"
               placeholder="password"
@@ -103,7 +115,9 @@ export default function RegForm() {
                   message: 'min length symbols 8',
                 },
               })}
-              className={'border border-black rounded-md p-2 outline-none'}
+              className={
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+              }
             />
             <div>
               {errors?.password && (
@@ -116,10 +130,10 @@ export default function RegForm() {
           </label>
           <input
             className={
-              'border border-black rounded-md p-2 outline-none' +
-              ` ${!isValid ? 'bg-gray-500' : 'hover:bg-grayTransparent cursor-pointer'}`
+              'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none' +
+              ` ${!isValid ? 'bg-gray-400' : 'hover:bg-grayTransparent cursor-pointer'}`
             }
-            type="submit"
+            type={'submit'}
             disabled={!isValid}
           />
         </form>
@@ -129,7 +143,7 @@ export default function RegForm() {
               setting={{
                 styleButton: 'p-1 max-w-max h-fit',
                 text: {
-                  value: 'login page',
+                  value: 'Sign In',
                 },
               }}
             />
