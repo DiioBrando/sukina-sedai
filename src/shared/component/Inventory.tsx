@@ -48,7 +48,7 @@ export const Inventory = () => {
   return (
     <div
       className={
-        'px-4 flex flex-col gap-4 bg-white border max-w-max p-2 rounded-md'
+        'px-4 flex flex-col gap-4 bg-white border max-w-max p-2 rounded-md dark:bg-slate-900'
       }
     >
       <div className={'flex md:max-w-80 w-full'}>

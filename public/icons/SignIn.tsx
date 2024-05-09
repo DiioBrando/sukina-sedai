@@ -1,11 +1,12 @@
 export const SignIn = () => {
   return (
     <svg
-      fill="#000000"
       height="100%"
       width="100%"
       version="1.1"
       viewBox="0 0 296.999 296.999"
+      stroke={'currentColor'}
+      fill={'currentColor'}
     >
       <g>
         <g>

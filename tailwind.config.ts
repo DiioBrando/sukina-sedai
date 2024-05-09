@@ -7,6 +7,7 @@ const config: Config = {
     './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'selector',
   theme: {
     extend: {
       animation: {
@@ -21,6 +22,9 @@ const config: Config = {
       },
       boxShadow: {
         customInner: 'inset 0 0 6px 0 rgb(0 0 0 / 0.05)',
+      },
+      textColor: {
+        slightlyGrayishWhite: '#e1e1e1',
       },
     },
   },

@@ -1,20 +1,37 @@
 import { Button } from '@/shared/component/Button';
 import { SendArrow } from '../../../public/icons/SendArrow';
-import React from 'react';
-import { IMessage } from '@/entities/models/IMessage';
+import React, { ChangeEvent, useState } from 'react';
+import CommentService from '@/features/comments/lib/CommentService';
+import { useAppContext } from '@/shared/context/page';
 
-export const Message: React.FC<IMessage> = ({
-  valueComment,
-  handleChange,
-  handleSubmit,
-}) => {
+export const Message = () => {
+  const store = useAppContext();
+  const { user, checkAuth } = store((state) => ({
+    ...state,
+    user: state.user,
+    checkAuth: state.checkAuth,
+  }));
+  const [value, setValue] = useState<string>('');
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.currentTarget.value);
+  };
+
+  const handleSubmit = () => {
+    if (value.length !== null && value.length <= 200) {
+      CommentService.addComment(user.id, value);
+      setValue('');
+    }
+  };
+
   return (
     <div className={'flex flex-col w-full h-full'}>
       <p className={'pb-4'}>
         <textarea
-          value={valueComment}
+          value={value}
           onChange={handleChange}
-          className={'w-full h-[100px] border border-black rounded-md p-2'}
+          className={
+            'w-full h-[100px] border border-black rounded-md p-2 dark:bg-slate-900 dark:border-white'
+          }
           placeholder={'Send here the best comment'}
         ></textarea>
       </p>

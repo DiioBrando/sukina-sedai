@@ -9,7 +9,7 @@ export const Input: React.FC<IInput> = ({ input }) => {
       value={input.value}
       onChange={input.onChange}
       className={
-        'border-customBorderWhite border outline-none w-full ' +
+        'border-customBorderWhite border outline-none w-full dark:bg-slate-900 ' +
         (input.style ?? '')
       }
       placeholder={input.placeholder ?? ''}

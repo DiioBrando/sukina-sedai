@@ -7,6 +7,8 @@ export const SearchSvg = () => {
       viewBox={'0 0 20 20'}
       x={'0px'}
       y={'0px'}
+      stroke={'currentColor'}
+      fill={'currentColor'}
     >
       <g>
         <path

@@ -15,11 +15,6 @@ export interface IUser {
   isActivated: boolean;
 }
 
-export interface IAuthBoolean {
-  auth: boolean;
-  setAuth: (e: boolean) => {};
-}
-
 export interface IAuthResponse {
   accessToken: string;
   refreshToken: string;

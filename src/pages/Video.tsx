@@ -2,26 +2,27 @@
 import { Content } from '@/shared/component/Content';
 import Link from 'next/link';
 import { Tags } from '@/shared/component/Tags';
-import { Rating } from '@/shared/component/Rating';
 import { Intro } from '@/shared/component/Intro';
 import { VideoPlayer } from '@/shared/component/VideoPlayer';
 import { Message } from '@/shared/component/Message';
 import { Comments } from '@/shared/component/Comments';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
 import {
   Franchise,
   List,
   Titles,
 } from '@/entities/data/anime-data/lib/IAnimeListType';
-import { animeArray } from '@/entities/data/anime-data/animeArray';
 import { ControlAnime } from '@/shared/component/ControlAnime';
 import { Button } from '@/shared/component/Button';
 import { Franchises } from '@/shared/component/Franchises';
 import { useAppContext } from '@/shared/context/page';
+import CommentService from '@/features/comments/lib/CommentService';
 
 export default function Video({ params }: { params: number }) {
-  const { store } = useAppContext();
+  const store = useAppContext();
+  const isAuth = store((state) => state.isAuth);
+
   const [anime, setAnime] = useState<Titles>();
   const [currentPart, setCurrentPart] = useState<number>(1);
   const [parts, setParts] = useState<List[]>();
@@ -68,9 +69,7 @@ export default function Video({ params }: { params: number }) {
                 ratingKinopoisk={0}
                 ratingIMDb={0}
               />
-              {!store.isAuth
-                ? null
-                : anime && <ControlAnime idAnime={anime.id} />}
+              {isAuth ? anime && <ControlAnime idAnime={anime.id} /> : null}
             </div>
             <div className={'flex flex-col min-w-[200px] h-fit gap-2.5'}>
               <div className={'max-w-max h-fit'}>
@@ -262,23 +261,9 @@ export default function Video({ params }: { params: number }) {
             </div>
             <div className={'flex flex-col'}>
               <div className={'py-4 flex w-full'}>
-                <Message
-                  valueComment={''}
-                  handleChange={() => {}}
-                  handleSubmit={() => {}}
-                />
+                <Message />
               </div>
-              {
-                <Comments
-                  key={1}
-                  comment={{
-                    id: 0,
-                    name: 'hoho',
-                    comment: 'hoho welcome to the club sukina-sedai user!!',
-                    dateComment: '12.11.2024',
-                  }}
-                />
-              }
+              <Comments />
             </div>
           </div>
         </div>

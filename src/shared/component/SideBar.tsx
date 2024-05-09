@@ -46,7 +46,7 @@ export const SideBar = () => {
 
   return (
     <section className={`${stateMenu.width} min-w-max max-h-max w-full`}>
-      <div className={'border border-white bg-white p-2'}>
+      <div className={'h-full p-2'}>
         <div className={'flex flex-1 flex-col gap-2.5'}>
           <div className={'hidden md:flex items-center'}>
             <span className={`hidden text-lg px-1 lg:${stateMenu.display}`}>

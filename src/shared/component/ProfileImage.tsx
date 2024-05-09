@@ -13,9 +13,6 @@ export const ProfileImage: React.FC<IPersonImage> = ({ setting }) => {
         alt={setting?.altPic ?? ''}
         priority={true}
       />
-      <span
-        className={`${setting?.isOnlineStatus ? 'bg-green-500' : 'bg-gray-500'} border-white rounded-full w-[${setting?.isOnlineSize?.width ?? 5}px] h-[${setting?.isOnlineSize?.height ?? 5}px] absolute bottom-0 right-1 border-2 p-1`}
-      ></span>
     </div>
   );
 };

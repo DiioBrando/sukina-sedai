@@ -1,13 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { ILogin } from '@/entities/models/IAuth';
 import { useAppContext } from '@/shared/context/page';
 import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
-  const { store } = useAppContext();
+  const store = useAppContext();
+  const login = store((state) => state.login);
+
   const router = useRouter();
   const {
     register,
@@ -18,14 +20,8 @@ export default function LoginForm() {
     mode: 'onBlur',
   });
 
-  useEffect(() => {
-    if (store.isAuth) {
-      router.push('/');
-    }
-  }, []);
-
   const onSubmit: SubmitHandler<ILogin> = async (data): Promise<void> => {
-    await store.login(data.email, data.password);
+    await login(data.email, data.password);
     reset();
   };
 
@@ -58,7 +54,7 @@ export default function LoginForm() {
                 },
               })}
               className={
-                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none dark:bg-slate-900'
               }
             />
             <div>
@@ -87,7 +83,7 @@ export default function LoginForm() {
                 },
               })}
               className={
-                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none dark:bg-slate-900'
               }
             />
             <div>

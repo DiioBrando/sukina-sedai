@@ -9,7 +9,6 @@ export interface ISettingImage {
     width: number;
     height: number;
   };
-  isOnlineStatus: boolean;
 }
 
 export interface IPersonImage {

@@ -7,8 +7,8 @@ import { useAppContext } from '@/shared/context/page';
 import { useRouter } from 'next/navigation';
 
 export default function RegForm() {
-  const { store } = useAppContext();
-  const router = useRouter();
+  const store = useAppContext();
+  const registration = store((state) => state.registration);
   const {
     register,
     handleSubmit,
@@ -18,14 +18,8 @@ export default function RegForm() {
     mode: 'onBlur',
   });
 
-  useEffect(() => {
-    if (store.isAuth) {
-      router.push('/');
-    }
-  }, []);
-
   const onSubmit: SubmitHandler<IReg> = async (data): Promise<void> => {
-    await store.registration(data.login, data.email, data.password);
+    await registration(data.login, data.email, data.password);
     reset();
   };
 
@@ -57,7 +51,7 @@ export default function RegForm() {
                 },
               })}
               className={
-                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none dark:bg-slate-900'
               }
             />
             <div>
@@ -87,7 +81,7 @@ export default function RegForm() {
                 },
               })}
               className={
-                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none dark:bg-slate-900'
               }
             />
             <div>
@@ -116,7 +110,7 @@ export default function RegForm() {
                 },
               })}
               className={
-                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none'
+                'shadow-customInner shadow-gray-200 rounded-md p-2 outline-none dark:bg-slate-900'
               }
             />
             <div>
