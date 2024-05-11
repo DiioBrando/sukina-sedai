@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
-import { useAnimeStore } from '@/shared/store';
+import { useAnimeStore } from '@/shared/store/store';
 import { Input } from '@/shared/component/Input';
 import { Button } from '@/shared/component/Button';
 import { SearchSvg } from '../../../public/icons/SearchSvg';

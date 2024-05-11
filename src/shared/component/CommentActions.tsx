@@ -18,9 +18,12 @@ export const CommentActions: FC<ICommentActions> = ({
   handleUpdate,
   handleDelete,
 }) => {
-  const store = useAppContext();
-  const idUser = store((state) => state.user.id);
-
+  const { useStore } = useAppContext();
+  const { idUser, isAuth } = useStore((state) => ({
+    ...state,
+    idUser: state.user.id,
+    isAuth: state.isAuth,
+  }));
   const [isOpen, setOpen] = useState<boolean>(false);
 
   const handleChange = () => {

@@ -5,11 +5,10 @@ import CommentService from '@/features/comments/lib/CommentService';
 import { useAppContext } from '@/shared/context/page';
 
 export const Message = () => {
-  const store = useAppContext();
-  const { user, checkAuth } = store((state) => ({
+  const { useStore } = useAppContext();
+  const { user } = useStore((state) => ({
     ...state,
     user: state.user,
-    checkAuth: state.checkAuth,
   }));
   const [value, setValue] = useState<string>('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

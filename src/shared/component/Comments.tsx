@@ -71,8 +71,6 @@ export const Comments = () => {
     CommentService.deleteComment(_id);
   };
 
-  console.log(comments);
-
   return (
     comments &&
     comments.map((item) => (
@@ -102,14 +100,14 @@ export const Comments = () => {
             <div className={'flex flex-col'}>
               <div className={'flex items-center gap-1'}>
                 <span className={'text-md'}>{item.login}</span>
-                <span className={'text-sm text-gray-500'}>
-                  {stampToDate(item.timestamp)}
-                </span>
-                {item.changed ? (
-                  <span className={'text-xs text-gray-500'}>(changed)</span>
-                ) : (
-                  ''
-                )}
+                <div className={'flex flex-col sm:flex-row'}>
+                  <span className={'text-sm text-gray-500'}>
+                    {stampToDate(item.timestamp)}
+                  </span>
+                  {item.changed ? (
+                    <span className={'text-xs text-gray-500'}>(changed)</span>
+                  ) : null}
+                </div>
               </div>
               <div className={'flex flex-wrap'}>
                 <p className={'text-wrap break-all'}>{item.comment}</p>

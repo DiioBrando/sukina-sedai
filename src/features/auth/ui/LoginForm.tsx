@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 export default function LoginForm() {
   const store = useAppContext();
   const login = store((state) => state.login);
-
   const router = useRouter();
   const {
     register,
@@ -23,6 +22,7 @@ export default function LoginForm() {
   const onSubmit: SubmitHandler<ILogin> = async (data): Promise<void> => {
     await login(data.email, data.password);
     reset();
+    router.push('/');
   };
 
   return (

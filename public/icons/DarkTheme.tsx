@@ -1,4 +1,4 @@
-export const Theme = () => {
+export const DarkTheme = () => {
   return (
     <svg
       stroke={'currentColor'}

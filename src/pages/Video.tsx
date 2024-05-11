@@ -17,11 +17,10 @@ import { ControlAnime } from '@/shared/component/ControlAnime';
 import { Button } from '@/shared/component/Button';
 import { Franchises } from '@/shared/component/Franchises';
 import { useAppContext } from '@/shared/context/page';
-import CommentService from '@/features/comments/lib/CommentService';
 
 export default function Video({ params }: { params: number }) {
-  const store = useAppContext();
-  const isAuth = store((state) => state.isAuth);
+  const { useStore } = useAppContext();
+  const isAuth = useStore((state) => state.isAuth);
 
   const [anime, setAnime] = useState<Titles>();
   const [currentPart, setCurrentPart] = useState<number>(1);
@@ -50,7 +49,7 @@ export default function Video({ params }: { params: number }) {
     <Content>
       <div
         className={
-          'flex flex-col overflow-y-auto overflow-x-hidden max-h-[93.3vh] pb-10 p-5 w-full'
+          'flex flex-col overflow-y-auto overflow-x-hidden max-h-[93.3vh] pb-10 p-1 sm:p-5 w-full'
         }
       >
         <div className={'flex flex-col'}>
@@ -189,11 +188,13 @@ export default function Video({ params }: { params: number }) {
                 )}
             </div>
             <div className={'flex w-full p-2'}>
-              <div className={'flex w-full justify-start'}>
+              <div
+                className={'flex w-full justify-start text-center text-sm px-1'}
+              >
                 <Button
                   setting={{
                     text: {
-                      style: 'px-3',
+                      style: 'px-1 sm:px-3',
                       value: 'prev part',
                     },
                     styleButton: `${currentPart <= 1 ? 'hidden' : ''}`,
@@ -208,7 +209,9 @@ export default function Video({ params }: { params: number }) {
               </div>
               <div className={'flex w-full justify-center max-w-max'}>
                 <select
-                  className={'flex rounded-md p-1 px-2 w-full items-center'}
+                  className={
+                    'flex rounded-md p-1 px-2 w-full items-center dark:bg-slate-700 text-center text-sm'
+                  }
                   value={currentPart}
                   onChange={(e) =>
                     setCurrentPart(Number(e.currentTarget.value))
@@ -222,11 +225,13 @@ export default function Video({ params }: { params: number }) {
                     ))}
                 </select>
               </div>
-              <div className={'flex w-full justify-end'}>
+              <div
+                className={'flex w-full justify-end text-center text-sm px-1'}
+              >
                 <Button
                   setting={{
                     text: {
-                      style: 'px-3',
+                      style: 'px-1 sm:px-3',
                       value: 'next part',
                     },
                     styleButton:
@@ -261,7 +266,13 @@ export default function Video({ params }: { params: number }) {
             </div>
             <div className={'flex flex-col'}>
               <div className={'py-4 flex w-full'}>
-                <Message />
+                {isAuth ? (
+                  <Message />
+                ) : (
+                  <p className={'flex w-full justify-center'}>
+                    To leave comments register or log in
+                  </p>
+                )}
               </div>
               <Comments />
             </div>

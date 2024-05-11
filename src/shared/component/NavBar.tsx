@@ -17,8 +17,8 @@ import { SignIn } from '../../../public/icons/SignIn';
 import { ProfileItem } from '@/shared/component/ProfileItem';
 
 export const NavBar = () => {
-  const store = useAppContext();
-  const isAuth = store((state) => state.isAuth);
+  const { useStore } = useAppContext();
+  const isAuth = useStore((state) => state.isAuth);
   const [isOpen, setOpen] = useState({
     ProfileDropDown: false,
     NotificationDropDown: false,
@@ -39,7 +39,11 @@ export const NavBar = () => {
   });
 
   return (
-    <header className={'flex gap-1 items-center px-1 sm:px-2'}>
+    <header
+      className={
+        'flex gap-1 items-center px-1 sm:px-2 shadow-sm shadow-slate-950'
+      }
+    >
       <div className={'flex items-center justify-start gap-0.5 sm:gap-2'}>
         <Link
           href={'/'}

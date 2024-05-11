@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BorderLine } from '@/shared/BorderLine';
+import { BorderLine } from '@/shared/component/BorderLine';
 import { Button } from '@/shared/component/Button';
 import React from 'react';
 import {
@@ -10,21 +10,22 @@ import { PersonProfile } from '../../../public/icons/PersonProfile';
 import { Setting } from '../../../public/icons/Setting';
 import { Privacy } from '../../../public/icons/Privacy';
 import { Language } from '../../../public/icons/Language';
-import { Theme } from '../../../public/icons/Theme';
 import { LogOut } from '../../../public/icons/LogOut';
 import { useAppContext } from '@/shared/context/page';
+import { DarkTheme } from '../../../public/icons/DarkTheme';
 
 export const ProfileItem = ({
   elementRef,
 }: {
   elementRef: React.RefObject<HTMLElement>;
 }) => {
-  const store = useAppContext();
-  const { logout, user } = store((state) => ({
+  const { useStore, useTheme } = useAppContext();
+  const { logout, user } = useStore((state) => ({
     ...state,
     logout: state.logout,
     user: state.user,
   }));
+  const { themeMode, setThemeMode } = useTheme();
   const profileDropDownLink: IProfileDropDownLink[] = [
     {
       id: 1,
@@ -54,9 +55,9 @@ export const ProfileItem = ({
     },
     {
       id: 2,
-      name: 'Dark Theme',
-      eventButton: () => {},
-      svgComponent: <Theme />,
+      name: `${themeMode === 'dark' ? 'Light' : 'Dark'} Theme`,
+      eventButton: () => setThemeMode(themeMode === 'dark' ? 'light' : 'dark'),
+      svgComponent: <DarkTheme />,
     },
     {
       id: 3,
@@ -70,7 +71,7 @@ export const ProfileItem = ({
     <nav ref={elementRef} className={'absolute bottom-0 top-14 right-0 z-50'}>
       <ul
         className={
-          'p-4 border w-60 max-h-72 rounded-lg overflow-hidden overflow-y-auto dark:bg-slate-900'
+          'p-4 border w-60 max-h-72 rounded-lg overflow-hidden overflow-y-auto bg-white dark:bg-slate-900'
         }
       >
         {profileDropDownLink.map((link) => (

@@ -5,7 +5,7 @@ import { Pagination } from '@/shared/component/Pagination';
 import { useEffect } from 'react';
 import { AnimeList } from '@/entities/data/anime-data/lib/IAnimeListType';
 import { $api } from '@/entities/data/anime-data/api/api';
-import { useAnimeStore } from '@/shared/store';
+import { useAnimeStore } from '@/shared/store/store';
 import { Loader } from '@/shared/component/Loader';
 
 export default function AllVideos() {

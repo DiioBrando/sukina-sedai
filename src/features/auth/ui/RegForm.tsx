@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/component/Button';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { IReg } from '@/entities/models/IAuth';
 import { useAppContext } from '@/shared/context/page';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 export default function RegForm() {
   const store = useAppContext();
   const registration = store((state) => state.registration);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -21,6 +22,7 @@ export default function RegForm() {
   const onSubmit: SubmitHandler<IReg> = async (data): Promise<void> => {
     await registration(data.login, data.email, data.password);
     reset();
+    router.push('/login');
   };
 
   return (
