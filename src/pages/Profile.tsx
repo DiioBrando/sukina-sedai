@@ -1,8 +1,8 @@
 'use client';
-import { Content } from '@/shared/component/Content';
-import { ProfileImage } from '@/shared/component/ProfileImage';
+import { Content } from '@/shared/components/Content';
+import { ProfileImage } from '@/shared/components/ProfileImage';
 import React, { useLayoutEffect, useState } from 'react';
-import { Inventory } from '@/shared/component/Inventory';
+import { Inventory } from '@/shared/components/Inventory';
 import { IUser } from '@/entities/models/IAuth';
 import UserService from '@/features/auth/lib/UserService';
 

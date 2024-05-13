@@ -1,5 +1,5 @@
 import React, { RefObject } from 'react';
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 
 export const Notification = (ref: RefObject<HTMLElement>) => {
   return (

@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { BorderLine } from '@/shared/component/BorderLine';
-import { Button } from '@/shared/component/Button';
+import { BorderLine } from '@/shared/components/BorderLine';
+import { Button } from '@/shared/components/Button';
 import React from 'react';
 import {
   IProfileDropDownButton,
   IProfileDropDownLink,
-} from '@/entities/data/dropdown-data/model/IProfileDropDownItems';
+} from '@/entities/models/IProfileDropDownItems';
 import { PersonProfile } from '../../../public/icons/PersonProfile';
 import { Setting } from '../../../public/icons/Setting';
 import { Privacy } from '../../../public/icons/Privacy';

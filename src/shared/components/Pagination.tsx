@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Button } from '@/shared/component/Button';
-import { ICustomPagination } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { Button } from '@/shared/components/Button';
+import { ICustomPagination } from '@/entities/data/anime-data/model/IAnimeListType';
 import { useAnimeStore } from '@/shared/store/store';
 
 export const Pagination: React.FC<ICustomPagination> = ({

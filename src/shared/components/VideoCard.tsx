@@ -1,6 +1,6 @@
-import { Tags } from '@/shared/component/Tags';
-import { Intro } from '@/shared/component/Intro';
-import { IAnime } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { Tags } from '@/shared/components/Tags';
+import { Intro } from '@/shared/components/Intro';
+import { IAnime } from '@/entities/data/anime-data/model/IAnimeListType';
 import Link from 'next/link';
 import React from 'react';
 

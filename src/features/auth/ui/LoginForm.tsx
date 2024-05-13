@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 import React from 'react';
 import Link from 'next/link';
 import { ILogin } from '@/entities/models/IAuth';
@@ -7,8 +7,8 @@ import { useAppContext } from '@/shared/context/page';
 import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
-  const store = useAppContext();
-  const login = store((state) => state.login);
+  const { useStore } = useAppContext();
+  const login = useStore((state) => state.login);
   const router = useRouter();
   const {
     register,

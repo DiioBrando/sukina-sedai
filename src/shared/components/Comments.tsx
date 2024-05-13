@@ -1,18 +1,25 @@
-import { ProfileImage } from '@/shared/component/ProfileImage';
+import { ProfileImage } from '@/shared/components/ProfileImage';
 import React, { useEffect, useState } from 'react';
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 import CommentService from '@/features/comments/lib/CommentService';
 import { IComments } from '@/entities/models/IComments';
-import { UpdateComment } from '@/shared/component/UpdateComment';
-import { CommentActions } from '@/shared/component/CommentActions';
+import { UpdateComment } from '@/shared/components/UpdateComment';
+import { CommentActions } from '@/shared/components/CommentActions';
 
-export const Comments = () => {
+export const Comments = ({ animeId }: { animeId: string }) => {
   const [comments, setComments] = useState<IComments[]>([]);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+
   useEffect(() => {
     const comments = CommentService.getAllComment();
-    comments.then((res) => setComments(res.data));
-  }, []);
+    comments.then((res) => {
+      const commentsFilter = res.data.filter(
+        (item) => item.animeId === animeId,
+      );
+      setComments(commentsFilter);
+    });
+  });
+
   const stampToDate = (timestamp: string) => {
     const dateCreated = {
       timestamp: 0,
@@ -100,7 +107,9 @@ export const Comments = () => {
             <div className={'flex flex-col'}>
               <div className={'flex items-center gap-1'}>
                 <span className={'text-md'}>{item.login}</span>
-                <div className={'flex flex-col sm:flex-row'}>
+                <div
+                  className={'flex flex-col sm:flex-row items-center gap-1.5'}
+                >
                   <span className={'text-sm text-gray-500'}>
                     {stampToDate(item.timestamp)}
                   </span>

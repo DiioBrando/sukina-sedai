@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ILoad } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { ILoad } from '@/entities/data/anime-data/model/IAnimeListType';
 
 export const useAnimeStore = create<ILoad>((set) => ({
   list: [],

@@ -1,5 +1,5 @@
-import { Input } from '@/shared/component/Input';
-import { Button } from '@/shared/component/Button';
+import { Input } from '@/shared/components/Input';
+import { Button } from '@/shared/components/Button';
 import React, { ChangeEvent, FC, useState } from 'react';
 import CommentService from '@/features/comments/lib/CommentService';
 
@@ -19,7 +19,7 @@ export const UpdateComment: FC<IUpdateComment> = ({
     setValue(e.currentTarget.value);
   };
   const handleSubmit = (_id: string) => {
-    if (value.length !== null && value.length <= 200) {
+    if (value.length !== 0 && value.length <= 200) {
       CommentService.updateComment(_id, value);
       setValue('');
     }

@@ -5,7 +5,7 @@ import { Following } from '../../../public/icons/Following';
 import { Recommended } from '../../../public/icons/Recommended';
 import { ArrowBar } from '../../../public/icons/ArrowBar';
 import { useEffect, useState } from 'react';
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 import { $api } from '@/entities/data/anime-data/api/api';
 
 export const SideBar = () => {

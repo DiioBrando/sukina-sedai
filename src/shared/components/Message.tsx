@@ -1,10 +1,10 @@
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 import { SendArrow } from '../../../public/icons/SendArrow';
 import React, { ChangeEvent, useState } from 'react';
 import CommentService from '@/features/comments/lib/CommentService';
 import { useAppContext } from '@/shared/context/page';
 
-export const Message = () => {
+export const Message = ({ animeId }: { animeId: string }) => {
   const { useStore } = useAppContext();
   const { user } = useStore((state) => ({
     ...state,
@@ -16,8 +16,8 @@ export const Message = () => {
   };
 
   const handleSubmit = () => {
-    if (value.length !== null && value.length <= 200) {
-      CommentService.addComment(user.id, value);
+    if (value.length !== 0 && value.length <= 200) {
+      CommentService.addComment(user.id, animeId, value);
       setValue('');
     }
   };

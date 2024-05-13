@@ -1,20 +1,20 @@
 'use client';
 import Link from 'next/link';
 import { Logo } from '../../../public/icons/Logo';
-import { Button } from '@/shared/component/Button';
-import { ProfileImage } from '@/shared/component/ProfileImage';
-import { DropDown } from '@/shared/component/DropDown';
+import { Button } from '@/shared/components/Button';
+import { ProfileImage } from '@/shared/components/ProfileImage';
+import { DropDown } from '@/shared/components/DropDown';
 import { useClickOutSide } from '@/shared/lib/hooks/useClickOutSide';
 import React, { useState, useRef } from 'react';
 import { Notification } from '../../../public/icons/Notification';
 import { Browse } from '../../../public/icons/Browse';
 import { InventorySvg } from '../../../public/icons/InventorySvg';
-import { Inventory } from '@/shared/component/Inventory';
-import { Search } from '@/shared/component/Search';
+import { Inventory } from '@/shared/components/Inventory';
+import { Search } from '@/shared/components/Search';
 import { useAppContext } from '@/shared/context/page';
 import { SignUp } from '../../../public/icons/SignUp';
 import { SignIn } from '../../../public/icons/SignIn';
-import { ProfileItem } from '@/shared/component/ProfileItem';
+import { ProfileItem } from '@/shared/components/ProfileItem';
 
 export const NavBar = () => {
   const { useStore } = useAppContext();

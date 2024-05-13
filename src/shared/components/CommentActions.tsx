@@ -1,7 +1,7 @@
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 import { ThreeDot } from '../../../public/icons/ThreeDot';
 import React, { FC, useRef, useState } from 'react';
-import { DropDown } from '@/shared/component/DropDown';
+import { DropDown } from '@/shared/components/DropDown';
 import { useClickOutSide } from '@/shared/lib/hooks/useClickOutSide';
 import { useAppContext } from '@/shared/context/page';
 

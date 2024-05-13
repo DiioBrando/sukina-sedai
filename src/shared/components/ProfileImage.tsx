@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { IPersonImage } from '@/entities/data/user-data/model/ISettingPersonImage';
+import { IPersonImage } from '@/entities/models/ISettingPersonImage';
 
 export const ProfileImage: React.FC<IPersonImage> = ({ setting }) => {
   return (

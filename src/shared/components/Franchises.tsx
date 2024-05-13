@@ -1,4 +1,4 @@
-import { Release } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { Release } from '@/entities/data/anime-data/model/IAnimeListType';
 import React from 'react';
 import Link from 'next/link';
 

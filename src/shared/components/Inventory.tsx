@@ -1,49 +1,42 @@
-import { Input } from '@/shared/component/Input';
-import { Button } from '@/shared/component/Button';
+import { Input } from '@/shared/components/Input';
+import { Button } from '@/shared/components/Button';
 import { SearchSvg } from '../../../public/icons/SearchSvg';
 import { Watch } from '../../../public/icons/Watch';
 import { Viewed } from '../../../public/icons/Viewed';
 import { Track } from '../../../public/icons/Track';
 import { Favorite } from '../../../public/icons/Favorite';
-import { VideoCard } from '@/shared/component/VideoCard';
-import { userInventory } from '@/entities/data/user-data/test-inventory/userInventory';
+import { VideoCard } from '@/shared/components/VideoCard';
 import React, { useEffect, useState } from 'react';
-import {
-  AnimeList,
-  Titles,
-} from '@/entities/data/anime-data/lib/IAnimeListType';
+import { useAppContext } from '@/shared/context/page';
+import { Titles } from '@/entities/data/anime-data/model/IAnimeListType';
+import InventoryService from '@/features/inventory/lib/InventoryService';
+import { AxiosResponse } from 'axios';
 import { $api } from '@/entities/data/anime-data/api/api';
 
 export const Inventory = () => {
-  const [inventory, setInventory] = useState<{
-    watch: boolean;
-    viewed: boolean;
-    track: boolean;
-    favorite: boolean;
-  }>({
-    watch: true,
-    viewed: false,
-    track: false,
-    favorite: false,
-  });
-
-  const [titles, setTitles] = useState<Titles[]>();
+  const [anime, setAnime] = useState<Titles[]>([]);
+  const [listId, setListId] = useState<string>('');
+  const { useStore } = useAppContext();
+  const currentUserId = useStore((state) => state.user.id);
 
   useEffect(() => {
-    const getAnime = async () =>
-      $api.get<AnimeList>('/title/updates', {
-        params: {
-          page: 1,
-          items_per_page: 20,
-        },
-      });
+    InventoryService.getAll().then((res) => {
+      const list = res.data
+        .filter((item) => item.idUser === currentUserId)
+        .map((item) => item.animeId)
+        .join(',');
+      setListId(list);
+    });
+  }, [currentUserId]);
 
-    getAnime()
-      .then((response) => {
-        setTitles(response.data.list);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+  useEffect(() => {
+    const getAnime = async (): Promise<AxiosResponse<Titles[]>> => {
+      return await $api.get(`/title/list?id_list=${listId}`);
+    };
+    if (listId) {
+      getAnime().then((res) => setAnime(res.data));
+    }
+  }, [listId]);
 
   return (
     <div
@@ -81,17 +74,7 @@ export const Inventory = () => {
                   style: 'w-5 h-5',
                 },
               },
-              styleButton:
-                'p-1 ' +
-                `${inventory.watch ? 'bg-grayTransparent rounded-md' : ''}`,
-              eventButton: () =>
-                setInventory({
-                  ...inventory,
-                  watch: true,
-                  track: false,
-                  favorite: false,
-                  viewed: false,
-                }),
+              styleButton: 'p-1',
             }}
           />
         </div>
@@ -104,17 +87,7 @@ export const Inventory = () => {
                   style: 'w-5 h-5',
                 },
               },
-              styleButton:
-                'p-1 ' +
-                `${inventory.viewed ? 'bg-grayTransparent rounded-md' : ''}`,
-              eventButton: () =>
-                setInventory({
-                  ...inventory,
-                  viewed: true,
-                  track: false,
-                  watch: false,
-                  favorite: false,
-                }),
+              styleButton: 'p-1',
             }}
           />
         </div>
@@ -127,17 +100,7 @@ export const Inventory = () => {
                   style: 'w-5 h-5',
                 },
               },
-              styleButton:
-                'p-1 ' +
-                `${inventory.track ? 'bg-grayTransparent rounded-md' : ''}`,
-              eventButton: () =>
-                setInventory({
-                  ...inventory,
-                  track: true,
-                  watch: false,
-                  viewed: false,
-                  favorite: false,
-                }),
+              styleButton: 'p-1',
             }}
           />
         </div>
@@ -150,17 +113,7 @@ export const Inventory = () => {
                   style: 'w-5 h-5',
                 },
               },
-              styleButton:
-                'p-1 ' +
-                `${inventory.favorite ? 'bg-grayTransparent rounded-md' : ''}`,
-              eventButton: () =>
-                setInventory({
-                  ...inventory,
-                  favorite: true,
-                  track: false,
-                  watch: false,
-                  viewed: false,
-                }),
+              styleButton: 'p-1',
             }}
           />
         </div>
@@ -170,7 +123,7 @@ export const Inventory = () => {
           'flex flex-wrap gap-2.5 max-h-[500px] w-full overflow-y-auto justify-center sm:justify-start'
         }
       >
-        {userInventory && <VideoCard list={userInventory} />}
+        {anime && <VideoCard list={anime} />}
       </div>
     </div>
   );

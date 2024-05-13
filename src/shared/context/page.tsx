@@ -10,9 +10,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const auth = useStore((state) => state.checkAuth);
   useTheme();
   useLayoutEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      auth().then((res) => res);
+    if (localStorage.getItem('token')) {
+      auth();
     }
   }, [auth]);
 

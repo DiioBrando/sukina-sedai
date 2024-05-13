@@ -1,21 +1,21 @@
 'use client';
-import { Content } from '@/shared/component/Content';
+import { Content } from '@/shared/components/Content';
 import Link from 'next/link';
-import { Tags } from '@/shared/component/Tags';
-import { Intro } from '@/shared/component/Intro';
-import { VideoPlayer } from '@/shared/component/VideoPlayer';
-import { Message } from '@/shared/component/Message';
-import { Comments } from '@/shared/component/Comments';
+import { Tags } from '@/shared/components/Tags';
+import { Intro } from '@/shared/components/Intro';
+import { VideoPlayer } from '@/shared/components/VideoPlayer';
+import { Message } from '@/shared/components/Message';
+import { Comments } from '@/shared/components/Comments';
 import { useEffect, useState } from 'react';
 import { $api } from '@/entities/data/anime-data/api/api';
 import {
   Franchise,
   List,
   Titles,
-} from '@/entities/data/anime-data/lib/IAnimeListType';
-import { ControlAnime } from '@/shared/component/ControlAnime';
-import { Button } from '@/shared/component/Button';
-import { Franchises } from '@/shared/component/Franchises';
+} from '@/entities/data/anime-data/model/IAnimeListType';
+import { ControlAnime } from '@/shared/components/ControlAnime';
+import { Button } from '@/shared/components/Button';
+import { Franchises } from '@/shared/components/Franchises';
 import { useAppContext } from '@/shared/context/page';
 
 export default function Video({ params }: { params: number }) {
@@ -42,7 +42,7 @@ export default function Video({ params }: { params: number }) {
         setFranchises(res.data.franchises);
         setParts(res.data.player.list);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => e);
   }, [params]);
 
   return (
@@ -267,14 +267,14 @@ export default function Video({ params }: { params: number }) {
             <div className={'flex flex-col'}>
               <div className={'py-4 flex w-full'}>
                 {isAuth ? (
-                  <Message />
+                  anime && <Message animeId={String(anime.id)} />
                 ) : (
                   <p className={'flex w-full justify-center'}>
                     To leave comments register or log in
                   </p>
                 )}
               </div>
-              <Comments />
+              {anime && <Comments animeId={String(anime.id)} />}
             </div>
           </div>
         </div>

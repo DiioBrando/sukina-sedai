@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import ReactPlayer from 'react-player';
-import { List } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { List } from '@/entities/data/anime-data/model/IAnimeListType';
 
 export const VideoPlayer: React.FC<List> = ({ hls }) => {
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface ImageSetting {
   svgComponent?: {
@@ -21,7 +21,9 @@ export interface IButtonSetting {
     value?: string;
   };
   value?: string;
-  eventButton?: () => void;
+  eventButton?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
   onChange?: () => void;
   image?: ImageSetting;
   styleButton?: string;

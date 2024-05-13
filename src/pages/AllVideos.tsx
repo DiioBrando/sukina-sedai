@@ -1,12 +1,12 @@
 'use client';
-import { Content } from '@/shared/component/Content';
-import { VideoCard } from '@/shared/component/VideoCard';
-import { Pagination } from '@/shared/component/Pagination';
+import { Content } from '@/shared/components/Content';
+import { VideoCard } from '@/shared/components/VideoCard';
+import { Pagination } from '@/shared/components/Pagination';
 import { useEffect } from 'react';
-import { AnimeList } from '@/entities/data/anime-data/lib/IAnimeListType';
+import { AnimeList } from '@/entities/data/anime-data/model/IAnimeListType';
 import { $api } from '@/entities/data/anime-data/api/api';
 import { useAnimeStore } from '@/shared/store/store';
-import { Loader } from '@/shared/component/Loader';
+import { Loader } from '@/shared/components/Loader';
 
 export default function AllVideos() {
   const pagination = useAnimeStore((state) => state.pagination);

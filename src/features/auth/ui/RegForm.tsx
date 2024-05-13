@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from '@/shared/component/Button';
+import { Button } from '@/shared/components/Button';
 import React from 'react';
 import Link from 'next/link';
 import { IReg } from '@/entities/models/IAuth';
@@ -7,8 +7,8 @@ import { useAppContext } from '@/shared/context/page';
 import { useRouter } from 'next/navigation';
 
 export default function RegForm() {
-  const store = useAppContext();
-  const registration = store((state) => state.registration);
+  const { useStore } = useAppContext();
+  const registration = useStore((state) => state.registration);
   const router = useRouter();
   const {
     register,
