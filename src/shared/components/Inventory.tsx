@@ -16,6 +16,7 @@ import { $api } from '@/entities/data/anime-data/api/api';
 export const Inventory = () => {
   const [anime, setAnime] = useState<Titles[]>([]);
   const [listId, setListId] = useState<string>('');
+  const [categoryAnime, setCategory] = useState<string>('watch');
   const { useStore } = useAppContext();
   const currentUserId = useStore((state) => state.user.id);
 
@@ -23,11 +24,12 @@ export const Inventory = () => {
     InventoryService.getAll().then((res) => {
       const list = res.data
         .filter((item) => item.idUser === currentUserId)
+        .filter((item) => item.typeItem === categoryAnime)
         .map((item) => item.animeId)
         .join(',');
       setListId(list);
     });
-  }, [currentUserId]);
+  }, [categoryAnime, currentUserId]);
 
   useEffect(() => {
     const getAnime = async (): Promise<AxiosResponse<Titles[]>> => {
@@ -37,6 +39,12 @@ export const Inventory = () => {
       getAnime().then((res) => setAnime(res.data));
     }
   }, [listId]);
+
+  const handleChangeCategory = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    setCategory(e.currentTarget.value);
+  };
 
   return (
     <div
@@ -75,6 +83,8 @@ export const Inventory = () => {
                 },
               },
               styleButton: 'p-1',
+              value: 'watch',
+              eventButton: handleChangeCategory,
             }}
           />
         </div>
@@ -88,6 +98,8 @@ export const Inventory = () => {
                 },
               },
               styleButton: 'p-1',
+              value: 'viewed',
+              eventButton: handleChangeCategory,
             }}
           />
         </div>
@@ -101,6 +113,8 @@ export const Inventory = () => {
                 },
               },
               styleButton: 'p-1',
+              value: 'track',
+              eventButton: handleChangeCategory,
             }}
           />
         </div>
@@ -114,6 +128,8 @@ export const Inventory = () => {
                 },
               },
               styleButton: 'p-1',
+              value: 'favorite',
+              eventButton: handleChangeCategory,
             }}
           />
         </div>

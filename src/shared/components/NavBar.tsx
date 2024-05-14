@@ -15,10 +15,14 @@ import { useAppContext } from '@/shared/context/page';
 import { SignUp } from '../../../public/icons/SignUp';
 import { SignIn } from '../../../public/icons/SignIn';
 import { ProfileItem } from '@/shared/components/ProfileItem';
+import { useAnimeStore } from '@/shared/store/store';
+import { useRouter } from 'next/navigation';
 
 export const NavBar = () => {
   const { useStore } = useAppContext();
+  const router = useRouter();
   const isAuth = useStore((state) => state.isAuth);
+  const isSearch = useAnimeStore((state) => state.isSearch);
   const [isOpen, setOpen] = useState({
     ProfileDropDown: false,
     NotificationDropDown: false,
@@ -37,6 +41,14 @@ export const NavBar = () => {
     isOpen.inventoryDropDown &&
       setTimeout(() => setOpen({ ...isOpen, inventoryDropDown: false }), 100);
   });
+  const handleChangeSearchBoolean = () => {
+    router.push('/');
+    if (isSearch) {
+      useAnimeStore.setState((state) => ({
+        isSearch: false,
+      }));
+    }
+  };
 
   return (
     <header
@@ -44,11 +56,10 @@ export const NavBar = () => {
         'flex gap-1 items-center px-1 sm:px-2 shadow-sm shadow-slate-950'
       }
     >
-      <div className={'flex items-center justify-start gap-0.5 sm:gap-2'}>
-        <Link
-          href={'/'}
+      <div className={'flex items-center justify-start sm:gap-2'}>
+        <div
           className={
-            'hidden sm:flex scale-125 justify-start min-h-14 min-w-14 max-w-14 max-h-14 w-full h-full'
+            'hidden sm:flex scale-125 justify-start min-h-14 min-w-14 max-w-14 max-h-14 w-full h-full cursor-pointer'
           }
         >
           <Button
@@ -60,12 +71,14 @@ export const NavBar = () => {
                 },
               },
               styleButton: 'p-0 hover:bg-transparent',
+              eventButton: handleChangeSearchBoolean,
             }}
           />
-        </Link>
-        <Link
-          href={'/'}
-          className={'flex items-center justify-center p-1 sm:p-0'}
+        </div>
+        <div
+          className={
+            'flex items-center justify-center p-1 sm:p-0 cursor-pointer'
+          }
         >
           <Button
             setting={{
@@ -76,6 +89,7 @@ export const NavBar = () => {
                 },
               },
               styleButton: 'p-1 sm:p-0',
+              eventButton: handleChangeSearchBoolean,
             }}
           />
           <p
@@ -85,7 +99,7 @@ export const NavBar = () => {
           >
             Browse
           </p>
-        </Link>
+        </div>
         {isAuth ? (
           <div className={'flex items-center justify-center p-1 sm:p-0'}>
             <div className={'relative flex items-center'}>
@@ -135,7 +149,9 @@ export const NavBar = () => {
       </div>
       {isAuth ? (
         <div
-          className={'flex items-center justify-end max-w-max w-full gap-1.5'}
+          className={
+            'flex items-center justify-end max-w-max w-full md:gap-1.5'
+          }
         >
           <div className={'relative flex items-center'}>
             <Button

@@ -1,7 +1,5 @@
 'use client';
-import { Home } from '../../../public/icons/Home';
 import Link from 'next/link';
-import { Following } from '../../../public/icons/Following';
 import { Recommended } from '../../../public/icons/Recommended';
 import { ArrowBar } from '../../../public/icons/ArrowBar';
 import { useEffect, useState } from 'react';
@@ -67,20 +65,6 @@ export const SideBar = () => {
               />{' '}
             </p>
           </div>
-          <Link className={'flex items-center gap-1 text-md'} href={'/'}>
-            <Button
-              setting={{
-                image: {
-                  svgComponent: {
-                    image: <Home />,
-                    style: 'w-5 h-5',
-                  },
-                },
-                styleButton: 'p-1',
-              }}
-            />
-            <span className={`lg:${stateMenu.display} hidden`}>Home</span>
-          </Link>
           <Link
             className={'flex items-center gap-1 text-md'}
             href={`/video/${randomAnime}`}

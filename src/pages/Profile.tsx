@@ -23,7 +23,7 @@ export default function Profile({ params }: { params: string }) {
   return (
     <Content>
       {store && (
-        <div key={store.id} className={'max-h-[100vh] w-full'}>
+        <div key={store.id} className={'max-h-[100vh] w-full p-4'}>
           <div
             className={'flex flex-wrap gap-3 items-center max-w-max pb-5 px-4'}
           >

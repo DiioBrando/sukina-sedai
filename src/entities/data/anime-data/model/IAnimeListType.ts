@@ -5,6 +5,7 @@ export interface AnimeList {
 
 export interface ILoad extends AnimeList {
   isLoad: boolean;
+  isSearch: boolean;
 }
 
 export interface Titles {

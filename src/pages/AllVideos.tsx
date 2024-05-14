@@ -11,7 +11,11 @@ import { Loader } from '@/shared/components/Loader';
 export default function AllVideos() {
   const pagination = useAnimeStore((state) => state.pagination);
   const titles = useAnimeStore((state) => state.list);
-  const isLoad = useAnimeStore((state) => state.isLoad);
+  const { isLoad, isSearch } = useAnimeStore((state) => ({
+    ...state,
+    isLoad: state.isLoad,
+    isSearch: state.isSearch,
+  }));
 
   const onChange = (e: number) => {
     useAnimeStore.setState((state) => ({
@@ -21,7 +25,6 @@ export default function AllVideos() {
       },
     }));
   };
-
   useEffect(() => {
     const getAnime = async () =>
       await $api.get<AnimeList>('/title/updates', {
@@ -30,8 +33,9 @@ export default function AllVideos() {
           items_per_page: pagination.items_per_page,
         },
       });
-    getAnime()
-      .then((response) => {
+
+    if (!isSearch) {
+      getAnime().then((response) => {
         useAnimeStore.setState((state) => ({
           list: response.data.list,
         }));
@@ -45,9 +49,9 @@ export default function AllVideos() {
           },
           isLoad: false,
         }));
-      })
-      .catch((e) => console.log(e));
-  }, [pagination.current_page, pagination.items_per_page]);
+      });
+    }
+  }, [isSearch, pagination.current_page, pagination.items_per_page]);
 
   return (
     <Content>
@@ -58,18 +62,22 @@ export default function AllVideos() {
       ) : (
         <div
           className={
-            'flex flex-wrap max-h-[93.3vh] overflow-y-auto overflow-x-hidden p-5 pb-10 justify-center sm:justify-start gap-2'
+            'flex flex-wrap max-h-[93.3vh] overflow-y-auto overflow-x-hidden py-5 px-2 sm:px-5 pb-10 justify-center sm:justify-start gap-2'
           }
         >
           {titles && <VideoCard list={titles} />}
-          <div className={'flex items-center justify-center h-fit w-full p-2'}>
-            <Pagination
-              current={pagination.current_page}
-              pagePerItems={pagination.items_per_page}
-              total={pagination.pages}
-              onChange={onChange}
-            />
-          </div>
+          {!isSearch ? (
+            <div
+              className={'flex items-center justify-center h-fit w-full p-2'}
+            >
+              <Pagination
+                current={pagination.current_page}
+                pagePerItems={pagination.items_per_page}
+                total={pagination.pages}
+                onChange={onChange}
+              />
+            </div>
+          ) : null}
         </div>
       )}
     </Content>

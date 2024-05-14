@@ -4,9 +4,10 @@ import { useAnimeStore } from '@/shared/store/store';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { SearchSvg } from '../../../public/icons/SearchSvg';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export const Search = () => {
+  const router = useRouter();
   const [valueSearch, setSearch] = useState<string>('');
   const handleSearch = async () => {
     if (!!valueSearch) {
@@ -19,13 +20,13 @@ export const Search = () => {
         .then((res) => {
           useAnimeStore.setState((state) => ({
             list: res.data.list,
-            pagination: {
-              ...state.pagination,
-              current_page: 1,
-              items_per_page: 20,
-            },
           }));
         });
+      router.push('/');
+      useAnimeStore.setState((state) => ({
+        isSearch: true,
+        isLoad: false,
+      }));
     }
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +37,7 @@ export const Search = () => {
       <Input
         input={{
           placeholder: 'search favorite anime here',
-          style: 'min-w-[150px] p-1 px-4 border-r-0 rounded-r-none rounded-md',
+          style: 'min-w-[115px] p-1 px-4 border-r-0 rounded-r-none rounded-md',
           onChange: onChange,
           value: valueSearch,
         }}
