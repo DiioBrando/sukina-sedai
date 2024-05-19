@@ -4,6 +4,7 @@ import React from 'react';
 export const Input: React.FC<IInput> = ({ input }) => {
   return (
     <input
+      ref={input.refObj}
       type={input.type ?? 'text'}
       name={input.name ?? ''}
       value={input.value}

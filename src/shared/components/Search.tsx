@@ -37,7 +37,8 @@ export const Search = () => {
       <Input
         input={{
           placeholder: 'search favorite anime here',
-          style: 'min-w-[115px] p-1 px-4 border-r-0 rounded-r-none rounded-md',
+          style:
+            'min-w-[115px] min-h-[32px] h-full p-1 px-4 border-r-0 rounded-r-none rounded-md',
           onChange: onChange,
           value: valueSearch,
         }}

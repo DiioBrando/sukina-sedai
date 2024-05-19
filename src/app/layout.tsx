@@ -19,7 +19,8 @@ export default function RootLayout({
     <html lang={'en'}>
       <body
         className={
-          inter.className + ' dark:bg-slate-900 dark:text-slightlyGrayishWhite'
+          inter.className +
+          ' dark:bg-slate-900 dark:text-slightlyGrayishWhite transition-all duration-500'
         }
       >
         <AppWrapper>{children}</AppWrapper>

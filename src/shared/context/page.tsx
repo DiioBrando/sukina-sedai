@@ -1,5 +1,10 @@
 'use client';
-import React, { createContext, useContext, useLayoutEffect } from 'react';
+import React, {
+  createContext,
+  Suspense,
+  useContext,
+  useLayoutEffect,
+} from 'react';
 import { useStore } from '@/shared/store/UserStore';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
 

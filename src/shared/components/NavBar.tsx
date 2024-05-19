@@ -90,15 +90,13 @@ export const NavBar = () => {
               },
               styleButton: 'p-1 sm:p-0',
               eventButton: handleChangeSearchBoolean,
+              text: {
+                value: 'Browse',
+                style:
+                  'hidden sm:flex p-1 hover:bg-grayTransparent hover:rounded-lg',
+              },
             }}
           />
-          <p
-            className={
-              'hidden sm:flex p-1 hover:bg-grayTransparent hover:rounded-lg'
-            }
-          >
-            Browse
-          </p>
         </div>
         {isAuth ? (
           <div className={'flex items-center justify-center p-1 sm:p-0'}>
@@ -128,9 +126,7 @@ export const NavBar = () => {
                 {isOpen.inventoryDropDown && (
                   <section
                     ref={elementRef}
-                    className={
-                      'absolute bottom-0 top-10 left-0 z-50 dark:bg-slate-900'
-                    }
+                    className={'absolute bottom-0 top-10 left-0 z-50'}
                   >
                     <Inventory />
                   </section>
@@ -140,11 +136,7 @@ export const NavBar = () => {
           </div>
         ) : null}
       </div>
-      <div
-        className={
-          'flex justify-end sm:justify-center w-full dark:bg-slate-900'
-        }
-      >
+      <div className={'flex justify-end sm:justify-center w-full'}>
         <Search />
       </div>
       {isAuth ? (

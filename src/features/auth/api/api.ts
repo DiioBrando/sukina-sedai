@@ -6,7 +6,7 @@ const $api = axios.create({
   baseURL: process.env.DATABASE_URL + '/api',
 });
 
-$api.interceptors.request.use((config) => {
+$api.interceptors.request.use(async (config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });
@@ -18,7 +18,7 @@ $api.interceptors.request.use(
   async (error) => {
     const originalRequest = error.config;
     if (
-      error.response.status == 401 &&
+      error.response.status === 401 &&
       error.config &&
       !error.config._isRetry
     ) {

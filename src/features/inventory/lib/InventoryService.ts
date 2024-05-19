@@ -18,6 +18,12 @@ export default class InventoryService {
       typeItem,
     });
   }
+  static async deleteMany(animeId: Array<string>) {
+    return $apiInventory.delete('/delete-anime-inventory-array', {
+      data: { animeId },
+    });
+  }
+
   static async getAll(): Promise<AxiosResponse<IInventory[]>> {
     return $apiInventory.get('/getAll-items-inventory');
   }
