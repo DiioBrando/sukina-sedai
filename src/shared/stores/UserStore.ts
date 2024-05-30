@@ -4,7 +4,7 @@ import { create } from 'zustand';
 import axios from 'axios';
 import { IStore } from '@/entities/models/IStore';
 
-export const useStore = create<IStore>((set) => ({
+export const useUserStore = create<IStore>((set) => ({
   user: {} as IUser,
   isAuth: false,
 

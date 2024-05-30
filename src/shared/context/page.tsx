@@ -5,10 +5,10 @@ import React, {
   useContext,
   useLayoutEffect,
 } from 'react';
-import { useStore } from '@/shared/store/UserStore';
+import { useUserStore } from '@/shared/stores/UserStore';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
 
-const AppContext = createContext({ useStore, useTheme });
+const AppContext = createContext({ useStore: useUserStore, useTheme });
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const { useStore, useTheme } = useAppContext();

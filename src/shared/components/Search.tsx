@@ -1,17 +1,17 @@
 import React, { ChangeEvent, useState } from 'react';
-import { $api } from '@/entities/data/anime-data/api/api';
-import { useAnimeStore } from '@/shared/store/store';
+import { useAnimeStore } from '@/shared/stores/AnimeStore';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { SearchSvg } from '../../../public/icons/SearchSvg';
 import { useRouter } from 'next/navigation';
+import { $apiAniLibria } from '@/features/anime/api/api';
 
 export const Search = () => {
   const router = useRouter();
   const [valueSearch, setSearch] = useState<string>('');
   const handleSearch = async () => {
     if (!!valueSearch) {
-      await $api
+      await $apiAniLibria
         .get('/title/search', {
           params: {
             search: valueSearch,

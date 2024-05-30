@@ -2,56 +2,26 @@
 import { Content } from '@/shared/components/Content';
 import { VideoCard } from '@/shared/components/VideoCard';
 import { Pagination } from '@/shared/components/Pagination';
-import { useEffect } from 'react';
-import { AnimeList } from '@/entities/data/anime-data/model/IAnimeListType';
-import { $api } from '@/entities/data/anime-data/api/api';
-import { useAnimeStore } from '@/shared/store/store';
+import { useAnimeStore } from '@/shared/stores/AnimeStore';
 import { Loader } from '@/shared/components/Loader';
+import { useEffect } from 'react';
 
 export default function AllVideos() {
-  const pagination = useAnimeStore((state) => state.pagination);
-  const titles = useAnimeStore((state) => state.list);
-  const { isLoad, isSearch } = useAnimeStore((state) => ({
-    ...state,
-    isLoad: state.isLoad,
-    isSearch: state.isSearch,
-  }));
+  const [getAnime, titles, isLoad, isSearch, pagination, onChangePage] =
+    useAnimeStore((state) => [
+      state.getTitles,
+      state.list,
+      state.isLoad,
+      state.isSearch,
+      state.pagination,
+      state.onChangePage,
+    ]);
 
-  const onChange = (e: number) => {
-    useAnimeStore.setState((state) => ({
-      pagination: {
-        ...state.pagination,
-        current_page: e,
-      },
-    }));
-  };
   useEffect(() => {
-    const getAnime = async () =>
-      await $api.get<AnimeList>('/title/updates', {
-        params: {
-          page: pagination.current_page,
-          items_per_page: pagination.items_per_page,
-        },
-      });
-
     if (!isSearch) {
-      getAnime().then((response) => {
-        useAnimeStore.setState((state) => ({
-          list: response.data.list,
-        }));
-        useAnimeStore.setState((state) => ({
-          pagination: {
-            ...state.pagination,
-            current_page: response.data.pagination.current_page,
-            pages: response.data.pagination.pages,
-            items_per_page: response.data.pagination.items_per_page,
-            total_items: response.data.pagination.total_items,
-          },
-          isLoad: false,
-        }));
-      });
+      getAnime();
     }
-  }, [isSearch, pagination.current_page, pagination.items_per_page]);
+  }, [getAnime, isSearch]);
 
   return (
     <Content>
@@ -74,7 +44,7 @@ export default function AllVideos() {
                 current={pagination.current_page}
                 pagePerItems={pagination.items_per_page}
                 total={pagination.pages}
-                onChange={onChange}
+                onChange={onChangePage}
               />
             </div>
           ) : null}

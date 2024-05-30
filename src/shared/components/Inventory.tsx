@@ -8,13 +8,13 @@ import { Favorite } from '../../../public/icons/Favorite';
 import { VideoCard } from '@/shared/components/VideoCard';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAppContext } from '@/shared/context/page';
-import { Titles } from '@/entities/data/anime-data/model/IAnimeListType';
+import { Titles } from '@/entities/models/IAnimeListType';
 import InventoryService from '@/features/inventory/lib/InventoryService';
 import { AxiosResponse } from 'axios';
-import { $api } from '@/entities/data/anime-data/api/api';
 import { Trash } from '../../../public/icons/Trash';
 import { ThreeDot } from '../../../public/icons/ThreeDot';
 import { DropDown } from '@/shared/components/DropDown';
+import { $apiAniLibria } from '@/features/anime/api/api';
 
 export const Inventory = () => {
   const [anime, setAnime] = useState<Titles[]>([]);
@@ -41,7 +41,7 @@ export const Inventory = () => {
 
   useEffect(() => {
     const getAnime = async (): Promise<AxiosResponse<Titles[]>> => {
-      return await $api.get(`/title/list?id_list=${listId}`);
+      return await $apiAniLibria.get(`/title/list?id_list=${listId}`);
     };
     if (listId) {
       getAnime().then((res) => setAnime(res.data));

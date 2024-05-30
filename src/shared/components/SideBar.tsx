@@ -4,7 +4,7 @@ import { Recommended } from '../../../public/icons/Recommended';
 import { ArrowBar } from '../../../public/icons/ArrowBar';
 import { useEffect, useState } from 'react';
 import { Button } from '@/shared/components/Button';
-import { $api } from '@/entities/data/anime-data/api/api';
+import AnimeService from '@/features/anime/lib/AnimeService';
 
 export const SideBar = () => {
   const [stateMenu, setStateMenu] = useState({
@@ -14,12 +14,11 @@ export const SideBar = () => {
     widthStyleIsOpenSvg: 'w-full justify-end',
     width: 'max-w-max',
   });
-
-  const [randomAnime, setRandomAnime] = useState();
+  const [randomAnimeId, setRandomAnimeId] = useState<number>(0);
   useEffect(() => {
-    const getAnime = async () => await $api.get('/title/random');
-
-    getAnime().then((e) => setRandomAnime(e.data.id));
+    AnimeService.getRandomAnim().then((res) => {
+      setRandomAnimeId(res.data.id);
+    });
   }, []);
 
   const handleChange = () => {
@@ -67,7 +66,7 @@ export const SideBar = () => {
           </div>
           <Link
             className={'flex items-center gap-1 text-md'}
-            href={`/video/${randomAnime}`}
+            href={`/video/${randomAnimeId}`}
           >
             <Button
               setting={{

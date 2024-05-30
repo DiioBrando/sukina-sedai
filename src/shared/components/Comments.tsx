@@ -1,85 +1,32 @@
 import { ProfileImage } from '@/shared/components/ProfileImage';
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/shared/components/Button';
-import CommentService from '@/features/comments/lib/CommentService';
-import { IComments } from '@/entities/models/IComments';
 import { UpdateComment } from '@/shared/components/UpdateComment';
 import { CommentActions } from '@/shared/components/CommentActions';
+import { useCommentStore } from '@/shared/stores/CommentStore';
+import { convertTimeStampToDate } from '@/shared/lib/helpers/convertTimeStampToDate';
 
 export const Comments = ({ animeId }: { animeId: string }) => {
-  const [comments, setComments] = useState<IComments[]>([]);
+  const [comments, updateComment, deleteComment, getCommentByAnimeId] =
+    useCommentStore((state) => [
+      state.comments,
+      state.updateComment,
+      state.deleteComment,
+      state.getCommentByAnimeId,
+    ]);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
 
   useEffect(() => {
-    const comments = CommentService.getAllComment();
-    comments.then((res) => {
-      const commentsFilter = res.data.filter(
-        (item) => item.animeId === animeId,
-      );
-      setComments(commentsFilter);
-    });
-  });
+    getCommentByAnimeId(animeId);
+  }, [animeId, getCommentByAnimeId]);
 
-  const stampToDate = (timestamp: string) => {
-    const dateCreated = {
-      timestamp: 0,
-      day: 0,
-      month: 0,
-      year: 0,
-      minute: 0,
-      hour: 0,
-
-      constructor(timestamp: number) {
-        this.timestamp = timestamp;
-      },
-
-      setDay(day: number) {
-        this.day = day;
-      },
-      setMonth(month: number) {
-        this.month = month;
-      },
-      setYear(year: number) {
-        this.year = year;
-      },
-      setTime(minute: number) {
-        this.minute = minute;
-      },
-
-      setHour(hour: number) {
-        this.hour = hour;
-      },
-
-      setDate() {
-        const date = new Date(this.timestamp);
-        this.setDay(date.getDate());
-        this.setMonth(date.getMonth() + 1);
-        this.setYear(date.getFullYear());
-        this.setTime(date.getMinutes());
-        this.setHour(date.getHours());
-      },
-
-      formatDate() {
-        return `${this.day < 10 ? '0' + this.day : this.day}.${this.month < 10 ? '0' + this.month : this.month}.${this.year} - ${this.hour < 10 ? '0' + this.hour : this.hour}:${this.minute < 10 ? '0' + this.minute : this.minute}`;
-      },
-      main() {
-        this.setDate();
-
-        return this.formatDate();
-      },
-    };
-    dateCreated.constructor(Number(timestamp));
-    return dateCreated.main();
-  };
-  const handleUpdate = (commentId: string | null) => {
+  const handleChangeEditingCommentId = (commentId: string | null) => {
     setEditingCommentId(commentId);
   };
-  const handleDelete = (_id: string) => {
-    CommentService.deleteComment(_id);
-  };
 
-  return (
-    comments &&
+  return !comments.length ? (
+    <div>No comments...</div>
+  ) : (
     comments.map((item) => (
       <div key={item._id} className={'flex gap-2 py-2'}>
         <Button
@@ -97,8 +44,9 @@ export const Comments = ({ animeId }: { animeId: string }) => {
         {editingCommentId === item._id ? (
           <div className={'flex items-center'}>
             <UpdateComment
-              _id={item._id}
-              handleUpdate={handleUpdate}
+              idComment={item._id}
+              handleChangeEditingCommentId={handleChangeEditingCommentId}
+              updateComment={updateComment}
               comment={item.comment}
             />
           </div>
@@ -111,7 +59,7 @@ export const Comments = ({ animeId }: { animeId: string }) => {
                   className={'flex flex-col sm:flex-row items-center gap-1.5'}
                 >
                   <span className={'text-sm text-gray-500'}>
-                    {stampToDate(item.timestamp)}
+                    {convertTimeStampToDate(Number(item.timestamp))}
                   </span>
                   {item.changed ? (
                     <span className={'text-xs text-gray-500'}>(changed)</span>
@@ -129,7 +77,7 @@ export const Comments = ({ animeId }: { animeId: string }) => {
                       styleButton: 'flex',
                       text: {
                         style: 'px-2 ',
-                        value: `Like: ${0}`,
+                        value: `Like: ${item.like.length}`,
                       },
                     }}
                   />
@@ -139,7 +87,7 @@ export const Comments = ({ animeId }: { animeId: string }) => {
                       styleButton: 'flex',
                       text: {
                         style: 'px-2 ',
-                        value: `Dislike: ${0}`,
+                        value: `Dislike: ${item.dislike.length}`,
                       },
                     }}
                   />
@@ -147,10 +95,10 @@ export const Comments = ({ animeId }: { animeId: string }) => {
               </div>
             </div>
             <CommentActions
-              _id={item._id}
+              idComment={item._id}
               currentUserId={item.idUser}
-              handleUpdate={handleUpdate}
-              handleDelete={handleDelete}
+              handleChangeEditingCommentId={handleChangeEditingCommentId}
+              deleteComment={deleteComment}
             />
           </div>
         )}

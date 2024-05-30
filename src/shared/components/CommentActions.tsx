@@ -6,17 +6,17 @@ import { useClickOutSide } from '@/shared/lib/hooks/useClickOutSide';
 import { useAppContext } from '@/shared/context/page';
 
 type ICommentActions = {
-  _id: string;
+  idComment: string;
   currentUserId: string;
-  handleUpdate: (commentId: string | null) => void;
-  handleDelete: (_id: string) => void;
+  handleChangeEditingCommentId: (commentId: string | null) => void;
+  deleteComment: (_id: string) => void;
 };
 
 export const CommentActions: FC<ICommentActions> = ({
-  _id,
+  idComment,
   currentUserId,
-  handleUpdate,
-  handleDelete,
+  handleChangeEditingCommentId,
+  deleteComment,
 }) => {
   const { useStore } = useAppContext();
   const { idUser, isAuth } = useStore((state) => ({
@@ -26,7 +26,10 @@ export const CommentActions: FC<ICommentActions> = ({
   }));
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  const handleChange = () => {
+  const handleDeleteComment = () => {
+    deleteComment(idComment);
+  };
+  const handleChangeOpen = () => {
     setOpen(!isOpen);
   };
   const refElement = useRef(null);
@@ -35,11 +38,12 @@ export const CommentActions: FC<ICommentActions> = ({
       setOpen(false);
     }, 500);
   });
+
   return (
     <div className={'flex flex-col relative'}>
       <Button
         setting={{
-          eventButton: handleChange,
+          eventButton: handleChangeOpen,
           image: {
             svgComponent: {
               image: <ThreeDot />,
@@ -65,7 +69,7 @@ export const CommentActions: FC<ICommentActions> = ({
                     text: {
                       value: 'update',
                     },
-                    eventButton: () => handleUpdate(_id),
+                    eventButton: () => handleChangeEditingCommentId(idComment),
                   }}
                 />
                 <Button
@@ -74,7 +78,7 @@ export const CommentActions: FC<ICommentActions> = ({
                     text: {
                       value: 'delete',
                     },
-                    eventButton: () => handleDelete(_id),
+                    eventButton: handleDeleteComment,
                   }}
                 />
               </>

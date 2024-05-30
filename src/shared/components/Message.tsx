@@ -1,25 +1,17 @@
 import { Button } from '@/shared/components/Button';
 import { SendArrow } from '../../../public/icons/SendArrow';
 import React, { ChangeEvent, useState } from 'react';
-import CommentService from '@/features/comments/lib/CommentService';
-import { useAppContext } from '@/shared/context/page';
+import { useCommentStore } from '@/shared/stores/CommentStore';
 
 export const Message = ({ animeId }: { animeId: string }) => {
-  const { useStore } = useAppContext();
-  const { user } = useStore((state) => ({
-    ...state,
-    user: state.user,
-  }));
+  const [addComment] = useCommentStore((state) => [state.addComment]);
   const [value, setValue] = useState<string>('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.currentTarget.value);
   };
 
   const handleSubmit = () => {
-    if (value.length !== 0 && value.length <= 200) {
-      CommentService.addComment(user.id, animeId, value);
-      setValue('');
-    }
+    addComment(animeId, value);
   };
 
   return (
