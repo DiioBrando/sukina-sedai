@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/shared/components/Button';
 import { ICustomPagination } from '@/entities/models/IAnimeListType';
-import { useAnimeStore } from '@/shared/stores/AnimeStore';
 
 export const Pagination: React.FC<ICustomPagination> = ({
   current,
@@ -18,10 +17,6 @@ export const Pagination: React.FC<ICustomPagination> = ({
       const index =
         Array.prototype.indexOf.call(ref.current?.children, element) + 1;
       onChange(index);
-      useAnimeStore.setState((state) => ({
-        ...state,
-        isLoad: true,
-      }));
     };
     const list = ref.current;
     if (list) {

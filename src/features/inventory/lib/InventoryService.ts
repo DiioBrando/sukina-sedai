@@ -3,14 +3,13 @@ import { AxiosResponse } from 'axios';
 import { IInventory } from '@/entities/models/IInventory';
 
 export default class InventoryService {
-  static async addAnime(_id: string, animeId: string, typeItem: string) {
+  static async addAnime(animeId: number, typeItem: string) {
     return $apiInventory.post('/add-anime-inventory', {
-      _id,
       animeId,
       typeItem,
     });
   }
-  static async deleteAnime(animeId: string) {
+  static async deleteAnime(animeId: number) {
     return $apiInventory.delete(`/delete-anime-inventory/${animeId}`);
   }
   static async updateAnime(animeId: string, typeItem: string) {
@@ -24,7 +23,9 @@ export default class InventoryService {
     });
   }
 
-  static async getAll(): Promise<AxiosResponse<IInventory[]>> {
-    return $apiInventory.get('/getAll-items-inventory');
+  static async getAllInventory(
+    userId: string,
+  ): Promise<AxiosResponse<IInventory[]>> {
+    return $apiInventory.get('/getAll-anime-inventory', { data: userId });
   }
 }

@@ -16,18 +16,19 @@ import { SignUp } from '../../../public/icons/SignUp';
 import { SignIn } from '../../../public/icons/SignIn';
 import { ProfileItem } from '@/shared/components/ProfileItem';
 import { useRouter } from 'next/navigation';
-import { useAnimeStore } from '@/shared/stores/AnimeStore';
-
 export const NavBar = () => {
   const { useStore } = useAppContext();
-  const isAuth = useStore((state) => state.isAuth);
+  const { isAuth, userId } = useStore((state) => ({
+    isAuth: state.isAuth,
+    userId: state.user.id,
+  }));
   const [isOpen, setOpen] = useState({
     ProfileDropDown: false,
     NotificationDropDown: false,
     fillNotification: '#000000',
     inventoryDropDown: false,
   });
-  const [isSearch] = useAnimeStore((state) => [state.isSearch]);
+
   const router = useRouter();
   const elementRef = useRef(null);
   useClickOutSide(elementRef, () => {
@@ -44,11 +45,6 @@ export const NavBar = () => {
 
   const handleChangeSearchBoolean = () => {
     router.push('/');
-    if (isSearch) {
-      useAnimeStore.setState({
-        isSearch: false,
-      });
-    }
   };
 
   return (
@@ -129,7 +125,7 @@ export const NavBar = () => {
                     ref={elementRef}
                     className={'absolute bottom-0 top-10 left-0 z-50'}
                   >
-                    <Inventory />
+                    <Inventory userId={userId} />
                   </section>
                 )}
               </DropDown>

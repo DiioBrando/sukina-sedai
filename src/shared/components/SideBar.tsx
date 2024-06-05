@@ -5,40 +5,21 @@ import { ArrowBar } from '../../../public/icons/ArrowBar';
 import { useEffect, useState } from 'react';
 import { Button } from '@/shared/components/Button';
 import AnimeService from '@/features/anime/lib/AnimeService';
+import { GetRandomTitle } from '@/features/anime/api/getRandomTitle';
 
 export const SideBar = () => {
-  const [stateMenu, setStateMenu] = useState({
-    isOpen: true,
-    rotate: 'rotate-0',
-    display: 'flex',
-    widthStyleIsOpenSvg: 'w-full justify-end',
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const stateMenu = {
+    rotate: isOpen ? 'rotate-0' : 'rotate-180',
+    display: isOpen ? 'flex' : 'hidden',
+    widthStyleIsOpenSvg: isOpen ? 'w-full justify-end' : 'w-0',
     width: 'max-w-max',
-  });
-  const [randomAnimeId, setRandomAnimeId] = useState<number>(0);
-  useEffect(() => {
-    AnimeService.getRandomAnim().then((res) => {
-      setRandomAnimeId(res.data.id);
-    });
-  }, []);
+  };
+  const { data } = GetRandomTitle();
 
   const handleChange = () => {
-    if (stateMenu.isOpen) {
-      setStateMenu({
-        ...stateMenu,
-        rotate: 'rotate-180',
-        display: 'hidden',
-        isOpen: false,
-        widthStyleIsOpenSvg: 'w-0',
-      });
-    } else {
-      setStateMenu({
-        ...stateMenu,
-        rotate: 'rotate-0',
-        display: 'flex',
-        isOpen: true,
-        widthStyleIsOpenSvg: 'w-full justify-end',
-      });
-    }
+    setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
   return (
@@ -66,7 +47,7 @@ export const SideBar = () => {
           </div>
           <Link
             className={'flex items-center gap-1 text-md'}
-            href={`/video/${randomAnimeId}`}
+            href={`/video/${data?.id}`}
           >
             <Button
               setting={{

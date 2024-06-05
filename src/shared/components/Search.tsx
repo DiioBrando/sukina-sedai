@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useAnimeStore } from '@/shared/stores/AnimeStore';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { SearchSvg } from '../../../public/icons/SearchSvg';
@@ -17,16 +16,9 @@ export const Search = () => {
             search: valueSearch,
           },
         })
-        .then((res) => {
-          useAnimeStore.setState((state) => ({
-            list: res.data.list,
-          }));
-        });
+        .then((res) => {});
       router.push('/');
-      useAnimeStore.setState((state) => ({
-        isSearch: true,
-        isLoad: false,
-      }));
+      // установка значения
     }
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

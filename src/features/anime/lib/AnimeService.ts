@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { AnimeList, List, Titles } from '@/entities/models/IAnimeListType';
+import { AnimeList, Titles } from '@/entities/models/IAnimeListType';
 import { $apiAniLibria } from '@/features/anime/api/api';
 
 export default class AnimeService {
@@ -14,7 +14,7 @@ export default class AnimeService {
       },
     });
   }
-  static async getRandomAnim(): Promise<AxiosResponse<Titles>> {
+  static async getRandomAnime(): Promise<AxiosResponse<Titles>> {
     return $apiAniLibria.get('/title/random', {
       params: {
         playlist_type: 'array',
@@ -28,5 +28,10 @@ export default class AnimeService {
         playlist_type: 'array',
       },
     });
+  }
+  static async getAnimeListByArrayId(
+    listId: Array<number>,
+  ): Promise<AxiosResponse<Titles[]>> {
+    return $apiAniLibria.get(`/title/list?id_list=${listId}`);
   }
 }

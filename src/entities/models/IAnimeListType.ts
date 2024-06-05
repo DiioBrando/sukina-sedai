@@ -3,15 +3,6 @@ export interface AnimeList {
   pagination: IPagination;
 }
 
-export interface IAnimeStore extends AnimeList {
-  isLoad: boolean;
-  isSearch: boolean;
-  getTitles: () => void;
-  onChangePage: (e: number) => void;
-  getAnimeById: (animeId: number) => void;
-  anime: Titles;
-}
-
 export interface Titles {
   id: number;
   code: string;

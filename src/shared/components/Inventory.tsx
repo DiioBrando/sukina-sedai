@@ -7,59 +7,54 @@ import { Track } from '../../../public/icons/Track';
 import { Favorite } from '../../../public/icons/Favorite';
 import { VideoCard } from '@/shared/components/VideoCard';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useAppContext } from '@/shared/context/page';
-import { Titles } from '@/entities/models/IAnimeListType';
-import InventoryService from '@/features/inventory/lib/InventoryService';
-import { AxiosResponse } from 'axios';
 import { Trash } from '../../../public/icons/Trash';
 import { ThreeDot } from '../../../public/icons/ThreeDot';
 import { DropDown } from '@/shared/components/DropDown';
-import { $apiAniLibria } from '@/features/anime/api/api';
+import { useInventoryStore } from '@/shared/stores/InventoryStore';
+import { shallow } from 'zustand/shallow';
+import { Loader } from '@/shared/components/Loader';
 
-export const Inventory = () => {
-  const [anime, setAnime] = useState<Titles[]>([]);
-  const [arrayWithAnimeId, setArrayWithAnimeId] = useState<Array<string>>([]);
-  const [listId, setListId] = useState<string>('');
+export const Inventory = ({ userId }: { userId: string }) => {
+  const [anime, isLoad] = useInventoryStore(
+    (state) => [state.anime, state.isLoad],
+    shallow,
+  );
+  const [arrayWithAnimeId, setArrayWithAnimeId] = useState<Array<number>>([]);
   const [categoryAnime, setCategory] = useState<string>('watch');
   const [isOpen, setOpen] = useState({
     threeDot: false,
     manyDelete: false,
   });
-  const { useStore } = useAppContext();
-  const currentUserId = useStore((state) => state.user.id);
-
-  useEffect(() => {
-    InventoryService.getAll().then((res) => {
-      const list = res.data
-        .filter((item) => item.idUser === currentUserId)
-        .filter((item) => item.typeItem === categoryAnime)
-        .map((item) => item.animeId)
-        .join(',');
-      setListId(list);
-    });
-  }, [categoryAnime, currentUserId]);
-
-  useEffect(() => {
-    const getAnime = async (): Promise<AxiosResponse<Titles[]>> => {
-      return await $apiAniLibria.get(`/title/list?id_list=${listId}`);
-    };
-    if (listId) {
-      getAnime().then((res) => setAnime(res.data));
-    }
-  }, [listId]);
 
   const toggleValue = (value: keyof typeof isOpen) => {
     setOpen((prevState) => ({ ...prevState, [value]: !prevState[value] }));
   };
-
   const handleChangeOpen = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     const value = e.currentTarget.value as keyof typeof isOpen;
-    console.log(value);
     if (value in isOpen) {
       toggleValue(value);
     }
+  };
+
+  const handleChangeArrayAnimeId = (e: ChangeEvent<HTMLInputElement>) => {
+    const idAnime = e.target.value;
+    const checked = e.target.checked;
+    if (checked) {
+      return setArrayWithAnimeId((prevState) => [
+        ...prevState,
+        Number(idAnime),
+      ]);
+    }
+
+    setArrayWithAnimeId((prevState) =>
+      [...prevState].filter((item) => item != Number(idAnime)),
+    );
+  };
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // (Number(e.currentTarget.value));
   };
 
   const handleChangeCategory = (
@@ -67,25 +62,9 @@ export const Inventory = () => {
   ) => {
     setCategory(e.currentTarget.value);
   };
-
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    return InventoryService.deleteAnime(e.currentTarget.value);
-  };
-
-  const handleChangeArrayAnimeId = (e: ChangeEvent<HTMLInputElement>) => {
-    const idAnime = e.target.value;
-    const checked = e.target.checked;
-    if (checked) {
-      return setArrayWithAnimeId((prevState) => [...prevState, idAnime]);
-    }
-
-    setArrayWithAnimeId((prevState) =>
-      [...prevState].filter((item) => item != idAnime),
-    );
-  };
   const handleSubmitDelete = () => {
-    InventoryService.deleteMany(arrayWithAnimeId);
-    setOpen((prevState) => ({ ...prevState, manyDelete: false }));
+    const toStringItem = arrayWithAnimeId.map(String);
+    // (toStringItem);
   };
 
   return (
@@ -254,7 +233,11 @@ export const Inventory = () => {
           'flex flex-wrap gap-2.5 max-h-[500px] w-full overflow-y-auto justify-center sm:justify-start'
         }
       >
-        {!anime.length ? (
+        {isLoad ? (
+          <div className={'flex w-full items-center justify-center'}>
+            <Loader />
+          </div>
+        ) : !anime.length ? (
           <div>not found anime</div>
         ) : (
           Array.from({ length: anime.length }, (_v, k) => (

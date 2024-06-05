@@ -1,29 +1,26 @@
 'use client';
 import { Content } from '@/shared/components/Content';
 import { ProfileImage } from '@/shared/components/ProfileImage';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Inventory } from '@/shared/components/Inventory';
 import { IUser } from '@/entities/models/IAuth';
-import UserService from '@/features/auth/lib/UserService';
+import { useProfiles } from '@/shared/lib/hooks/useProfiles';
+import { Comment } from 'postcss';
+import { Comments } from '@/shared/components/Comments';
 
 export default function Profile({ params }: { params: string }) {
-  const [store, setStore] = useState<IUser>();
+  const { data, isFetching, error } = useProfiles();
+  const [user, setUser] = useState<IUser>();
 
-  useLayoutEffect(() => {
-    const getUser = async () => {
-      await UserService.fetchUsers().then((res) => {
-        const user = res.data.filter((user) => user.login === params)[0];
-        setStore(user);
-      });
-    };
-
-    getUser();
-  }, [params]);
+  useEffect(() => {
+    const userData = data?.data.filter((item) => item.login === params)[0];
+    setUser(userData);
+  }, [data?.data, params]);
 
   return (
     <Content>
-      {store && (
-        <div key={store.id} className={'max-h-[100vh] w-full p-4'}>
+      {user && (
+        <div key={user.id} className={'max-h-[100vh] w-full p-4'}>
           <div
             className={'flex flex-wrap gap-3 items-center max-w-max pb-5 px-4'}
           >
@@ -41,11 +38,11 @@ export default function Profile({ params }: { params: string }) {
               />
             </div>
             <div className={'flex flex-col'}>
-              <span> name: {store.login}</span>
-              <span>status user: {store.roles}</span>
+              <span> name: {user.login}</span>
+              <span> role: {user.roles}</span>
             </div>
           </div>
-          <Inventory />
+          <Inventory userId={user.id} />
         </div>
       )}
     </Content>

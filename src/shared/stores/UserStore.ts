@@ -3,6 +3,8 @@ import AuthService from '@/features/auth/lib/AuthService';
 import { create } from 'zustand';
 import axios from 'axios';
 import { IStore } from '@/entities/models/IStore';
+import { cookies, headers } from 'next/headers';
+import { deleteCookie } from 'undici-types';
 
 export const useUserStore = create<IStore>((set) => ({
   user: {} as IUser,

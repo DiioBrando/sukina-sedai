@@ -1,14 +1,13 @@
 'use client';
-import React, {
-  createContext,
-  Suspense,
-  useContext,
-  useLayoutEffect,
-} from 'react';
+import React, { createContext, useContext, useLayoutEffect } from 'react';
 import { useUserStore } from '@/shared/stores/UserStore';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
+import Providers from '@/shared/context/query-provider';
 
-const AppContext = createContext({ useStore: useUserStore, useTheme });
+const AppContext = createContext({
+  useStore: useUserStore,
+  useTheme,
+});
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const { useStore, useTheme } = useAppContext();
@@ -22,7 +21,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <AppContext.Provider value={{ useStore, useTheme }}>
-      {children}
+      <Providers>{children}</Providers>
     </AppContext.Provider>
   );
 }

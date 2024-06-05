@@ -21,16 +21,6 @@ export const Intro: React.FC<IIntro> = ({
         priority={true}
         alt={''}
       />
-      {/*<div className={'absolute bottom-[6px] right-1 flex gap-2 text-sm'}>*/}
-      {/*    <div className={'flex gap-1 rounded-md bg-purple-500 px-1.5 text-white'}>*/}
-      {/*        <span>IMDb:</span>*/}
-      {/*        <span>{ratingIMDb}</span>*/}
-      {/*    </div>*/}
-      {/*    <div className={'flex gap-1 rounded-md bg-purple-500 px-1.5 text-white'}>*/}
-      {/*        <span>Kinopoisk:</span>*/}
-      {/*        <span>{ratingKinopoisk}</span>*/}
-      {/*    </div>*/}
-      {/*</div>*/}
     </div>
   );
 };

@@ -9,7 +9,7 @@ export const VideoCard: React.FC<IAnime> = ({ list }) => {
     <div
       key={item.id}
       className={
-        'flex flex-col flex-1 min-h-80 h-fit lg:max-h-[450px] min-w-[200px] max-w-[230px]  lg:h-full gap-1 pb-2'
+        'flex flex-col flex-1 min-h-80 h-fit lg:max-h-[450px] min-w-[200px] max-w-[230px]  lg:min-h-fit gap-1 pb-2'
       }
     >
       <Link className={'max-w-[230px]'} href={`/video/${item.id}`}>
