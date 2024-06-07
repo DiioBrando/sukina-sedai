@@ -6,26 +6,28 @@ import { Viewed } from '../../../public/icons/Viewed';
 import { Track } from '../../../public/icons/Track';
 import { Favorite } from '../../../public/icons/Favorite';
 import { VideoCard } from '@/shared/components/VideoCard';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Trash } from '../../../public/icons/Trash';
 import { ThreeDot } from '../../../public/icons/ThreeDot';
 import { DropDown } from '@/shared/components/DropDown';
-import { useInventoryStore } from '@/shared/stores/InventoryStore';
-import { shallow } from 'zustand/shallow';
 import { Loader } from '@/shared/components/Loader';
+import { GetAllInventory } from '@/features/inventory/api/getAllInventory';
+import { useUserStore } from '@/shared/stores/UserStore';
 
 export const Inventory = ({ userId }: { userId: string }) => {
-  const [anime, isLoad] = useInventoryStore(
-    (state) => [state.anime, state.isLoad],
-    shallow,
-  );
+  const currentUserId = useUserStore((state) => state.user.id);
   const [arrayWithAnimeId, setArrayWithAnimeId] = useState<Array<number>>([]);
   const [categoryAnime, setCategory] = useState<string>('watch');
   const [isOpen, setOpen] = useState({
     threeDot: false,
     manyDelete: false,
   });
+  const { data, isFetching, isError } = GetAllInventory({
+    userId,
+    categoryAnime,
+  });
 
+  console.log(data);
   const toggleValue = (value: keyof typeof isOpen) => {
     setOpen((prevState) => ({ ...prevState, [value]: !prevState[value] }));
   };
@@ -60,6 +62,7 @@ export const Inventory = ({ userId }: { userId: string }) => {
   const handleChangeCategory = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
+    console.log(e.currentTarget.value);
     setCategory(e.currentTarget.value);
   };
   const handleSubmitDelete = () => {
@@ -147,19 +150,21 @@ export const Inventory = ({ userId }: { userId: string }) => {
             eventButton: handleChangeCategory,
           }}
         />
-        <Button
-          setting={{
-            styleButton: 'p-1',
-            image: {
-              svgComponent: {
-                image: <ThreeDot />,
-                style: 'w-5 h-5',
+        {userId !== currentUserId ? null : (
+          <Button
+            setting={{
+              styleButton: 'p-1',
+              image: {
+                svgComponent: {
+                  image: <ThreeDot />,
+                  style: 'w-5 h-5',
+                },
               },
-            },
-            value: 'threeDot',
-            eventButton: handleChangeOpen,
-          }}
-        />
+              value: 'threeDot',
+              eventButton: handleChangeOpen,
+            }}
+          />
+        )}
         {isOpen.threeDot ? (
           <div
             className={
@@ -191,7 +196,7 @@ export const Inventory = ({ userId }: { userId: string }) => {
                 </div>
               </DropDown>
             ) : (
-              <>
+              <DropDown>
                 <Button
                   setting={{
                     text: {
@@ -222,7 +227,7 @@ export const Inventory = ({ userId }: { userId: string }) => {
                     eventButton: handleChangeOpen,
                   }}
                 />
-              </>
+              </DropDown>
             )}
           </div>
         ) : null}
@@ -233,51 +238,54 @@ export const Inventory = ({ userId }: { userId: string }) => {
           'flex flex-wrap gap-2.5 max-h-[500px] w-full overflow-y-auto justify-center sm:justify-start'
         }
       >
-        {isLoad ? (
+        {isFetching ? (
           <div className={'flex w-full items-center justify-center'}>
             <Loader />
           </div>
-        ) : !anime.length ? (
+        ) : !data?.length ? (
           <div>not found anime</div>
         ) : (
-          Array.from({ length: anime.length }, (_v, k) => (
+          Array.from({ length: data.length }, (_v, k) => (
             <div key={k}>
-              {anime && (
+              {data && (
                 <div className={'relative'}>
-                  <VideoCard list={[anime[k]]} />
-                  <div
-                    className={
-                      'absolute top-2 left-2 rounded-lg flex p-2 gap-2'
-                    }
-                  >
-                    {isOpen.manyDelete ? (
-                      <Input
-                        input={{
-                          type: 'checkbox',
-                          value: String(anime[k].id),
-                          onChange: handleChangeArrayAnimeId,
-                          style: 'w-10 h-10',
-                        }}
-                      />
-                    ) : (
-                      <Button
-                        setting={{
-                          eventButton: handleDelete,
-                          value: String(anime[k].id),
-                          text: {
-                            value: 'delete',
-                            style: 'hidden md:flex px-2',
-                          },
-                          image: {
-                            svgComponent: {
-                              image: <Trash />,
-                              style: 'w-5 h-5 flex md:hidden',
+                  <VideoCard list={[data[k]]} />
+
+                  {userId !== currentUserId ? null : (
+                    <div
+                      className={
+                        'absolute top-2 left-2 rounded-lg flex p-2 gap-2 bg-gray-500'
+                      }
+                    >
+                      {isOpen.manyDelete ? (
+                        <Input
+                          input={{
+                            type: 'checkbox',
+                            value: String(data[k].id),
+                            onChange: handleChangeArrayAnimeId,
+                            style: 'w-10 h-10',
+                          }}
+                        />
+                      ) : (
+                        <Button
+                          setting={{
+                            eventButton: handleDelete,
+                            value: String(data[k].id),
+                            text: {
+                              value: 'delete',
+                              style: 'hidden md:flex px-2',
                             },
-                          },
-                        }}
-                      />
-                    )}
-                  </div>
+                            image: {
+                              svgComponent: {
+                                image: <Trash />,
+                                style: 'w-5 h-5 flex md:hidden',
+                              },
+                            },
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

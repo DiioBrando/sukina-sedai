@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export const GetTitleById = ({ id }: { id: number }) => {
   return useQuery({
-    queryFn: async () => AnimeService.getAnimeById(id, {}),
+    queryFn: async () => AnimeService.getAnimeById(id),
     queryKey: ['getTitleById', id],
     select: ({ data }) => data,
     refetchOnWindowFocus: false,

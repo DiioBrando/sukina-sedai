@@ -30,7 +30,7 @@ export default class AnimeService {
     });
   }
   static async getAnimeListByArrayId(
-    listId: Array<number>,
+    listId: string,
   ): Promise<AxiosResponse<Titles[]>> {
     return $apiAniLibria.get(`/title/list?id_list=${listId}`);
   }

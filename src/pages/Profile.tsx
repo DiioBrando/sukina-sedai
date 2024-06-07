@@ -7,11 +7,11 @@ import { IUser } from '@/entities/models/IAuth';
 import { useProfiles } from '@/shared/lib/hooks/useProfiles';
 import { Comment } from 'postcss';
 import { Comments } from '@/shared/components/Comments';
+import { useAppContext } from '@/shared/context/page';
 
 export default function Profile({ params }: { params: string }) {
   const { data, isFetching, error } = useProfiles();
   const [user, setUser] = useState<IUser>();
-
   useEffect(() => {
     const userData = data?.data.filter((item) => item.login === params)[0];
     setUser(userData);

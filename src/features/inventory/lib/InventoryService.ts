@@ -1,6 +1,8 @@
 import { $apiInventory } from '@/features/inventory/api/api';
 import { AxiosResponse } from 'axios';
 import { IInventory } from '@/entities/models/IInventory';
+import { Titles } from '@/entities/models/IAnimeListType';
+import AnimeService from '@/features/anime/lib/AnimeService';
 
 export default class InventoryService {
   static async addAnime(animeId: number, typeItem: string) {
@@ -23,9 +25,10 @@ export default class InventoryService {
     });
   }
 
-  static async getAllInventory(
-    userId: string,
-  ): Promise<AxiosResponse<IInventory[]>> {
-    return $apiInventory.get('/getAll-anime-inventory', { data: userId });
+  static async getAllInventory(userId: string, categoryAnime: string) {
+    const listId = await $apiInventory.get(
+      `/getAll-anime-inventory/${userId}/${categoryAnime}`,
+    );
+    return await AnimeService.getAnimeListByArrayId(listId.data);
   }
 }
