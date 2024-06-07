@@ -11,7 +11,7 @@ export const ControlAnime = ({ idAnime }: { idAnime: number }) => {
   const { useStore } = useAppContext();
   const _id = useStore((state) => state.user.id);
   const handleAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    InventoryService.addAnime(String(idAnime), e.currentTarget.value);
+    InventoryService.addAnime(idAnime, e.currentTarget.value);
   };
 
   return (
